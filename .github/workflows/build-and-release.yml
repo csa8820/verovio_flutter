@@ -82,7 +82,9 @@ jobs:
           if [[ ! -x "${SDKMANAGER}" ]]; then
             SDKMANAGER="$(command -v sdkmanager)"
           fi
-          yes | "${SDKMANAGER}" --licenses
+          set +o pipefail
+          yes | "${SDKMANAGER}" --licenses >/dev/null
+          set -o pipefail
           "${SDKMANAGER}" --install "ndk;26.1.10909125"
 
       - name: Build Android .so libraries
@@ -131,6 +133,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          bash third_party/verovio/tools/get_git_commit.sh
           bash tool/build_ios_xcframework.sh
 
       - name: Verify iOS artifact paths
