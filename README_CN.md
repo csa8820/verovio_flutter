@@ -2,21 +2,21 @@
 
 [![License: LGPL-3.0](https://img.shields.io/badge/License-LGPL--3.0-blue.svg)](LICENSE)
 
-`verovio_flutter` is a Flutter FFI plugin derived from Verovio and distributed under LGPL-3.0.  
-Any derivative work must comply with the same LGPL-3.0 license obligations.
+`verovio_flutter` 是基于 Verovio 的 Flutter FFI 插件，遵循 LGPL-3.0。  
+任何派生作品也必须遵守同样的 LGPL-3.0 许可证要求。
 
 Language: [English](README.md) | [中文](README_CN.md)
 
-> Package size snapshot from the current release tree:
+> 当前发布树体积快照：
 >
 > - `android/src/main/jniLibs`: `14M`
 > - `ios/Frameworks/VerovioFFI.xcframework`: `8.6M`
 > - `assets/verovio_data`: `11M`
-> - **Total:** `33.6M`
+> - **总计：** `33.6M`
 >
-> Android `--split-per-abi` incremental APK payload is approximately `6.8M` for `arm64-v8a` and `7.2M` for `x86_64` before APK compression.
+> Android 使用 `--split-per-abi` 后，单个 APK 的增量体积大约是 `6.8M`（`arm64-v8a`）和 `7.2M`（`x86_64`），未计入 APK 压缩差异。
 
-## Install
+## 安装
 
 ```yaml
 dependencies:
@@ -26,9 +26,9 @@ dependencies:
       ref: v0.1.0
 ```
 
-## Minimal usage
+## 最小使用示例
 
-The example app in `example/lib/main.dart` is a simple raw-SVG viewer. The snippet below follows the same minimal rendering flow: create a `VerovioService`, load MEI/XML, render SVG, then display it in Flutter.
+示例工程 `example/lib/main.dart` 是一个最小的 SVG 展示器。下面的代码演示与其一致的核心流程：创建 `VerovioService`、加载 MEI/XML、渲染 SVG，然后在 Flutter 中展示。
 
 ```dart
 import 'package:flutter/material.dart';
@@ -56,29 +56,29 @@ Future<void> main() async {
 }
 ```
 
-## Platform support
+## 平台支持
 
-| Platform | Minimum version | Architectures |
-|---------|-----------------|---------------|
+| 平台 | 最低版本 | 架构 |
+|------|----------|------|
 | Android | API 21 | arm64-v8a / x86_64 |
 | iOS | 13.0 | arm64(device) / arm64+x86_64(simulator) |
 
-## Version mapping
+## 版本对应关系
 
 `verovio_flutter 0.1.0 → Verovio version-2.7.1-10372-g8100cb396`
 
-## Maintainer guide
+## 维护者指南
 
 <details>
-<summary>Build and sync commands</summary>
+<summary>构建与同步命令</summary>
 
-- Initialize submodules:
+- 初始化 submodule：
   `git clone --recurse-submodules https://github.com/csa8820/verovio_flutter`
-- Rebuild Android `.so`:
+- 重新构建 Android `.so`：
   `bash tool/build_android_so.sh`
-- Rebuild iOS `.xcframework`:
+- 重新构建 iOS `.xcframework`：
   `bash tool/build_ios_xcframework.sh`
-- Sync resources:
+- 同步资源：
   `bash tool/sync_verovio_sources.sh`
 
 </details>
