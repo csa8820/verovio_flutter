@@ -64,6 +64,7 @@ The native build systems that are invoked by FFI (and method channel) plugins ar
 * For iOS and MacOS: Xcode, via CocoaPods.
   * See the documentation in ios/verovio_flutter.podspec.
   * See the documentation in macos/verovio_flutter.podspec.
+  * Build the iOS XCFramework with `bash tool/build_ios_xcframework.sh`.
 * For Linux and Windows: CMake.
   * See the documentation in linux/CMakeLists.txt.
   * See the documentation in windows/CMakeLists.txt.

@@ -1,42 +1,15 @@
 PODS:
   - Flutter (1.0.0)
-  - path_provider_foundation (0.0.1):
-    - Flutter
-    - FlutterMacOS
-  - re_svg (0.0.1):
-    - Flutter
-    - resvg (~> 0.1.2)
-  - resvg (0.1.2)
-  - verovio_flutter (0.0.1):
-    - Flutter
-    - resvg
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
-  - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
-  - re_svg (from `.symlinks/plugins/re_svg/ios`)
-  - verovio_flutter (from `.symlinks/plugins/verovio_flutter/ios`)
-
-SPEC REPOS:
-  trunk:
-    - resvg
 
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
-  path_provider_foundation:
-    :path: ".symlinks/plugins/path_provider_foundation/darwin"
-  re_svg:
-    :path: ".symlinks/plugins/re_svg/ios"
-  verovio_flutter:
-    :path: ".symlinks/plugins/verovio_flutter/ios"
 
 SPEC CHECKSUMS:
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
-  path_provider_foundation: 080d55be775b7414fd5a5ef3ac137b97b097e564
-  re_svg: 0522166aeb720488c4379349894af5d2f4994a3a
-  resvg: 0c79160ff7225147153f9c8e2bda5377714a4a54
-  verovio_flutter: 9e6be7918e8845093d7a5b23b3fd52abc2a0c3db
 
 PODFILE CHECKSUM: 819463e6a0290f5a72f145ba7cde16e8b6ef0796
 

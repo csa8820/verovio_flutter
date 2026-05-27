@@ -1,0 +1,1606 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		005854E0B461318A44725D9B /* fraction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC0FF46EE61F2A0B66625CC2 /* fraction.cpp */; };
+		007E2B5902C7B84656F50B57 /* adjustharmgrpsspacingfunctor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A0D0CCC87F38753297D5BFB /* adjustharmgrpsspacingfunctor.cpp */; };
+		0247A78A06B61BBF84D87B8D /* label.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 801936386D2F8AF80C482E3C /* label.cpp */; };
+		0275DA006BDDB8A24A8AB336 /* calcdotsfunctor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3329A88538744C20FDACCBC6 /* calcdotsfunctor.cpp */; };
+		03AAB59E6ED0D8EB15D789F9 /* calcarticfunctor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF0C2710FE0021F0DA2164EA /* calcarticfunctor.cpp */; };
+		03E95E3C00A4AC93DF5F116E /* lv.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EB85C106DFE09BD650AE46F5 /* lv.cpp */; };
+		040F903FAA1FBF98F900917E /* symbol.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DDDF69667D9DB5C7208F2EC6 /* symbol.cpp */; };
+		04439CFBD08EC780D46BDC8D /* hairpin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 970117614848B72C876611EB /* hairpin.cpp */; };
+		0632AC80A90B6AB2AE667745 /* view_element.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 26D25AD10256686BEE14F922 /* view_element.cpp */; };
+		080B068D671642013F2B6886 /* pugixml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F98726C0CB141114F26F2A52 /* pugixml.cpp */; };
+		083CAD7C10053C71285B0CC0 /* MidiMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 413D97A1E082ED3F3DD6D752 /* MidiMessage.cpp */; };
+		087BCD8D431A11CDF852A9A6 /* jsonxx.cc in Sources */ = {isa = PBXBuildFile; fileRef = 1480BBD998F1C62877AF4960 /* jsonxx.cc */; };
+		08B08E46E9295D6529C6107D /* rdg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F24EBEDC2855CD8EDC6B533 /* rdg.cpp */; };
+		092BA509F89A9421D08CD2D2 /* findlayerelementsfunctor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 48F4A4365F4A8DAFA2EF7DE3 /* findlayerelementsfunctor.cpp */; };
+		09F406FB54E3F3559AE3BE61 /* adjustneumexfunctor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04A3084E466B4DE15E8D11EC /* adjustneumexfunctor.cpp */; };
+		0A9C1F585582AD4B7C95A670 /* timestamp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1998CDADBE624EED117AC547 /* timestamp.cpp */; };
+		0B0FDB61CA059176CCF72220 /* adjusttempofunctor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D49BD6009DAC85B33E5AC4BD /* adjusttempofunctor.cpp */; };
+		0BC4A59A9931EF3DA04EAE31 /* harm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65AF113A7736F2F9F6BCB39C /* harm.cpp */; };
+		0BDDBB1CA32DD91F1A75BE0D /* view_tuplet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC0FC99EFE27231F238687DC /* view_tuplet.cpp */; };
+		0EA8CF4F4D4FA48181AC9325 /* adjustdotsfunctor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28CB6C1E9D082B2E214133B9 /* adjustdotsfunctor.cpp */; };
+		10DC301E756843ECCD205E30 /* pitchinflection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 181BFC774EF638BEFCC2CB07 /* pitchinflection.cpp */; };
+		116FAE02AE11AFDC093A227A /* episema.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BDB54B3AE70F6280BB225FB /* episema.cpp */; };
+		1246D9123C6D4E3DAA99B92D /* view_tab.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4F6EB6A3FBFF9BE2C449AD5 /* view_tab.cpp */; };
+		12A41ECC6EF240223772BF34 /* calcspanningbeamspansfunctor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0890465253EA4CB02D9B0EA3 /* calcspanningbeamspansfunctor.cpp */; };
+		12BC0630C8C7ED4EC28B4C7D /* att.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 108970E8F160EF0BA96E545E /* att.cpp */; };
+		13A4EB419F2F73922247063A /* atts_facsimile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F087571529784BD1A89E1C7 /* atts_facsimile.cpp */; };
+		13E5469E579E6FA8E583D60B /* plica.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 212F8FE0B32CBFDF6286AC77 /* plica.cpp */; };
+		16E077566C492CE6BC70A9F7 /* durationinterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 866BF1E9181C28E183096A9B /* durationinterface.cpp */; };
+		187831A305EAD3DC6DD69496 /* annotscore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E97C6D7BB40A2C3F4A7EA60 /* annotscore.cpp */; };
+		18FA11CEE274F6DC942EF3CA /* editfunctor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88C1F3C22C62A155A01462E0 /* editfunctor.cpp */; };
+		1969DCD3EA4DC54671F12B6B /* adjustyposfunctor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CE5ED0223FEC41BED0CB94C /* adjustyposfunctor.cpp */; };
+		1972BDB6DB4FCEBE1E589F97 /* adjustarpegfunctor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D7D5A7E7203B27FBE1B4FC2D /* adjustarpegfunctor.cpp */; };
+		1A2D45B6B16001F1D8F2565D /* verse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1147A735312DCC8780621B3 /* verse.cpp */; };
+		1AEDF2B68805C4DF5BCA26A2 /* atts_harmony.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2878ABBDBE06CA51B2FEEFE /* atts_harmony.cpp */; };
+		1BB89833DF4ADF4B550260EC /* iohumdrum.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D87400B5F201EDC28540A4D /* iohumdrum.cpp */; };
+		1C2A5A25378ADDA9EFBB40C0 /* atts_critapp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 58B42D9232D28E22B0AAB09C /* atts_critapp.cpp */; };
+		1C367531CAC5144716879F94 /* btrem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BAC2B8A2E29CA3484773470 /* btrem.cpp */; };
+		1D99B3BA629420D2F9CB78E5 /* adjustfloatingpositionerfunctor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 757B289C34194BE8AA928E18 /* adjustfloatingpositionerfunctor.cpp */; };
+		20117EEC8097284117641629 /* syl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4F67335B016AB41099835B3 /* syl.cpp */; };
+		206E1009FE9108C9B67E0334 /* vrv.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A2AFA99C7FFAC8514F93065 /* vrv.cpp */; };
+		20B131C9AFBAB3B31F0A75A9 /* findfunctor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7D45BACA2E1A7E416FFDF049 /* findfunctor.cpp */; };
+		2118D44B390BF9A040E847F8 /* damage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C66BF44D32BE2F8DF1DB6CED /* damage.cpp */; };
+		213B1DFD46CF99F2B34574B5 /* svg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4CD8B39B3B394B99AF838A7 /* svg.cpp */; };
+		21899D599D1F1C45C4F65C03 /* liquescent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 076A4BD549FB8EA5179EE4CB /* liquescent.cpp */; };
+		21E4BC9BEC6C8727DE44851A /* divline.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BD9E246ED1B22C40A4B863FE /* divline.cpp */; };
+		2346FBB566F3CDFD10E560D8 /* sic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 815B26B1D26915D178171642 /* sic.cpp */; };
+		25379C7A0C58CA6A2A195825 /* adjustxrelfortranscriptionfunctor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 061991325320CDA20E3398D8 /* adjustxrelfortranscriptionfunctor.cpp */; };
+		265061ADA733FBF57332678B /* supplied.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1BE1E2C9722149E2B6DD18F2 /* supplied.cpp */; };
+		26E7C694FD455256618C47A5 /* textelement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 498020C89DE91005670092FF /* textelement.cpp */; };
+		27926D9F8B595210458B9A17 /* view_graph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C17FDF82A97907814DFFCC47 /* view_graph.cpp */; };
+		29DFBE9A944DA1CB96D2CC7D /* pb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27850A6B27870EACF6AA2355 /* pb.cpp */; };
+		2A78781033FD6ECE381CA044 /* adjustxoverflowfunctor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 85A3A5128EFE0AB4CBC2C5CB /* adjustxoverflowfunctor.cpp */; };
+		2C2019E25EFE4AFCE33A0541 /* view_text.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A68D66C26AF7660F1F733C53 /* view_text.cpp */; };
+		2FC00AC4BEFD786C6A5B0609 /* tabgrp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AD7EEC56F935F3C6FB4ACD07 /* tabgrp.cpp */; };
+		30082A32CF024D6AB88E9766 /* iovolpiano.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD15BB5E3EC53BD922962597 /* iovolpiano.cpp */; };
+		30312CA5D3A3520AB7CBD9D3 /* docselection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C3E1011C91024F67E859A57 /* docselection.cpp */; };
+		30F82E349722E824A8D4FFB8 /* symboltable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 211A938B2216970C6065661F /* symboltable.cpp */; };
+		315C94315341E14E5976E085 /* breath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F4D90230C45D7965B6037449 /* breath.cpp */; };
+		3221920542ED3C90ADC21964 /* facsimilefunctor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 152C5FBC6A1206D9613F2064 /* facsimilefunctor.cpp */; };
+		332E4884E78E83D173E0A151 /* atts_cmn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 44AC689836A777F648E057B7 /* atts_cmn.cpp */; };
+		34AD71D4623BDA39348184D4 /* ligature.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45267B70CD65CCB0C7E47C45 /* ligature.cpp */; };
+		34C1323D19CEC91BD80B8886 /* keyaccid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5C521716A09BEB21223DB3F4 /* keyaccid.cpp */; };
+		34F038ECB78F29E8A9384F3C /* view_mensural.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 137FEEF18AEBE0BD7D45F59E /* view_mensural.cpp */; };
+		351FB342B5F24A3A1CC6D423 /* atts_mei.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 536F4BD27F6602DB720F79A6 /* atts_mei.cpp */; };
+		35BFB21FD5EA8FB2B0C701FB /* iocmme.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E8A2C570DB6F03A62F586B32 /* iocmme.cpp */; };
+		375C3E7C2AE9DEBB068EEB8B /* attconverter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7499A3CA6ED32E7968607A62 /* attconverter.cpp */; };
+		3838DA4826C683C193AE0158 /* beam.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CBDA803FA2B3A43FD0238BE3 /* beam.cpp */; };
+		3AE1040519DB8907DB2AE9C9 /* glyph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C4E0205571E432715DB9C9C /* glyph.cpp */; };
+		3BA8E2BA41B49FB3369A1292 /* adjustaccidxfunctor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D875F14FF10CC53FCACF1B5B /* adjustaccidxfunctor.cpp */; };
+		3C5B7975D128BF31897CC2DA /* div.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCD365EE6CDD65DE20892C55 /* div.cpp */; };
+		404D2F55672DCCBE372B17EA /* staffgrp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E10BFAFAED7B6BAB1025532 /* staffgrp.cpp */; };
+		413AEFA658189E723D5C0606 /* stem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71A272F9DBC9418B03BD3699 /* stem.cpp */; };
+		4274722575D93CDAA193DFA9 /* adjustclefchangesfunctor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D8BBBD314EC474AF9D6AE1F7 /* adjustclefchangesfunctor.cpp */; };
+		4312D76D02133ACE22B0F6D7 /* sb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EEDB5221E62D707D89C7FB58 /* sb.cpp */; };
+		45130A9F0BC4457418351887 /* mrpt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EB9FCBAA91B78701D2CDD93 /* mrpt.cpp */; };
+		45D8AF4E64268B2F1BC06416 /* atts_edittrans.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8816814CC20A90224F44793C /* atts_edittrans.cpp */; };
+		45ED9A2896F687C07CA832FA /* calcalignmentpitchposfunctor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EB5F2FF9F5ED7A09D13DB108 /* calcalignmentpitchposfunctor.cpp */; };
+		460DBF332C7B924C07360EE9 /* elementpart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DDE342E81CECD0E286F3758 /* elementpart.cpp */; };
+		461600C93B98583361E97E32 /* scoringupfunctor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0650222068C7D02DB8B61D75 /* scoringupfunctor.cpp */; };
+		48115B03580D501CD3AFD05D /* systemmilestone.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 691EC3AA3018227A45A5D80C /* systemmilestone.cpp */; };
+		4AC33BDB9E0EF87CBD57B237 /* pitchinterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28F9B28FEC817CD1F630436A /* pitchinterface.cpp */; };
+		4F206299DE0F512AB1FA4C1D /* verticalaligner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C80B54DAF1D26CE2B7277AA4 /* verticalaligner.cpp */; };
+		52CF1908F8AA963464B5C2F9 /* genericlayerelement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70C2C7F3BD1084FDA35E6033 /* genericlayerelement.cpp */; };
+		53AD4A0CA5C41543E71E5909 /* keysig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA01AC3278325B6B1230FBA4 /* keysig.cpp */; };
+		53F99D7AEBFDECD1A9307ADB /* add.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5917C547BF85CB3102E8DC7D /* add.cpp */; };
+		55B42991F4F90535627C4A63 /* atts_usersymbols.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A0C90CFB1BA1B1FDCAD55FA /* atts_usersymbols.cpp */; };
+		57193D07F7607B22404FE73C /* fermata.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A6C159D53C02054B6AED84AB /* fermata.cpp */; };
+		57F7C327801C859789289977 /* calcalignmentxposfunctor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F11BBD129790FA8DCFA59BF /* calcalignmentxposfunctor.cpp */; };
+		5938227C34E66E9A9557BEC7 /* toolkit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 774221526BBCFDF10DA4F441 /* toolkit.cpp */; };
+		5AF320020E29C6976B9D8304 /* beamspan.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D92B44403E7A011DF79C315 /* beamspan.cpp */; };
+		5B3A4692339D915735A84DD2 /* accid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AD5A86DAB4F09FA4C6E3393D /* accid.cpp */; };
+		5CCB492A6515BD2C9E2B6EBF /* symboldef.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8769F761FD726CC789D60AD /* symboldef.cpp */; };
+		5D30E12D058EB66DEFC8F715 /* iomei.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 90881B2EBCB0EB91317F21A7 /* iomei.cpp */; };
+		5D3ED0B4CF506386C84A7ACE /* adjustossiastaffdeffunctor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 67A625438BDB5624299A924E /* adjustossiastaffdeffunctor.cpp */; };
+		5DFD593414A0F75CACB5F215 /* dir.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8D910CBB7A4ECE2134FE232 /* dir.cpp */; };
+		5FCD6BC13F27AD102B728CAB /* mrpt2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F6876677C6821F7EA056D031 /* mrpt2.cpp */; };
+		5FF2BEB3C5554FEB4E838B82 /* neume.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94B9EB319305CF98356488EF /* neume.cpp */; };
+		5FFFF300255E9E32237DA3D8 /* pgfoot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A0A545C6EF3A5ACA5754DED /* pgfoot.cpp */; };
+		607EE63F70638C843238C252 /* rest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F94571398302E5E7431DA12E /* rest.cpp */; };
+		60BB506CAB45AA73EC2F944E /* surface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E53826518F8776B6FA88929D /* surface.cpp */; };
+		62F0DD2DB6E454E3E85B8725 /* positioninterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F17C5C386050B8A9FD34F1F /* positioninterface.cpp */; };
+		63467AD3F16EF140F300DC68 /* attmodule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49926E6C7BAAF927EC608A23 /* attmodule.cpp */; };
+		63D7A45DCA3F07BD83C5366F /* graphic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D7F1B2AADC7FD9D580837E04 /* graphic.cpp */; };
+		6464A246A4FCB528A330AFF0 /* view_neume.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C55F6D3B97A90BF6FF3C93B /* view_neume.cpp */; };
+		648715BEB3918CCA41C7F361 /* floatingobject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 307B73FCBB5E7D1CE0DE4AA9 /* floatingobject.cpp */; };
+		64D4F87E5682BE8175D94261 /* systemelement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 67FEBFA3E0CF2F1DF4C5AC83 /* systemelement.cpp */; };
+		65388A3E6921DAF148F80067 /* setscoredeffunctor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 47F6D0E013CADAF7E6A7B3AF /* setscoredeffunctor.cpp */; };
+		6585AC7621FEF31F33002A1E /* textdirinterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 834FDDEBFEAF15E05ADEDF5A /* textdirinterface.cpp */; };
+		65AE6DF43FECFBFB3C78645F /* text.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ACFCF54697427E4186E21BE2 /* text.cpp */; };
+		65F86DB9C606A3303D7EA009 /* scoredefinterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8ECAEB4865C9C379645E0EEB /* scoredefinterface.cpp */; };
+		674FD546E98C68BA93BDD588 /* facsimileinterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C3FA7F260258DEDF45EFC413 /* facsimileinterface.cpp */; };
+		6778CDB6AED750D162B7E572 /* ftrem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54749381FAC5BE82411D4213 /* ftrem.cpp */; };
+		6983AFBEA9FCA67B77D68BB4 /* pedal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F0595A424C2E771B01CD9C0 /* pedal.cpp */; };
+		69DF93D4DFDD57BE0BFBB907 /* iobase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1EFC412F566AE8F32BAF51F /* iobase.cpp */; };
+		6AB5485B697C80322AD71585 /* multirest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA573591E0D2E3C76FE1BE3D /* multirest.cpp */; };
+		6C4407F3F22164ECF8DAE847 /* staffdef.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A640B392FF2CBA84D9F624BA /* staffdef.cpp */; };
+		6CFF6FCDD5F7CF4C4E2F6444 /* MidiFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E384FB17B5CDA0DB248A32D /* MidiFile.cpp */; };
+		6DA475D07F939AAAC5274EB4 /* adjustlayersfunctor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E308989CB45CF43928F7E898 /* adjustlayersfunctor.cpp */; };
+		703A709EA28A567753B254E7 /* view.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 44E8E2C941E6C3D0C8786EAB /* view.cpp */; };
+		72650B83E4A48C01E762C448 /* proport.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56698DD4987FE53608DECDB0 /* proport.cpp */; };
+		72E0ACE52976B46D089AB74E /* tuning.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDF333236D630C18CFCCAA8E /* tuning.cpp */; };
+		7365638A52FEAB57AC89E34B /* editortoolkit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01B442C83DABB6FE9907D3B2 /* editortoolkit.cpp */; };
+		7383A55DADCE89B2537FCA6D /* corr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D10C367E76E2B4EBCF238643 /* corr.cpp */; };
+		7396D1414D0A05E5E44C30E4 /* areaposinterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AEDC0C6316C53CBFF050EBE /* areaposinterface.cpp */; };
+		73C86AE77081DC6BB7878682 /* layerdef.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B568E8858C5D488C4725C2A /* layerdef.cpp */; };
+		73E96EEBE746385070AD99E8 /* view_control.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4931DBA32D781BEDFA76EF1E /* view_control.cpp */; };
+		74CE638BD8BB21A2E5DF46B3 /* adjusttupletsxfunctor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86DF8B8D61A956D03AD7303D /* adjusttupletsxfunctor.cpp */; };
+		74DE447B29D31D8BEC31419F /* measure.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DB979135177D120A8FE9B66 /* measure.cpp */; };
+		759B6F096D2D7ECF0324E6EF /* adjusttupletsyfunctor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61C8456DC4B88E7BD95D25E0 /* adjusttupletsyfunctor.cpp */; };
+		75D98EC95E2B66A3EDE8CD6C /* syllable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E30197C4005322D411D15901 /* syllable.cpp */; };
+		760C7E57C28BCB0B46FB8A4D /* fing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C0E541B765BC0F4EE47E49EF /* fing.cpp */; };
+		76A7F9E62E1C7941E38FF212 /* metersiggrp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C8A5405E9A2ED11303C5BF69 /* metersiggrp.cpp */; };
+		781010E3309F9F9D892B04A0 /* trill.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4053BB0C062E66256BCD444F /* trill.cpp */; };
+		78CD228B872F3954F91E7D1B /* pages.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DDF821D745F6752BC1245DE /* pages.cpp */; };
+		7A3FEB1B488CEBE132AA6FB0 /* chord.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 90B9ECC84B4EB9FCA7F67DDF /* chord.cpp */; };
+		7BEAAD36C74C08674C01F79C /* mnum.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B81C195811BD31CC28EFEE14 /* mnum.cpp */; };
+		7FF57BB58A7639671BBF526C /* slur.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B88CD39BD96963FA087AEBC0 /* slur.cpp */; };
+		8235D8370E5A9984971E65E7 /* ossia.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 741B0A4FBB7BF29E5E038DE4 /* ossia.cpp */; };
+		8434A19982D484D12A509F10 /* instrdef.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 638D22493E15B7C3BC189749 /* instrdef.cpp */; };
+		852D710B1C8457729E05A7A5 /* editorial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A0D4F644E2D1583DB876BBAA /* editorial.cpp */; };
+		855FBC078154E29C19BB6044 /* atts_performance.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E546501F24A05659E4EA2A93 /* atts_performance.cpp */; };
+		85C35B6C01F88189F8D79C6D /* mspace.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54A69F9C68B2B9F4AFFB84C5 /* mspace.cpp */; };
+		863DF649B224C6ED4F331E7C /* adjustyrelfortranscriptionfunctor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DC0FD3C1FD23199C563BB595 /* adjustyrelfortranscriptionfunctor.cpp */; };
+		86600B77FDC1A0BA17852255 /* anchoredtext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16C7E3DD0AF2BDA2A35E7F85 /* anchoredtext.cpp */; };
+		86A54598A506C303AABE2F7B /* f.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCC16DCE1275A91E1D20D460 /* f.cpp */; };
+		87223498606E871AAE25E0BE /* adjustslursfunctor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03F8C7B84D820C7487659C50 /* adjustslursfunctor.cpp */; };
+		8734CC32FFE89B4CEF1DAEB7 /* mensur.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F63B6D545C5A48FAF019BC95 /* mensur.cpp */; };
+		875E06662A48633D2BB34904 /* Binasc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFABBCF01247C8BE6DFB57AF /* Binasc.cpp */; };
+		8783AC5AB6685707C70B84BC /* del.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1B73B291A79F81D905AE532 /* del.cpp */; };
+		87AEC3841519D6E70ACE33BF /* beatrpt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C458943FF080067DD4593B4A /* beatrpt.cpp */; };
+		88F8DFB0FE67C7EAA9D9B502 /* dynam.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1E89CE46D0FF4ED37B56D96 /* dynam.cpp */; };
+		8A5B6F8D93CF4795AE8A0A8C /* atts_analytical.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D1B9290A7699A56D1A9BF3B /* atts_analytical.cpp */; };
+		8A7DF8BFACE738EFF25F3C6B /* functorinterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3F4CE8142453CA9272DAF70A /* functorinterface.cpp */; };
+		8CE8275FF115ADF8E716A954 /* view_slur.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AD6972A7D2F45096ED2BC812 /* view_slur.cpp */; };
+		8D2EF58AE1FF67D5697562E2 /* halfmrpt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A94C59CA410D48D582ECF2C /* halfmrpt.cpp */; };
+		8E79F3F8D88E9315507B80A7 /* calcslurdirectionfunctor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 471D2DA15196DFBB62C8AF6F /* calcslurdirectionfunctor.cpp */; };
+		8EC8B86486E1BDFE5E6EE3A6 /* atts_externalsymbols.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B78AF41DD2868AC30617B18A /* atts_externalsymbols.cpp */; };
+		8F1509A7D7120D475AB39050 /* mdiv.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50A8E1416505BC53EFE0F498 /* mdiv.cpp */; };
+		905203D53261DAEB79D40D3D /* iopae.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D330BDBFD6595BC8AB84D0B2 /* iopae.cpp */; };
+		915E1E65FC4D0BD6EFBB5896 /* miscfunctor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 739CCCE0C19853FB815C847B /* miscfunctor.cpp */; };
+		92068ED3758670BD9AEEF017 /* note.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 982AA9D280181775B779110A /* note.cpp */; };
+		920C27D4372EF22096B7AECC /* customtuning.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF8FF5295876BD866AB44608 /* customtuning.cpp */; };
+		922437BEEC3785C7A6D2ADAD /* layerelement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 17704EAA3FC8ECB06CE66BCB /* layerelement.cpp */; };
+		92271E973E68869964D297EC /* expansion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFBD9ED2012ECA6559E61296 /* expansion.cpp */; };
+		92F4DB4F5B74B5E3CF8758BF /* verovio_ffi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E58C6513C2F4D8EB1674DC5E /* verovio_ffi.cpp */; };
+		92FF669CCEA12B93DF232331 /* reg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F4863FE782B07C8A6560752 /* reg.cpp */; };
+		938257E4515D09D284903836 /* atts_shared.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8631525269EC782A995B11F0 /* atts_shared.cpp */; };
+		93EAE0D899B5D16B1E62CA36 /* featureextractor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9CDC42DEF8136BA164E5632 /* featureextractor.cpp */; };
+		93FCC67C9A48B84466FA15B8 /* object.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CA9703515BC547D9FA0C7962 /* object.cpp */; };
+		94F5BD8A72EA14ED7E4ADAC5 /* expan.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C80A684815CDF4C8B46FFEAB /* expan.cpp */; };
+		964F58851C8C0B9A1C332B24 /* adjustsylspacingfunctor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84C422F97F9959B86AD533CB /* adjustsylspacingfunctor.cpp */; };
+		977C22C5367E355C3781245F /* calcligatureorneumeposfunctor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1B82B6A64F92435802441610 /* calcligatureorneumeposfunctor.cpp */; };
+		97BFA102B1951D5175A98EE9 /* atts_header.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8506FAE062669F57FD60C2E /* atts_header.cpp */; };
+		980208FE1AD7C209A32A903A /* devicecontext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF96BB279CD8664D8F3268E5 /* devicecontext.cpp */; };
+		995BB4DD65C579E77D640748 /* cpmark.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 975E7F61A90B1737B703ADDF /* cpmark.cpp */; };
+		9AFB27D6CC2AFF80A7D165AB /* atts_figtable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 762BEDB4AE11ABFAA5115616 /* atts_figtable.cpp */; };
+		9CC6A60B3C611D8D67F7F98C /* rend.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5C4EFAE830F2D2263B7E1143 /* rend.cpp */; };
+		9D2B823986A6F1BB193BAE30 /* reh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FCB63A1167A76BA4F935912B /* reh.cpp */; };
+		9DBC9A0EF97B712DFCC24989 /* space.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D06071C583E2A58AE63EBD44 /* space.cpp */; };
+		9DD373B06BAD819D1FE10EF8 /* artic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 945A50363D2E604EAA7531E3 /* artic.cpp */; };
+		A095553B3F9532E95B3AC460 /* unclear.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55E6F520034BCC2339798AC5 /* unclear.cpp */; };
+		A229858379974F04FF105A7A /* humlib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41BA777D07116E92E4670A28 /* humlib.cpp */; };
+		A289F466189B5C5B8F965C14 /* ending.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8098929F11F1E0260B60613 /* ending.cpp */; };
+		A39010ED5545F710D4307471 /* ornam.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A449EFDF89028CDCAC64E6F1 /* ornam.cpp */; };
+		A3C8523FEC8D47EA58951BC2 /* phrase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 11E644D5D5E382364079DF4E /* phrase.cpp */; };
+		A41EDE4305EAB6AFF46C80F6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 274E7CD1C445250E3725159F /* Foundation.framework */; };
+		A59988649DE8D1CEBFF40128 /* dot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7807A4F66C450153363BEA8D /* dot.cpp */; };
+		A62019D709BCBE3DE185E74F /* savefunctor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CE812E07914428FD1606195 /* savefunctor.cpp */; };
+		A7439316A818D42C7B812BF4 /* layer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1281D5BF6F80BD96FBF94F70 /* layer.cpp */; };
+		A7611825CEBA81543386871E /* tabdursym.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9A21D6C62FD927642476249 /* tabdursym.cpp */; };
+		A907CB48BF39313B808D2230 /* drawinginterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2D91D3A4FDCD78D60793E677 /* drawinginterface.cpp */; };
+		AAF2707DC95B6AF4235DE33D /* crc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CB158292BA70C0819D6E956F /* crc.cpp */; };
+		AB9E62C6183C9A9C821C7A12 /* num.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C29D37BCC5F59D547D013B0C /* num.cpp */; };
+		AC437E23323A111E7E4C482F /* calcstemfunctor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 066AFB3AC5135E8B6F464E8D /* calcstemfunctor.cpp */; };
+		AC734389836EEB52C497EAB8 /* atts_cmnornaments.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C82ED7BA0825319804BA1ADC /* atts_cmnornaments.cpp */; };
+		AE01E0FFA89861634A0C104E /* gliss.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EE7249788EBA5A995AFC185 /* gliss.cpp */; };
+		AE4127A0450D8B88F1DA18A7 /* linkinginterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 52D374F3E7F17A4E875B19EE /* linkinginterface.cpp */; };
+		AECFF4633AEB10ADC135719E /* altsyminterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E3DE180514F764B04F946D42 /* altsyminterface.cpp */; };
+		AFC74DCB485C5875A9262A79 /* score.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2C28FB5CB5B286CD40BEB0B /* score.cpp */; };
+		B063AFE48E962024FB05D3DF /* metersig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 594FAAE9B8892FE78B801126 /* metersig.cpp */; };
+		B155002D05F180D874C3BDEF /* boundingbox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A08E2B118E4A6DCA5CDC1179 /* boundingbox.cpp */; };
+		B20037DE40DF6F9CEBDA42C7 /* atts_stringtab.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78FA1D0BE2DF3DA9875D04A7 /* atts_stringtab.cpp */; };
+		B27D66668A479663CEFD3D23 /* pagemilestone.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2BAA734C79EF39806D23F7F /* pagemilestone.cpp */; };
+		B29FD5EEE0C24227A217327B /* filereader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49AD96DF49AB4B2E9990E4DE /* filereader.cpp */; };
+		B38B040186E02FAC7E96FD35 /* cachehorizontallayoutfunctor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EBB28E2F8748C3EB26F2527F /* cachehorizontallayoutfunctor.cpp */; };
+		B4BB2124822E31CD4BD7F816 /* caesura.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 68BC5736A146BE6888593609 /* caesura.cpp */; };
+		B4C02A04E418CE00686C12E2 /* labelabbr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6B6E4981E930569C2378B8F0 /* labelabbr.cpp */; };
+		B54906BC3CB2BD6AF6637C35 /* plistinterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2AC630E55EA5F38A7B0E6260 /* plistinterface.cpp */; };
+		B59C4C6AC9328302DD30E602 /* iogabc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E22CE52C30A8256BC02F652F /* iogabc.cpp */; };
+		B5E617C5F96F4FBD648C10EA /* resetfunctor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F1B49398E3763F22A87B89B /* resetfunctor.cpp */; };
+		B71771D5F3D7562369A10EC2 /* annot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C3872105CD754BA5506D5C0 /* annot.cpp */; };
+		B8A05559E3428525CC0144FC /* oriscus.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 80A750AD94667D6A4C4004D7 /* oriscus.cpp */; };
+		B90B50976F1D46F827F528A8 /* custos.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4650E3041B682056C4AE91C8 /* custos.cpp */; };
+		B96810A8AECED6ECA6D81271 /* bracketspan.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6893D134D69642BC50B9A374 /* bracketspan.cpp */; };
+		BB2C45E675BA16A3FF3F2428 /* scoredef.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65C77840BBCC5F43FFEC6360 /* scoredef.cpp */; };
+		BC3F965A63D055A8ECC6F163 /* MidiEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F21021A5683A12F833EA87B0 /* MidiEvent.cpp */; };
+		BC42C2A26C359A6E6AADC9C4 /* turn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC8754A49C2B77524A9BD55E /* turn.cpp */; };
+		BC85B26DD412AF98B3BA0AB6 /* system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBE62280D100FA73DACE6990 /* system.cpp */; };
+		BD75C5D30AC4FF9A7EFF8AC7 /* transposefunctor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86B1ADEA1ABFB89D20E613AA /* transposefunctor.cpp */; };
+		BDC699C02DB8B4F8BD68126C /* pghead.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C3C797D05525160B3370E59D /* pghead.cpp */; };
+		BF0B700E9CA632EB087D71AF /* adjustarticfunctor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DEC941E14A34E45BB637943A /* adjustarticfunctor.cpp */; };
+		C1290B9F9ACBBCA2CA028354 /* choice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1745AEE6D978A209AE07EEBF /* choice.cpp */; };
+		C12DFB6A62B5B1DC0A5F693D /* calcchordnoteheadsfunctor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ACEBE6D106445FC07EC3470 /* calcchordnoteheadsfunctor.cpp */; };
+		C235FCD14A907DDEC81D75E4 /* controlelement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E9D0CB757235E63FCB6468BF /* controlelement.cpp */; };
+		C3404F03BA276D619604D549 /* verovio_ffi.h in Headers */ = {isa = PBXBuildFile; fileRef = C9A1103677A30910F7C39025 /* verovio_ffi.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C3C9466FD4BFBBFCDEDADB4A /* restore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B1CA87E2ACBB275C1F746653 /* restore.cpp */; };
+		C4C5306C220C7339F7D79F84 /* atts_midi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23BE5766D2F008B40DB23286 /* atts_midi.cpp */; };
+		C531266356A63ED82B050659 /* atts_mensural.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02984155F3E57E90CDB86D93 /* atts_mensural.cpp */; };
+		C847340A25362B173DD82B5D /* staff.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8680C619D96286C84762C8FB /* staff.cpp */; };
+		C86DDC37D9B908FD7521622A /* timemap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74364C8C874EF284D7F280CD /* timemap.cpp */; };
+		C9140AADEFD54D78E3378794 /* timeinterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B57F3F4CAF8243E29106A167 /* timeinterface.cpp */; };
+		C95B1A8D8A2DDA119926E3ED /* adjustgracexposfunctor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64DA82F60C8E4CDFB840EA88 /* adjustgracexposfunctor.cpp */; };
+		C98A66530D5FB5C471F4A24E /* offsetinterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0D3991B519D630E4D5941D28 /* offsetinterface.cpp */; };
+		C9C8FE0362FE01043476D7F6 /* atts_gestural.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CA3CD50F4F54B2745E43BD9E /* atts_gestural.cpp */; };
+		CA4868DF88123559F202B885 /* tie.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6C982A6D4678AF47CF219F6 /* tie.cpp */; };
+		CC3B0E7E307170F5D3A6E441 /* horizontalaligner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9800FE8468071CFF95AA8BE6 /* horizontalaligner.cpp */; };
+		CD751C4098C2563091A59DC4 /* convertfunctor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F10CE82021504746062F88AA /* convertfunctor.cpp */; };
+		CDD8C5BD037E63AEC0F5F62A /* course.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E79B415C2810E20EE7886A1 /* course.cpp */; };
+		CDF76069EB60CE8D7078AF05 /* preparedatafunctor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB6DF4D04332B4297A4B68F1 /* preparedatafunctor.cpp */; };
+		CE4A363398600AA128695CA2 /* iomusxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 80DC3756072C1675D103FF48 /* iomusxml.cpp */; };
+		CE8B41698F1C950EF6A9ADEF /* textlayoutelement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4121FE411624BF8E10F4F1D4 /* textlayoutelement.cpp */; };
+		CFD16A8AB938F63D07BC852C /* tempo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 968964A33574D4F353362640 /* tempo.cpp */; };
+		D073E92C416CB3F63CEEA01B /* view_beam.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FAFB7DE011120599D448959F /* view_beam.cpp */; };
+		D243C1AE6A7ED6DE3F47CF8C /* nc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2596B898F4DBA2547D7E83B /* nc.cpp */; };
+		D3220166BA9256A9C0CA7C25 /* doc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 38B6456FAD4F1401719F7CFC /* doc.cpp */; };
+		D3FC04C146E641A924E1EF88 /* iodarms.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D3EDCC79393C4A6A7A93742 /* iodarms.cpp */; };
+		D47DD5923E2D40A3CB29DA67 /* page.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 792045C579661718F05D0F13 /* page.cpp */; };
+		D4B87784B5FEC48173ADF85E /* mordent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF906583BB0C4879D5B86241 /* mordent.cpp */; };
+		D60F6496CFB9007DF140237E /* arpeg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C5DDFD337950660D7F3F02F /* arpeg.cpp */; };
+		D68700B7AFD1F15598DB5903 /* pageelement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0477600BA70D059B751B73BB /* pageelement.cpp */; };
+		D885A861BFB24DB42DE769A4 /* alignfunctor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EB0A6742545B5605DB26BDF /* alignfunctor.cpp */; };
+		D88F2B4F8C4F56F5F11784FA /* fig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 34E6E2963C8936D2575EC850 /* fig.cpp */; };
+		D97F996ACEB7AD3A45A0D531 /* view_page.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C99AC6530687CCB2491C48FE /* view_page.cpp */; };
+		D99112FB6C9530F7978F677C /* calcbboxoverflowsfunctor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40F1B8BC452AFF9B2331F915 /* calcbboxoverflowsfunctor.cpp */; };
+		DA2CF63C397731C1A8BA6E0F /* app.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5843B59E8CCDFA8DAB595CC4 /* app.cpp */; };
+		DB84283D98AAAE2FB6C82279 /* facsimile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A68357822600BC418F024D1D /* facsimile.cpp */; };
+		DB9D3FC4DBF64891ACA3C359 /* gracegrp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 42B9E7B1590B7AC67935B9D7 /* gracegrp.cpp */; };
+		DDB649BA2D94C24704321DBD /* editortoolkit_shared.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC4EDDEFF0151FDEF5279599 /* editortoolkit_shared.cpp */; };
+		DE914F13D75EB35624FAF0A7 /* ref.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 260E6FAF4F7EB2548C4419D7 /* ref.cpp */; };
+		DF70195E4497449887DAF836 /* c_wrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 58D29FD9AE3A083C94D2A688 /* c_wrapper.cpp */; };
+		DFFDAB6135A6834E506EB4E6 /* MidiEventList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 104C8720406BC2913D10BA52 /* MidiEventList.cpp */; };
+		E09CA0B8F1C4A88CA6B8F8EE /* strophicus.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2758C297560AEAC105C8F214 /* strophicus.cpp */; };
+		E15CC9AB245101D9FE5B1C22 /* clef.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 44E78F061FA4AF40091D52DA /* clef.cpp */; };
+		E2063255A32613E26D41E630 /* subst.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7D76739D368ACB664AD1AADF /* subst.cpp */; };
+		E26E933130EA189BAEA81C7F /* atts_neumes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCEC181CC9DDB98CB3C74CEF /* atts_neumes.cpp */; };
+		E302DFDBAD5856BF222BF1E5 /* midifunctor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57879D5BE88C161BC3F6FFAD /* midifunctor.cpp */; };
+		E350BF946EB3B8464249BC6C /* lb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 17C7A9D69227193D346139B7 /* lb.cpp */; };
+		E40ACEE2F0DFD8D004135247 /* section.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B09A85D6A974CF5C034CD102 /* section.cpp */; };
+		E5164FED6D3097CC38AED967 /* resources.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C20B554E919D95286FE4E162 /* resources.cpp */; };
+		E614B7A8978AB210FFD98CD9 /* ioabc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84C12E64A3A328EE7A483F55 /* ioabc.cpp */; };
+		E698B97FF14FF267B75620B9 /* multirpt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A056CF0112E339B0B6827FE4 /* multirpt.cpp */; };
+		E795EAEBCCBE3797921FB8D8 /* quilisma.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E48524BDECE71D8A4D0E3BE /* quilisma.cpp */; };
+		E8A4163BD17444F5454A92E6 /* adjustxposfunctor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C51489C3EFFE64FADF68A9A3 /* adjustxposfunctor.cpp */; };
+		EA9E7752B5BD7C2FD6056D36 /* svgdevicecontext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B28D53488EC89508DD21D139 /* svgdevicecontext.cpp */; };
+		EAB38AE32A5D15C320BFCFDD /* editortoolkit_cmn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0FB2EC26C3FF01720F663DD0 /* editortoolkit_cmn.cpp */; };
+		EAC93AFF08D0AD7FAE544136 /* bboxdevicecontext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDEC71AC313F8D282B8F70CE /* bboxdevicecontext.cpp */; };
+		EADCA062EEFFDD5B30DFB1E0 /* runningelement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBF85ADB87918D07A93081B /* runningelement.cpp */; };
+		EAF3B514CFDBE8EED60F5FC2 /* runtimeclock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6BEE5AF06364DF92EBEEF661 /* runtimeclock.cpp */; };
+		EB92B10CF20357BAE7CA546B /* atts_fingering.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5B348FE452866081034B66A /* atts_fingering.cpp */; };
+		EC38DB68A39E8EE7B4A47168 /* barline.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BEDB0D95A3B7DF340D2AE0C /* barline.cpp */; };
+		ED2AC2D1FE67D72439B54034 /* lem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 171FFDB243EA20CE68B337DA /* lem.cpp */; };
+		ED397D6070561BE938019E87 /* orig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 95F7A7BBD37383B6EAF6BA8C /* orig.cpp */; };
+		EE63AAF3D3C287C4E7746DE6 /* justifyfunctor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E55C23E7D90CE83ECD78EAF /* justifyfunctor.cpp */; };
+		EF9231F761FB92A8B40D1431 /* expansionmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05EACF034F5720CB8971BA29 /* expansionmap.cpp */; };
+		F150F983F1527E24955C9E56 /* calcledgerlinesfunctor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 17D1339E3DD0B672B1339CC0 /* calcledgerlinesfunctor.cpp */; };
+		F196E61641FEDFF274A27810 /* grpsym.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 052CEEA671C7F1F937F14986 /* grpsym.cpp */; };
+		F1D899B06BAA2831F887D188 /* zone.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F0E66DB9931BA4497932937 /* zone.cpp */; };
+		F250848E949B06F8075A6D50 /* castofffunctor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96B4E1068D49127A6614D4EE /* castofffunctor.cpp */; };
+		F4BFEA9BC0D288C5D42E0787 /* mrest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BDECA185EAA2AD93C627AF1 /* mrest.cpp */; };
+		F72DC50818150E8CA13C887B /* editortoolkit_neume.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 956E082C7C38461AB109F4F4 /* editortoolkit_neume.cpp */; };
+		F74978A895B11C0FB5D32715 /* tuplet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 87DA8F40D5C663CFFBDC7810 /* tuplet.cpp */; };
+		F7E8CDB64AD5DD3F07C4B1F8 /* abbr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5BCD2711DA59BAED3A167E9 /* abbr.cpp */; };
+		F803718647905A09210CB73C /* transposition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BBC08E725836ED20E44FE6D /* transposition.cpp */; };
+		F893B93C6208C4514AD20B59 /* options.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C18724BA58721024FA3CFE73 /* options.cpp */; };
+		F93A2C571DD9900AF0175B76 /* adjustbeamsfunctor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDF0453E2D8431071170A5DF /* adjustbeamsfunctor.cpp */; };
+		F93F50EFA5A62EF6A4F2AC5E /* octave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5940A45C19D5D59B2576D175 /* octave.cpp */; };
+		F95A7844E0A8DD044D10ED5E /* repeatmark.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2BAF02CC358E4655DF3EE9C /* repeatmark.cpp */; };
+		F97F075CD17B09B1D2CDF18F /* fb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F88BCEAE4B0ACBABE0E18E7 /* fb.cpp */; };
+		FB285DFBC4F3108C6B3E6B59 /* atts_pagebased.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 62D429FE6A0FAB21ED0224AE /* atts_pagebased.cpp */; };
+		FE270253533A0296E1A3ABF6 /* adjuststaffoverlapfunctor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24D89D0D7FB211AF63D2D0B /* adjuststaffoverlapfunctor.cpp */; };
+		FFB531F3CD128E72A2938486 /* atts_visual.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49EC7C52D2CDEC33673F623E /* atts_visual.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		01B442C83DABB6FE9907D3B2 /* editortoolkit.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = editortoolkit.cpp; path = ../third_party/verovio/src/editortoolkit.cpp; sourceTree = "<group>"; };
+		02984155F3E57E90CDB86D93 /* atts_mensural.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = atts_mensural.cpp; path = ../third_party/verovio/libmei/dist/atts_mensural.cpp; sourceTree = "<group>"; };
+		03F8C7B84D820C7487659C50 /* adjustslursfunctor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = adjustslursfunctor.cpp; path = ../third_party/verovio/src/adjustslursfunctor.cpp; sourceTree = "<group>"; };
+		0477600BA70D059B751B73BB /* pageelement.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = pageelement.cpp; path = ../third_party/verovio/src/pageelement.cpp; sourceTree = "<group>"; };
+		04A3084E466B4DE15E8D11EC /* adjustneumexfunctor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = adjustneumexfunctor.cpp; path = ../third_party/verovio/src/adjustneumexfunctor.cpp; sourceTree = "<group>"; };
+		052CEEA671C7F1F937F14986 /* grpsym.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = grpsym.cpp; path = ../third_party/verovio/src/grpsym.cpp; sourceTree = "<group>"; };
+		05EACF034F5720CB8971BA29 /* expansionmap.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = expansionmap.cpp; path = ../third_party/verovio/src/expansionmap.cpp; sourceTree = "<group>"; };
+		061991325320CDA20E3398D8 /* adjustxrelfortranscriptionfunctor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = adjustxrelfortranscriptionfunctor.cpp; path = ../third_party/verovio/src/adjustxrelfortranscriptionfunctor.cpp; sourceTree = "<group>"; };
+		0650222068C7D02DB8B61D75 /* scoringupfunctor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = scoringupfunctor.cpp; path = ../third_party/verovio/src/scoringupfunctor.cpp; sourceTree = "<group>"; };
+		066AFB3AC5135E8B6F464E8D /* calcstemfunctor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = calcstemfunctor.cpp; path = ../third_party/verovio/src/calcstemfunctor.cpp; sourceTree = "<group>"; };
+		076A4BD549FB8EA5179EE4CB /* liquescent.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = liquescent.cpp; path = ../third_party/verovio/src/liquescent.cpp; sourceTree = "<group>"; };
+		0890465253EA4CB02D9B0EA3 /* calcspanningbeamspansfunctor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = calcspanningbeamspansfunctor.cpp; path = ../third_party/verovio/src/calcspanningbeamspansfunctor.cpp; sourceTree = "<group>"; };
+		0A94C59CA410D48D582ECF2C /* halfmrpt.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = halfmrpt.cpp; path = ../third_party/verovio/src/halfmrpt.cpp; sourceTree = "<group>"; };
+		0C3872105CD754BA5506D5C0 /* annot.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = annot.cpp; path = ../third_party/verovio/src/annot.cpp; sourceTree = "<group>"; };
+		0C3E1011C91024F67E859A57 /* docselection.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = docselection.cpp; path = ../third_party/verovio/src/docselection.cpp; sourceTree = "<group>"; };
+		0CE5ED0223FEC41BED0CB94C /* adjustyposfunctor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = adjustyposfunctor.cpp; path = ../third_party/verovio/src/adjustyposfunctor.cpp; sourceTree = "<group>"; };
+		0D3991B519D630E4D5941D28 /* offsetinterface.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = offsetinterface.cpp; path = ../third_party/verovio/src/offsetinterface.cpp; sourceTree = "<group>"; };
+		0DDF821D745F6752BC1245DE /* pages.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = pages.cpp; path = ../third_party/verovio/src/pages.cpp; sourceTree = "<group>"; };
+		0F087571529784BD1A89E1C7 /* atts_facsimile.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = atts_facsimile.cpp; path = ../third_party/verovio/libmei/dist/atts_facsimile.cpp; sourceTree = "<group>"; };
+		0F17C5C386050B8A9FD34F1F /* positioninterface.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = positioninterface.cpp; path = ../third_party/verovio/src/positioninterface.cpp; sourceTree = "<group>"; };
+		0FB2EC26C3FF01720F663DD0 /* editortoolkit_cmn.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = editortoolkit_cmn.cpp; path = ../third_party/verovio/src/editortoolkit_cmn.cpp; sourceTree = "<group>"; };
+		104C8720406BC2913D10BA52 /* MidiEventList.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = MidiEventList.cpp; path = ../third_party/verovio/src/midi/MidiEventList.cpp; sourceTree = "<group>"; };
+		108970E8F160EF0BA96E545E /* att.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = att.cpp; path = ../third_party/verovio/libmei/addons/att.cpp; sourceTree = "<group>"; };
+		11E644D5D5E382364079DF4E /* phrase.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = phrase.cpp; path = ../third_party/verovio/src/phrase.cpp; sourceTree = "<group>"; };
+		1281D5BF6F80BD96FBF94F70 /* layer.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = layer.cpp; path = ../third_party/verovio/src/layer.cpp; sourceTree = "<group>"; };
+		137FEEF18AEBE0BD7D45F59E /* view_mensural.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = view_mensural.cpp; path = ../third_party/verovio/src/view_mensural.cpp; sourceTree = "<group>"; };
+		1480BBD998F1C62877AF4960 /* jsonxx.cc */ = {isa = PBXFileReference; includeInIndex = 1; name = jsonxx.cc; path = ../third_party/verovio/src/json/jsonxx.cc; sourceTree = "<group>"; };
+		152C5FBC6A1206D9613F2064 /* facsimilefunctor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = facsimilefunctor.cpp; path = ../third_party/verovio/src/facsimilefunctor.cpp; sourceTree = "<group>"; };
+		16C7E3DD0AF2BDA2A35E7F85 /* anchoredtext.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = anchoredtext.cpp; path = ../third_party/verovio/src/anchoredtext.cpp; sourceTree = "<group>"; };
+		171FFDB243EA20CE68B337DA /* lem.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = lem.cpp; path = ../third_party/verovio/src/lem.cpp; sourceTree = "<group>"; };
+		1745AEE6D978A209AE07EEBF /* choice.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = choice.cpp; path = ../third_party/verovio/src/choice.cpp; sourceTree = "<group>"; };
+		17704EAA3FC8ECB06CE66BCB /* layerelement.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = layerelement.cpp; path = ../third_party/verovio/src/layerelement.cpp; sourceTree = "<group>"; };
+		17C7A9D69227193D346139B7 /* lb.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = lb.cpp; path = ../third_party/verovio/src/lb.cpp; sourceTree = "<group>"; };
+		17D1339E3DD0B672B1339CC0 /* calcledgerlinesfunctor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = calcledgerlinesfunctor.cpp; path = ../third_party/verovio/src/calcledgerlinesfunctor.cpp; sourceTree = "<group>"; };
+		181BFC774EF638BEFCC2CB07 /* pitchinflection.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = pitchinflection.cpp; path = ../third_party/verovio/src/pitchinflection.cpp; sourceTree = "<group>"; };
+		1998CDADBE624EED117AC547 /* timestamp.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = timestamp.cpp; path = ../third_party/verovio/src/timestamp.cpp; sourceTree = "<group>"; };
+		1AEDC0C6316C53CBFF050EBE /* areaposinterface.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = areaposinterface.cpp; path = ../third_party/verovio/src/areaposinterface.cpp; sourceTree = "<group>"; };
+		1B82B6A64F92435802441610 /* calcligatureorneumeposfunctor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = calcligatureorneumeposfunctor.cpp; path = ../third_party/verovio/src/calcligatureorneumeposfunctor.cpp; sourceTree = "<group>"; };
+		1BE1E2C9722149E2B6DD18F2 /* supplied.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = supplied.cpp; path = ../third_party/verovio/src/supplied.cpp; sourceTree = "<group>"; };
+		1D1B9290A7699A56D1A9BF3B /* atts_analytical.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = atts_analytical.cpp; path = ../third_party/verovio/libmei/dist/atts_analytical.cpp; sourceTree = "<group>"; };
+		1EE7249788EBA5A995AFC185 /* gliss.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = gliss.cpp; path = ../third_party/verovio/src/gliss.cpp; sourceTree = "<group>"; };
+		1F1B49398E3763F22A87B89B /* resetfunctor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = resetfunctor.cpp; path = ../third_party/verovio/src/resetfunctor.cpp; sourceTree = "<group>"; };
+		1F24EBEDC2855CD8EDC6B533 /* rdg.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = rdg.cpp; path = ../third_party/verovio/src/rdg.cpp; sourceTree = "<group>"; };
+		1F88BCEAE4B0ACBABE0E18E7 /* fb.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = fb.cpp; path = ../third_party/verovio/src/fb.cpp; sourceTree = "<group>"; };
+		211A938B2216970C6065661F /* symboltable.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = symboltable.cpp; path = ../third_party/verovio/src/symboltable.cpp; sourceTree = "<group>"; };
+		212F8FE0B32CBFDF6286AC77 /* plica.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = plica.cpp; path = ../third_party/verovio/src/plica.cpp; sourceTree = "<group>"; };
+		23BE5766D2F008B40DB23286 /* atts_midi.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = atts_midi.cpp; path = ../third_party/verovio/libmei/dist/atts_midi.cpp; sourceTree = "<group>"; };
+		260E6FAF4F7EB2548C4419D7 /* ref.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = ref.cpp; path = ../third_party/verovio/src/ref.cpp; sourceTree = "<group>"; };
+		26D25AD10256686BEE14F922 /* view_element.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = view_element.cpp; path = ../third_party/verovio/src/view_element.cpp; sourceTree = "<group>"; };
+		274E7CD1C445250E3725159F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		2758C297560AEAC105C8F214 /* strophicus.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = strophicus.cpp; path = ../third_party/verovio/src/strophicus.cpp; sourceTree = "<group>"; };
+		27850A6B27870EACF6AA2355 /* pb.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = pb.cpp; path = ../third_party/verovio/src/pb.cpp; sourceTree = "<group>"; };
+		28CB6C1E9D082B2E214133B9 /* adjustdotsfunctor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = adjustdotsfunctor.cpp; path = ../third_party/verovio/src/adjustdotsfunctor.cpp; sourceTree = "<group>"; };
+		28F9B28FEC817CD1F630436A /* pitchinterface.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = pitchinterface.cpp; path = ../third_party/verovio/src/pitchinterface.cpp; sourceTree = "<group>"; };
+		2AC630E55EA5F38A7B0E6260 /* plistinterface.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = plistinterface.cpp; path = ../third_party/verovio/src/plistinterface.cpp; sourceTree = "<group>"; };
+		2B568E8858C5D488C4725C2A /* layerdef.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = layerdef.cpp; path = ../third_party/verovio/src/layerdef.cpp; sourceTree = "<group>"; };
+		2D91D3A4FDCD78D60793E677 /* drawinginterface.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = drawinginterface.cpp; path = ../third_party/verovio/src/drawinginterface.cpp; sourceTree = "<group>"; };
+		2E48524BDECE71D8A4D0E3BE /* quilisma.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = quilisma.cpp; path = ../third_party/verovio/src/quilisma.cpp; sourceTree = "<group>"; };
+		2E55C23E7D90CE83ECD78EAF /* justifyfunctor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = justifyfunctor.cpp; path = ../third_party/verovio/src/justifyfunctor.cpp; sourceTree = "<group>"; };
+		307B73FCBB5E7D1CE0DE4AA9 /* floatingobject.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = floatingobject.cpp; path = ../third_party/verovio/src/floatingobject.cpp; sourceTree = "<group>"; };
+		3329A88538744C20FDACCBC6 /* calcdotsfunctor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = calcdotsfunctor.cpp; path = ../third_party/verovio/src/calcdotsfunctor.cpp; sourceTree = "<group>"; };
+		34E6E2963C8936D2575EC850 /* fig.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = fig.cpp; path = ../third_party/verovio/src/fig.cpp; sourceTree = "<group>"; };
+		38B6456FAD4F1401719F7CFC /* doc.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = doc.cpp; path = ../third_party/verovio/src/doc.cpp; sourceTree = "<group>"; };
+		3A0A545C6EF3A5ACA5754DED /* pgfoot.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = pgfoot.cpp; path = ../third_party/verovio/src/pgfoot.cpp; sourceTree = "<group>"; };
+		3BBC08E725836ED20E44FE6D /* transposition.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = transposition.cpp; path = ../third_party/verovio/src/transposition.cpp; sourceTree = "<group>"; };
+		3BEDB0D95A3B7DF340D2AE0C /* barline.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = barline.cpp; path = ../third_party/verovio/src/barline.cpp; sourceTree = "<group>"; };
+		3C55F6D3B97A90BF6FF3C93B /* view_neume.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = view_neume.cpp; path = ../third_party/verovio/src/view_neume.cpp; sourceTree = "<group>"; };
+		3EB9FCBAA91B78701D2CDD93 /* mrpt.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = mrpt.cpp; path = ../third_party/verovio/src/mrpt.cpp; sourceTree = "<group>"; };
+		3F4CE8142453CA9272DAF70A /* functorinterface.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = functorinterface.cpp; path = ../third_party/verovio/src/functorinterface.cpp; sourceTree = "<group>"; };
+		4053BB0C062E66256BCD444F /* trill.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = trill.cpp; path = ../third_party/verovio/src/trill.cpp; sourceTree = "<group>"; };
+		40F1B8BC452AFF9B2331F915 /* calcbboxoverflowsfunctor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = calcbboxoverflowsfunctor.cpp; path = ../third_party/verovio/src/calcbboxoverflowsfunctor.cpp; sourceTree = "<group>"; };
+		4121FE411624BF8E10F4F1D4 /* textlayoutelement.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = textlayoutelement.cpp; path = ../third_party/verovio/src/textlayoutelement.cpp; sourceTree = "<group>"; };
+		413D97A1E082ED3F3DD6D752 /* MidiMessage.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = MidiMessage.cpp; path = ../third_party/verovio/src/midi/MidiMessage.cpp; sourceTree = "<group>"; };
+		41BA777D07116E92E4670A28 /* humlib.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = humlib.cpp; path = ../third_party/verovio/src/hum/humlib.cpp; sourceTree = "<group>"; };
+		42B9E7B1590B7AC67935B9D7 /* gracegrp.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = gracegrp.cpp; path = ../third_party/verovio/src/gracegrp.cpp; sourceTree = "<group>"; };
+		44AC689836A777F648E057B7 /* atts_cmn.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = atts_cmn.cpp; path = ../third_party/verovio/libmei/dist/atts_cmn.cpp; sourceTree = "<group>"; };
+		44E78F061FA4AF40091D52DA /* clef.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = clef.cpp; path = ../third_party/verovio/src/clef.cpp; sourceTree = "<group>"; };
+		44E8E2C941E6C3D0C8786EAB /* view.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = view.cpp; path = ../third_party/verovio/src/view.cpp; sourceTree = "<group>"; };
+		45267B70CD65CCB0C7E47C45 /* ligature.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = ligature.cpp; path = ../third_party/verovio/src/ligature.cpp; sourceTree = "<group>"; };
+		463E15182D3C11BDDF6F1153 /* VerovioFFI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = VerovioFFI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4650E3041B682056C4AE91C8 /* custos.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = custos.cpp; path = ../third_party/verovio/src/custos.cpp; sourceTree = "<group>"; };
+		471D2DA15196DFBB62C8AF6F /* calcslurdirectionfunctor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = calcslurdirectionfunctor.cpp; path = ../third_party/verovio/src/calcslurdirectionfunctor.cpp; sourceTree = "<group>"; };
+		47F6D0E013CADAF7E6A7B3AF /* setscoredeffunctor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = setscoredeffunctor.cpp; path = ../third_party/verovio/src/setscoredeffunctor.cpp; sourceTree = "<group>"; };
+		48F4A4365F4A8DAFA2EF7DE3 /* findlayerelementsfunctor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = findlayerelementsfunctor.cpp; path = ../third_party/verovio/src/findlayerelementsfunctor.cpp; sourceTree = "<group>"; };
+		4931DBA32D781BEDFA76EF1E /* view_control.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = view_control.cpp; path = ../third_party/verovio/src/view_control.cpp; sourceTree = "<group>"; };
+		498020C89DE91005670092FF /* textelement.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = textelement.cpp; path = ../third_party/verovio/src/textelement.cpp; sourceTree = "<group>"; };
+		49926E6C7BAAF927EC608A23 /* attmodule.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = attmodule.cpp; path = ../third_party/verovio/libmei/dist/attmodule.cpp; sourceTree = "<group>"; };
+		49AD96DF49AB4B2E9990E4DE /* filereader.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = filereader.cpp; path = ../third_party/verovio/src/filereader.cpp; sourceTree = "<group>"; };
+		49EC7C52D2CDEC33673F623E /* atts_visual.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = atts_visual.cpp; path = ../third_party/verovio/libmei/dist/atts_visual.cpp; sourceTree = "<group>"; };
+		4A0D0CCC87F38753297D5BFB /* adjustharmgrpsspacingfunctor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = adjustharmgrpsspacingfunctor.cpp; path = ../third_party/verovio/src/adjustharmgrpsspacingfunctor.cpp; sourceTree = "<group>"; };
+		4BAC2B8A2E29CA3484773470 /* btrem.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = btrem.cpp; path = ../third_party/verovio/src/btrem.cpp; sourceTree = "<group>"; };
+		4BDB54B3AE70F6280BB225FB /* episema.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = episema.cpp; path = ../third_party/verovio/src/episema.cpp; sourceTree = "<group>"; };
+		4E79B415C2810E20EE7886A1 /* course.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = course.cpp; path = ../third_party/verovio/src/course.cpp; sourceTree = "<group>"; };
+		50A8E1416505BC53EFE0F498 /* mdiv.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = mdiv.cpp; path = ../third_party/verovio/src/mdiv.cpp; sourceTree = "<group>"; };
+		52D374F3E7F17A4E875B19EE /* linkinginterface.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = linkinginterface.cpp; path = ../third_party/verovio/src/linkinginterface.cpp; sourceTree = "<group>"; };
+		536F4BD27F6602DB720F79A6 /* atts_mei.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = atts_mei.cpp; path = ../third_party/verovio/libmei/dist/atts_mei.cpp; sourceTree = "<group>"; };
+		54749381FAC5BE82411D4213 /* ftrem.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = ftrem.cpp; path = ../third_party/verovio/src/ftrem.cpp; sourceTree = "<group>"; };
+		54A69F9C68B2B9F4AFFB84C5 /* mspace.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = mspace.cpp; path = ../third_party/verovio/src/mspace.cpp; sourceTree = "<group>"; };
+		55E6F520034BCC2339798AC5 /* unclear.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = unclear.cpp; path = ../third_party/verovio/src/unclear.cpp; sourceTree = "<group>"; };
+		56698DD4987FE53608DECDB0 /* proport.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = proport.cpp; path = ../third_party/verovio/src/proport.cpp; sourceTree = "<group>"; };
+		57879D5BE88C161BC3F6FFAD /* midifunctor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = midifunctor.cpp; path = ../third_party/verovio/src/midifunctor.cpp; sourceTree = "<group>"; };
+		5843B59E8CCDFA8DAB595CC4 /* app.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = app.cpp; path = ../third_party/verovio/src/app.cpp; sourceTree = "<group>"; };
+		58B42D9232D28E22B0AAB09C /* atts_critapp.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = atts_critapp.cpp; path = ../third_party/verovio/libmei/dist/atts_critapp.cpp; sourceTree = "<group>"; };
+		58D29FD9AE3A083C94D2A688 /* c_wrapper.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = c_wrapper.cpp; path = ../third_party/verovio/tools/c_wrapper.cpp; sourceTree = "<group>"; };
+		5917C547BF85CB3102E8DC7D /* add.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = add.cpp; path = ../third_party/verovio/src/add.cpp; sourceTree = "<group>"; };
+		5940A45C19D5D59B2576D175 /* octave.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = octave.cpp; path = ../third_party/verovio/src/octave.cpp; sourceTree = "<group>"; };
+		594FAAE9B8892FE78B801126 /* metersig.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = metersig.cpp; path = ../third_party/verovio/src/metersig.cpp; sourceTree = "<group>"; };
+		5BDECA185EAA2AD93C627AF1 /* mrest.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = mrest.cpp; path = ../third_party/verovio/src/mrest.cpp; sourceTree = "<group>"; };
+		5C4EFAE830F2D2263B7E1143 /* rend.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = rend.cpp; path = ../third_party/verovio/src/rend.cpp; sourceTree = "<group>"; };
+		5C521716A09BEB21223DB3F4 /* keyaccid.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = keyaccid.cpp; path = ../third_party/verovio/src/keyaccid.cpp; sourceTree = "<group>"; };
+		5D87400B5F201EDC28540A4D /* iohumdrum.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = iohumdrum.cpp; path = ../third_party/verovio/src/iohumdrum.cpp; sourceTree = "<group>"; };
+		5DDE342E81CECD0E286F3758 /* elementpart.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = elementpart.cpp; path = ../third_party/verovio/src/elementpart.cpp; sourceTree = "<group>"; };
+		5F0595A424C2E771B01CD9C0 /* pedal.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = pedal.cpp; path = ../third_party/verovio/src/pedal.cpp; sourceTree = "<group>"; };
+		61C8456DC4B88E7BD95D25E0 /* adjusttupletsyfunctor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = adjusttupletsyfunctor.cpp; path = ../third_party/verovio/src/adjusttupletsyfunctor.cpp; sourceTree = "<group>"; };
+		62D429FE6A0FAB21ED0224AE /* atts_pagebased.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = atts_pagebased.cpp; path = ../third_party/verovio/libmei/dist/atts_pagebased.cpp; sourceTree = "<group>"; };
+		638D22493E15B7C3BC189749 /* instrdef.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = instrdef.cpp; path = ../third_party/verovio/src/instrdef.cpp; sourceTree = "<group>"; };
+		64DA82F60C8E4CDFB840EA88 /* adjustgracexposfunctor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = adjustgracexposfunctor.cpp; path = ../third_party/verovio/src/adjustgracexposfunctor.cpp; sourceTree = "<group>"; };
+		65AF113A7736F2F9F6BCB39C /* harm.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = harm.cpp; path = ../third_party/verovio/src/harm.cpp; sourceTree = "<group>"; };
+		65C77840BBCC5F43FFEC6360 /* scoredef.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = scoredef.cpp; path = ../third_party/verovio/src/scoredef.cpp; sourceTree = "<group>"; };
+		67A625438BDB5624299A924E /* adjustossiastaffdeffunctor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = adjustossiastaffdeffunctor.cpp; path = ../third_party/verovio/src/adjustossiastaffdeffunctor.cpp; sourceTree = "<group>"; };
+		67FEBFA3E0CF2F1DF4C5AC83 /* systemelement.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = systemelement.cpp; path = ../third_party/verovio/src/systemelement.cpp; sourceTree = "<group>"; };
+		6893D134D69642BC50B9A374 /* bracketspan.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = bracketspan.cpp; path = ../third_party/verovio/src/bracketspan.cpp; sourceTree = "<group>"; };
+		68BC5736A146BE6888593609 /* caesura.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = caesura.cpp; path = ../third_party/verovio/src/caesura.cpp; sourceTree = "<group>"; };
+		691EC3AA3018227A45A5D80C /* systemmilestone.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = systemmilestone.cpp; path = ../third_party/verovio/src/systemmilestone.cpp; sourceTree = "<group>"; };
+		6A2AFA99C7FFAC8514F93065 /* vrv.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = vrv.cpp; path = ../third_party/verovio/src/vrv.cpp; sourceTree = "<group>"; };
+		6ACEBE6D106445FC07EC3470 /* calcchordnoteheadsfunctor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = calcchordnoteheadsfunctor.cpp; path = ../third_party/verovio/src/calcchordnoteheadsfunctor.cpp; sourceTree = "<group>"; };
+		6B6E4981E930569C2378B8F0 /* labelabbr.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = labelabbr.cpp; path = ../third_party/verovio/src/labelabbr.cpp; sourceTree = "<group>"; };
+		6BEE5AF06364DF92EBEEF661 /* runtimeclock.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = runtimeclock.cpp; path = ../third_party/verovio/src/runtimeclock.cpp; sourceTree = "<group>"; };
+		6CE812E07914428FD1606195 /* savefunctor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = savefunctor.cpp; path = ../third_party/verovio/src/savefunctor.cpp; sourceTree = "<group>"; };
+		6D92B44403E7A011DF79C315 /* beamspan.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = beamspan.cpp; path = ../third_party/verovio/src/beamspan.cpp; sourceTree = "<group>"; };
+		6DB979135177D120A8FE9B66 /* measure.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = measure.cpp; path = ../third_party/verovio/src/measure.cpp; sourceTree = "<group>"; };
+		6F11BBD129790FA8DCFA59BF /* calcalignmentxposfunctor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = calcalignmentxposfunctor.cpp; path = ../third_party/verovio/src/calcalignmentxposfunctor.cpp; sourceTree = "<group>"; };
+		70C2C7F3BD1084FDA35E6033 /* genericlayerelement.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = genericlayerelement.cpp; path = ../third_party/verovio/src/genericlayerelement.cpp; sourceTree = "<group>"; };
+		71A272F9DBC9418B03BD3699 /* stem.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = stem.cpp; path = ../third_party/verovio/src/stem.cpp; sourceTree = "<group>"; };
+		739CCCE0C19853FB815C847B /* miscfunctor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = miscfunctor.cpp; path = ../third_party/verovio/src/miscfunctor.cpp; sourceTree = "<group>"; };
+		741B0A4FBB7BF29E5E038DE4 /* ossia.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = ossia.cpp; path = ../third_party/verovio/src/ossia.cpp; sourceTree = "<group>"; };
+		74364C8C874EF284D7F280CD /* timemap.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = timemap.cpp; path = ../third_party/verovio/src/timemap.cpp; sourceTree = "<group>"; };
+		7499A3CA6ED32E7968607A62 /* attconverter.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = attconverter.cpp; path = ../third_party/verovio/libmei/dist/attconverter.cpp; sourceTree = "<group>"; };
+		757B289C34194BE8AA928E18 /* adjustfloatingpositionerfunctor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = adjustfloatingpositionerfunctor.cpp; path = ../third_party/verovio/src/adjustfloatingpositionerfunctor.cpp; sourceTree = "<group>"; };
+		762BEDB4AE11ABFAA5115616 /* atts_figtable.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = atts_figtable.cpp; path = ../third_party/verovio/libmei/dist/atts_figtable.cpp; sourceTree = "<group>"; };
+		774221526BBCFDF10DA4F441 /* toolkit.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = toolkit.cpp; path = ../third_party/verovio/src/toolkit.cpp; sourceTree = "<group>"; };
+		7807A4F66C450153363BEA8D /* dot.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = dot.cpp; path = ../third_party/verovio/src/dot.cpp; sourceTree = "<group>"; };
+		78FA1D0BE2DF3DA9875D04A7 /* atts_stringtab.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = atts_stringtab.cpp; path = ../third_party/verovio/libmei/dist/atts_stringtab.cpp; sourceTree = "<group>"; };
+		792045C579661718F05D0F13 /* page.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = page.cpp; path = ../third_party/verovio/src/page.cpp; sourceTree = "<group>"; };
+		7A0C90CFB1BA1B1FDCAD55FA /* atts_usersymbols.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = atts_usersymbols.cpp; path = ../third_party/verovio/libmei/dist/atts_usersymbols.cpp; sourceTree = "<group>"; };
+		7D45BACA2E1A7E416FFDF049 /* findfunctor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = findfunctor.cpp; path = ../third_party/verovio/src/findfunctor.cpp; sourceTree = "<group>"; };
+		7D76739D368ACB664AD1AADF /* subst.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = subst.cpp; path = ../third_party/verovio/src/subst.cpp; sourceTree = "<group>"; };
+		7F0E66DB9931BA4497932937 /* zone.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = zone.cpp; path = ../third_party/verovio/src/zone.cpp; sourceTree = "<group>"; };
+		801936386D2F8AF80C482E3C /* label.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = label.cpp; path = ../third_party/verovio/src/label.cpp; sourceTree = "<group>"; };
+		80A750AD94667D6A4C4004D7 /* oriscus.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = oriscus.cpp; path = ../third_party/verovio/src/oriscus.cpp; sourceTree = "<group>"; };
+		80DC3756072C1675D103FF48 /* iomusxml.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = iomusxml.cpp; path = ../third_party/verovio/src/iomusxml.cpp; sourceTree = "<group>"; };
+		815B26B1D26915D178171642 /* sic.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = sic.cpp; path = ../third_party/verovio/src/sic.cpp; sourceTree = "<group>"; };
+		834FDDEBFEAF15E05ADEDF5A /* textdirinterface.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = textdirinterface.cpp; path = ../third_party/verovio/src/textdirinterface.cpp; sourceTree = "<group>"; };
+		84C12E64A3A328EE7A483F55 /* ioabc.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = ioabc.cpp; path = ../third_party/verovio/src/ioabc.cpp; sourceTree = "<group>"; };
+		84C422F97F9959B86AD533CB /* adjustsylspacingfunctor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = adjustsylspacingfunctor.cpp; path = ../third_party/verovio/src/adjustsylspacingfunctor.cpp; sourceTree = "<group>"; };
+		85A3A5128EFE0AB4CBC2C5CB /* adjustxoverflowfunctor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = adjustxoverflowfunctor.cpp; path = ../third_party/verovio/src/adjustxoverflowfunctor.cpp; sourceTree = "<group>"; };
+		8631525269EC782A995B11F0 /* atts_shared.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = atts_shared.cpp; path = ../third_party/verovio/libmei/dist/atts_shared.cpp; sourceTree = "<group>"; };
+		866BF1E9181C28E183096A9B /* durationinterface.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = durationinterface.cpp; path = ../third_party/verovio/src/durationinterface.cpp; sourceTree = "<group>"; };
+		8680C619D96286C84762C8FB /* staff.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = staff.cpp; path = ../third_party/verovio/src/staff.cpp; sourceTree = "<group>"; };
+		86B1ADEA1ABFB89D20E613AA /* transposefunctor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = transposefunctor.cpp; path = ../third_party/verovio/src/transposefunctor.cpp; sourceTree = "<group>"; };
+		86DF8B8D61A956D03AD7303D /* adjusttupletsxfunctor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = adjusttupletsxfunctor.cpp; path = ../third_party/verovio/src/adjusttupletsxfunctor.cpp; sourceTree = "<group>"; };
+		87DA8F40D5C663CFFBDC7810 /* tuplet.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = tuplet.cpp; path = ../third_party/verovio/src/tuplet.cpp; sourceTree = "<group>"; };
+		8816814CC20A90224F44793C /* atts_edittrans.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = atts_edittrans.cpp; path = ../third_party/verovio/libmei/dist/atts_edittrans.cpp; sourceTree = "<group>"; };
+		88C1F3C22C62A155A01462E0 /* editfunctor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = editfunctor.cpp; path = ../third_party/verovio/src/editfunctor.cpp; sourceTree = "<group>"; };
+		8D3EDCC79393C4A6A7A93742 /* iodarms.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = iodarms.cpp; path = ../third_party/verovio/src/iodarms.cpp; sourceTree = "<group>"; };
+		8E10BFAFAED7B6BAB1025532 /* staffgrp.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = staffgrp.cpp; path = ../third_party/verovio/src/staffgrp.cpp; sourceTree = "<group>"; };
+		8E384FB17B5CDA0DB248A32D /* MidiFile.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = MidiFile.cpp; path = ../third_party/verovio/src/midi/MidiFile.cpp; sourceTree = "<group>"; };
+		8E97C6D7BB40A2C3F4A7EA60 /* annotscore.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = annotscore.cpp; path = ../third_party/verovio/src/annotscore.cpp; sourceTree = "<group>"; };
+		8EB0A6742545B5605DB26BDF /* alignfunctor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = alignfunctor.cpp; path = ../third_party/verovio/src/alignfunctor.cpp; sourceTree = "<group>"; };
+		8ECAEB4865C9C379645E0EEB /* scoredefinterface.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = scoredefinterface.cpp; path = ../third_party/verovio/src/scoredefinterface.cpp; sourceTree = "<group>"; };
+		8F4863FE782B07C8A6560752 /* reg.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = reg.cpp; path = ../third_party/verovio/src/reg.cpp; sourceTree = "<group>"; };
+		90881B2EBCB0EB91317F21A7 /* iomei.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = iomei.cpp; path = ../third_party/verovio/src/iomei.cpp; sourceTree = "<group>"; };
+		90B9ECC84B4EB9FCA7F67DDF /* chord.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = chord.cpp; path = ../third_party/verovio/src/chord.cpp; sourceTree = "<group>"; };
+		945A50363D2E604EAA7531E3 /* artic.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = artic.cpp; path = ../third_party/verovio/src/artic.cpp; sourceTree = "<group>"; };
+		94B9EB319305CF98356488EF /* neume.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = neume.cpp; path = ../third_party/verovio/src/neume.cpp; sourceTree = "<group>"; };
+		956E082C7C38461AB109F4F4 /* editortoolkit_neume.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = editortoolkit_neume.cpp; path = ../third_party/verovio/src/editortoolkit_neume.cpp; sourceTree = "<group>"; };
+		95F7A7BBD37383B6EAF6BA8C /* orig.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = orig.cpp; path = ../third_party/verovio/src/orig.cpp; sourceTree = "<group>"; };
+		968964A33574D4F353362640 /* tempo.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = tempo.cpp; path = ../third_party/verovio/src/tempo.cpp; sourceTree = "<group>"; };
+		96B4E1068D49127A6614D4EE /* castofffunctor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = castofffunctor.cpp; path = ../third_party/verovio/src/castofffunctor.cpp; sourceTree = "<group>"; };
+		970117614848B72C876611EB /* hairpin.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = hairpin.cpp; path = ../third_party/verovio/src/hairpin.cpp; sourceTree = "<group>"; };
+		975E7F61A90B1737B703ADDF /* cpmark.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = cpmark.cpp; path = ../third_party/verovio/src/cpmark.cpp; sourceTree = "<group>"; };
+		9800FE8468071CFF95AA8BE6 /* horizontalaligner.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = horizontalaligner.cpp; path = ../third_party/verovio/src/horizontalaligner.cpp; sourceTree = "<group>"; };
+		982AA9D280181775B779110A /* note.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = note.cpp; path = ../third_party/verovio/src/note.cpp; sourceTree = "<group>"; };
+		9C4E0205571E432715DB9C9C /* glyph.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = glyph.cpp; path = ../third_party/verovio/src/glyph.cpp; sourceTree = "<group>"; };
+		9C5DDFD337950660D7F3F02F /* arpeg.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = arpeg.cpp; path = ../third_party/verovio/src/arpeg.cpp; sourceTree = "<group>"; };
+		A056CF0112E339B0B6827FE4 /* multirpt.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = multirpt.cpp; path = ../third_party/verovio/src/multirpt.cpp; sourceTree = "<group>"; };
+		A08E2B118E4A6DCA5CDC1179 /* boundingbox.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = boundingbox.cpp; path = ../third_party/verovio/src/boundingbox.cpp; sourceTree = "<group>"; };
+		A0D4F644E2D1583DB876BBAA /* editorial.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = editorial.cpp; path = ../third_party/verovio/src/editorial.cpp; sourceTree = "<group>"; };
+		A2BAA734C79EF39806D23F7F /* pagemilestone.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = pagemilestone.cpp; path = ../third_party/verovio/src/pagemilestone.cpp; sourceTree = "<group>"; };
+		A449EFDF89028CDCAC64E6F1 /* ornam.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = ornam.cpp; path = ../third_party/verovio/src/ornam.cpp; sourceTree = "<group>"; };
+		A5BCD2711DA59BAED3A167E9 /* abbr.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = abbr.cpp; path = ../third_party/verovio/src/abbr.cpp; sourceTree = "<group>"; };
+		A640B392FF2CBA84D9F624BA /* staffdef.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = staffdef.cpp; path = ../third_party/verovio/src/staffdef.cpp; sourceTree = "<group>"; };
+		A68357822600BC418F024D1D /* facsimile.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = facsimile.cpp; path = ../third_party/verovio/src/facsimile.cpp; sourceTree = "<group>"; };
+		A68D66C26AF7660F1F733C53 /* view_text.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = view_text.cpp; path = ../third_party/verovio/src/view_text.cpp; sourceTree = "<group>"; };
+		A6C159D53C02054B6AED84AB /* fermata.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = fermata.cpp; path = ../third_party/verovio/src/fermata.cpp; sourceTree = "<group>"; };
+		A8506FAE062669F57FD60C2E /* atts_header.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = atts_header.cpp; path = ../third_party/verovio/libmei/dist/atts_header.cpp; sourceTree = "<group>"; };
+		A8D910CBB7A4ECE2134FE232 /* dir.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = dir.cpp; path = ../third_party/verovio/src/dir.cpp; sourceTree = "<group>"; };
+		A9A21D6C62FD927642476249 /* tabdursym.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = tabdursym.cpp; path = ../third_party/verovio/src/tabdursym.cpp; sourceTree = "<group>"; };
+		AC0FF46EE61F2A0B66625CC2 /* fraction.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = fraction.cpp; path = ../third_party/verovio/src/fraction.cpp; sourceTree = "<group>"; };
+		AC8754A49C2B77524A9BD55E /* turn.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = turn.cpp; path = ../third_party/verovio/src/turn.cpp; sourceTree = "<group>"; };
+		ACFCF54697427E4186E21BE2 /* text.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = text.cpp; path = ../third_party/verovio/src/text.cpp; sourceTree = "<group>"; };
+		AD5A86DAB4F09FA4C6E3393D /* accid.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = accid.cpp; path = ../third_party/verovio/src/accid.cpp; sourceTree = "<group>"; };
+		AD6972A7D2F45096ED2BC812 /* view_slur.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = view_slur.cpp; path = ../third_party/verovio/src/view_slur.cpp; sourceTree = "<group>"; };
+		AD7EEC56F935F3C6FB4ACD07 /* tabgrp.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = tabgrp.cpp; path = ../third_party/verovio/src/tabgrp.cpp; sourceTree = "<group>"; };
+		B09A85D6A974CF5C034CD102 /* section.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = section.cpp; path = ../third_party/verovio/src/section.cpp; sourceTree = "<group>"; };
+		B1CA87E2ACBB275C1F746653 /* restore.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = restore.cpp; path = ../third_party/verovio/src/restore.cpp; sourceTree = "<group>"; };
+		B24D89D0D7FB211AF63D2D0B /* adjuststaffoverlapfunctor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = adjuststaffoverlapfunctor.cpp; path = ../third_party/verovio/src/adjuststaffoverlapfunctor.cpp; sourceTree = "<group>"; };
+		B2878ABBDBE06CA51B2FEEFE /* atts_harmony.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = atts_harmony.cpp; path = ../third_party/verovio/libmei/dist/atts_harmony.cpp; sourceTree = "<group>"; };
+		B28D53488EC89508DD21D139 /* svgdevicecontext.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = svgdevicecontext.cpp; path = ../third_party/verovio/src/svgdevicecontext.cpp; sourceTree = "<group>"; };
+		B2BAF02CC358E4655DF3EE9C /* repeatmark.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = repeatmark.cpp; path = ../third_party/verovio/src/repeatmark.cpp; sourceTree = "<group>"; };
+		B2C28FB5CB5B286CD40BEB0B /* score.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = score.cpp; path = ../third_party/verovio/src/score.cpp; sourceTree = "<group>"; };
+		B4CD8B39B3B394B99AF838A7 /* svg.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = svg.cpp; path = ../third_party/verovio/src/svg.cpp; sourceTree = "<group>"; };
+		B4F6EB6A3FBFF9BE2C449AD5 /* view_tab.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = view_tab.cpp; path = ../third_party/verovio/src/view_tab.cpp; sourceTree = "<group>"; };
+		B57F3F4CAF8243E29106A167 /* timeinterface.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = timeinterface.cpp; path = ../third_party/verovio/src/timeinterface.cpp; sourceTree = "<group>"; };
+		B78AF41DD2868AC30617B18A /* atts_externalsymbols.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = atts_externalsymbols.cpp; path = ../third_party/verovio/libmei/dist/atts_externalsymbols.cpp; sourceTree = "<group>"; };
+		B8098929F11F1E0260B60613 /* ending.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = ending.cpp; path = ../third_party/verovio/src/ending.cpp; sourceTree = "<group>"; };
+		B81C195811BD31CC28EFEE14 /* mnum.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = mnum.cpp; path = ../third_party/verovio/src/mnum.cpp; sourceTree = "<group>"; };
+		B88CD39BD96963FA087AEBC0 /* slur.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = slur.cpp; path = ../third_party/verovio/src/slur.cpp; sourceTree = "<group>"; };
+		BA01AC3278325B6B1230FBA4 /* keysig.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = keysig.cpp; path = ../third_party/verovio/src/keysig.cpp; sourceTree = "<group>"; };
+		BBBF85ADB87918D07A93081B /* runningelement.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = runningelement.cpp; path = ../third_party/verovio/src/runningelement.cpp; sourceTree = "<group>"; };
+		BBE62280D100FA73DACE6990 /* system.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = system.cpp; path = ../third_party/verovio/src/system.cpp; sourceTree = "<group>"; };
+		BC0FC99EFE27231F238687DC /* view_tuplet.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = view_tuplet.cpp; path = ../third_party/verovio/src/view_tuplet.cpp; sourceTree = "<group>"; };
+		BC4EDDEFF0151FDEF5279599 /* editortoolkit_shared.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = editortoolkit_shared.cpp; path = ../third_party/verovio/src/editortoolkit_shared.cpp; sourceTree = "<group>"; };
+		BCC16DCE1275A91E1D20D460 /* f.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = f.cpp; path = ../third_party/verovio/src/f.cpp; sourceTree = "<group>"; };
+		BCD365EE6CDD65DE20892C55 /* div.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = div.cpp; path = ../third_party/verovio/src/div.cpp; sourceTree = "<group>"; };
+		BD9E246ED1B22C40A4B863FE /* divline.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = divline.cpp; path = ../third_party/verovio/src/divline.cpp; sourceTree = "<group>"; };
+		BDEC71AC313F8D282B8F70CE /* bboxdevicecontext.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = bboxdevicecontext.cpp; path = ../third_party/verovio/src/bboxdevicecontext.cpp; sourceTree = "<group>"; };
+		BF0C2710FE0021F0DA2164EA /* calcarticfunctor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = calcarticfunctor.cpp; path = ../third_party/verovio/src/calcarticfunctor.cpp; sourceTree = "<group>"; };
+		BF906583BB0C4879D5B86241 /* mordent.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = mordent.cpp; path = ../third_party/verovio/src/mordent.cpp; sourceTree = "<group>"; };
+		BF96BB279CD8664D8F3268E5 /* devicecontext.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = devicecontext.cpp; path = ../third_party/verovio/src/devicecontext.cpp; sourceTree = "<group>"; };
+		C0E541B765BC0F4EE47E49EF /* fing.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = fing.cpp; path = ../third_party/verovio/src/fing.cpp; sourceTree = "<group>"; };
+		C17FDF82A97907814DFFCC47 /* view_graph.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = view_graph.cpp; path = ../third_party/verovio/src/view_graph.cpp; sourceTree = "<group>"; };
+		C18724BA58721024FA3CFE73 /* options.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = options.cpp; path = ../third_party/verovio/src/options.cpp; sourceTree = "<group>"; };
+		C20B554E919D95286FE4E162 /* resources.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = resources.cpp; path = ../third_party/verovio/src/resources.cpp; sourceTree = "<group>"; };
+		C29D37BCC5F59D547D013B0C /* num.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = num.cpp; path = ../third_party/verovio/src/num.cpp; sourceTree = "<group>"; };
+		C3C797D05525160B3370E59D /* pghead.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = pghead.cpp; path = ../third_party/verovio/src/pghead.cpp; sourceTree = "<group>"; };
+		C3FA7F260258DEDF45EFC413 /* facsimileinterface.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = facsimileinterface.cpp; path = ../third_party/verovio/src/facsimileinterface.cpp; sourceTree = "<group>"; };
+		C458943FF080067DD4593B4A /* beatrpt.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = beatrpt.cpp; path = ../third_party/verovio/src/beatrpt.cpp; sourceTree = "<group>"; };
+		C51489C3EFFE64FADF68A9A3 /* adjustxposfunctor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = adjustxposfunctor.cpp; path = ../third_party/verovio/src/adjustxposfunctor.cpp; sourceTree = "<group>"; };
+		C66BF44D32BE2F8DF1DB6CED /* damage.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = damage.cpp; path = ../third_party/verovio/src/damage.cpp; sourceTree = "<group>"; };
+		C6C982A6D4678AF47CF219F6 /* tie.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = tie.cpp; path = ../third_party/verovio/src/tie.cpp; sourceTree = "<group>"; };
+		C80A684815CDF4C8B46FFEAB /* expan.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = expan.cpp; path = ../third_party/verovio/src/expan.cpp; sourceTree = "<group>"; };
+		C80B54DAF1D26CE2B7277AA4 /* verticalaligner.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = verticalaligner.cpp; path = ../third_party/verovio/src/verticalaligner.cpp; sourceTree = "<group>"; };
+		C82ED7BA0825319804BA1ADC /* atts_cmnornaments.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = atts_cmnornaments.cpp; path = ../third_party/verovio/libmei/dist/atts_cmnornaments.cpp; sourceTree = "<group>"; };
+		C8A5405E9A2ED11303C5BF69 /* metersiggrp.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = metersiggrp.cpp; path = ../third_party/verovio/src/metersiggrp.cpp; sourceTree = "<group>"; };
+		C99AC6530687CCB2491C48FE /* view_page.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = view_page.cpp; path = ../third_party/verovio/src/view_page.cpp; sourceTree = "<group>"; };
+		C9A1103677A30910F7C39025 /* verovio_ffi.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = verovio_ffi.h; path = ../src/verovio_ffi.h; sourceTree = "<group>"; };
+		CA3CD50F4F54B2745E43BD9E /* atts_gestural.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = atts_gestural.cpp; path = ../third_party/verovio/libmei/dist/atts_gestural.cpp; sourceTree = "<group>"; };
+		CA9703515BC547D9FA0C7962 /* object.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = object.cpp; path = ../third_party/verovio/src/object.cpp; sourceTree = "<group>"; };
+		CB158292BA70C0819D6E956F /* crc.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = crc.cpp; path = ../third_party/verovio/src/crc/crc.cpp; sourceTree = "<group>"; };
+		CBDA803FA2B3A43FD0238BE3 /* beam.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = beam.cpp; path = ../third_party/verovio/src/beam.cpp; sourceTree = "<group>"; };
+		CCEC181CC9DDB98CB3C74CEF /* atts_neumes.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = atts_neumes.cpp; path = ../third_party/verovio/libmei/dist/atts_neumes.cpp; sourceTree = "<group>"; };
+		CFABBCF01247C8BE6DFB57AF /* Binasc.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = Binasc.cpp; path = ../third_party/verovio/src/midi/Binasc.cpp; sourceTree = "<group>"; };
+		D06071C583E2A58AE63EBD44 /* space.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = space.cpp; path = ../third_party/verovio/src/space.cpp; sourceTree = "<group>"; };
+		D10C367E76E2B4EBCF238643 /* corr.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = corr.cpp; path = ../third_party/verovio/src/corr.cpp; sourceTree = "<group>"; };
+		D330BDBFD6595BC8AB84D0B2 /* iopae.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = iopae.cpp; path = ../third_party/verovio/src/iopae.cpp; sourceTree = "<group>"; };
+		D49BD6009DAC85B33E5AC4BD /* adjusttempofunctor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = adjusttempofunctor.cpp; path = ../third_party/verovio/src/adjusttempofunctor.cpp; sourceTree = "<group>"; };
+		D7D5A7E7203B27FBE1B4FC2D /* adjustarpegfunctor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = adjustarpegfunctor.cpp; path = ../third_party/verovio/src/adjustarpegfunctor.cpp; sourceTree = "<group>"; };
+		D7F1B2AADC7FD9D580837E04 /* graphic.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = graphic.cpp; path = ../third_party/verovio/src/graphic.cpp; sourceTree = "<group>"; };
+		D875F14FF10CC53FCACF1B5B /* adjustaccidxfunctor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = adjustaccidxfunctor.cpp; path = ../third_party/verovio/src/adjustaccidxfunctor.cpp; sourceTree = "<group>"; };
+		D8BBBD314EC474AF9D6AE1F7 /* adjustclefchangesfunctor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = adjustclefchangesfunctor.cpp; path = ../third_party/verovio/src/adjustclefchangesfunctor.cpp; sourceTree = "<group>"; };
+		D9CDC42DEF8136BA164E5632 /* featureextractor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = featureextractor.cpp; path = ../third_party/verovio/src/featureextractor.cpp; sourceTree = "<group>"; };
+		DA573591E0D2E3C76FE1BE3D /* multirest.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = multirest.cpp; path = ../third_party/verovio/src/multirest.cpp; sourceTree = "<group>"; };
+		DB6DF4D04332B4297A4B68F1 /* preparedatafunctor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = preparedatafunctor.cpp; path = ../third_party/verovio/src/preparedatafunctor.cpp; sourceTree = "<group>"; };
+		DC0FD3C1FD23199C563BB595 /* adjustyrelfortranscriptionfunctor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = adjustyrelfortranscriptionfunctor.cpp; path = ../third_party/verovio/src/adjustyrelfortranscriptionfunctor.cpp; sourceTree = "<group>"; };
+		DDDF69667D9DB5C7208F2EC6 /* symbol.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = symbol.cpp; path = ../third_party/verovio/src/symbol.cpp; sourceTree = "<group>"; };
+		DEC941E14A34E45BB637943A /* adjustarticfunctor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = adjustarticfunctor.cpp; path = ../third_party/verovio/src/adjustarticfunctor.cpp; sourceTree = "<group>"; };
+		DFBD9ED2012ECA6559E61296 /* expansion.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = expansion.cpp; path = ../third_party/verovio/src/expansion.cpp; sourceTree = "<group>"; };
+		E1EFC412F566AE8F32BAF51F /* iobase.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = iobase.cpp; path = ../third_party/verovio/src/iobase.cpp; sourceTree = "<group>"; };
+		E22CE52C30A8256BC02F652F /* iogabc.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = iogabc.cpp; path = ../third_party/verovio/src/iogabc.cpp; sourceTree = "<group>"; };
+		E30197C4005322D411D15901 /* syllable.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = syllable.cpp; path = ../third_party/verovio/src/syllable.cpp; sourceTree = "<group>"; };
+		E308989CB45CF43928F7E898 /* adjustlayersfunctor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = adjustlayersfunctor.cpp; path = ../third_party/verovio/src/adjustlayersfunctor.cpp; sourceTree = "<group>"; };
+		E3DE180514F764B04F946D42 /* altsyminterface.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = altsyminterface.cpp; path = ../third_party/verovio/src/altsyminterface.cpp; sourceTree = "<group>"; };
+		E4F67335B016AB41099835B3 /* syl.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = syl.cpp; path = ../third_party/verovio/src/syl.cpp; sourceTree = "<group>"; };
+		E53826518F8776B6FA88929D /* surface.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = surface.cpp; path = ../third_party/verovio/src/surface.cpp; sourceTree = "<group>"; };
+		E546501F24A05659E4EA2A93 /* atts_performance.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = atts_performance.cpp; path = ../third_party/verovio/libmei/dist/atts_performance.cpp; sourceTree = "<group>"; };
+		E58C6513C2F4D8EB1674DC5E /* verovio_ffi.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = verovio_ffi.cpp; path = ../src/verovio_ffi.cpp; sourceTree = "<group>"; };
+		E8A2C570DB6F03A62F586B32 /* iocmme.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = iocmme.cpp; path = ../third_party/verovio/src/iocmme.cpp; sourceTree = "<group>"; };
+		E9D0CB757235E63FCB6468BF /* controlelement.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = controlelement.cpp; path = ../third_party/verovio/src/controlelement.cpp; sourceTree = "<group>"; };
+		EB5F2FF9F5ED7A09D13DB108 /* calcalignmentpitchposfunctor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = calcalignmentpitchposfunctor.cpp; path = ../third_party/verovio/src/calcalignmentpitchposfunctor.cpp; sourceTree = "<group>"; };
+		EB85C106DFE09BD650AE46F5 /* lv.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = lv.cpp; path = ../third_party/verovio/src/lv.cpp; sourceTree = "<group>"; };
+		EBB28E2F8748C3EB26F2527F /* cachehorizontallayoutfunctor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = cachehorizontallayoutfunctor.cpp; path = ../third_party/verovio/src/cachehorizontallayoutfunctor.cpp; sourceTree = "<group>"; };
+		EDF333236D630C18CFCCAA8E /* tuning.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = tuning.cpp; path = ../third_party/verovio/src/tuning.cpp; sourceTree = "<group>"; };
+		EEDB5221E62D707D89C7FB58 /* sb.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = sb.cpp; path = ../third_party/verovio/src/sb.cpp; sourceTree = "<group>"; };
+		EF8FF5295876BD866AB44608 /* customtuning.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = customtuning.cpp; path = ../third_party/verovio/src/customtuning.cpp; sourceTree = "<group>"; };
+		F10CE82021504746062F88AA /* convertfunctor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = convertfunctor.cpp; path = ../third_party/verovio/src/convertfunctor.cpp; sourceTree = "<group>"; };
+		F1147A735312DCC8780621B3 /* verse.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = verse.cpp; path = ../third_party/verovio/src/verse.cpp; sourceTree = "<group>"; };
+		F1B73B291A79F81D905AE532 /* del.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = del.cpp; path = ../third_party/verovio/src/del.cpp; sourceTree = "<group>"; };
+		F1E89CE46D0FF4ED37B56D96 /* dynam.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = dynam.cpp; path = ../third_party/verovio/src/dynam.cpp; sourceTree = "<group>"; };
+		F21021A5683A12F833EA87B0 /* MidiEvent.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = MidiEvent.cpp; path = ../third_party/verovio/src/midi/MidiEvent.cpp; sourceTree = "<group>"; };
+		F2596B898F4DBA2547D7E83B /* nc.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = nc.cpp; path = ../third_party/verovio/src/nc.cpp; sourceTree = "<group>"; };
+		F4D90230C45D7965B6037449 /* breath.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = breath.cpp; path = ../third_party/verovio/src/breath.cpp; sourceTree = "<group>"; };
+		F5B348FE452866081034B66A /* atts_fingering.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = atts_fingering.cpp; path = ../third_party/verovio/libmei/dist/atts_fingering.cpp; sourceTree = "<group>"; };
+		F63B6D545C5A48FAF019BC95 /* mensur.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = mensur.cpp; path = ../third_party/verovio/src/mensur.cpp; sourceTree = "<group>"; };
+		F6876677C6821F7EA056D031 /* mrpt2.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = mrpt2.cpp; path = ../third_party/verovio/src/mrpt2.cpp; sourceTree = "<group>"; };
+		F8769F761FD726CC789D60AD /* symboldef.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = symboldef.cpp; path = ../third_party/verovio/src/symboldef.cpp; sourceTree = "<group>"; };
+		F94571398302E5E7431DA12E /* rest.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = rest.cpp; path = ../third_party/verovio/src/rest.cpp; sourceTree = "<group>"; };
+		F98726C0CB141114F26F2A52 /* pugixml.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = pugixml.cpp; path = ../third_party/verovio/src/pugi/pugixml.cpp; sourceTree = "<group>"; };
+		FAFB7DE011120599D448959F /* view_beam.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = view_beam.cpp; path = ../third_party/verovio/src/view_beam.cpp; sourceTree = "<group>"; };
+		FCB63A1167A76BA4F935912B /* reh.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = reh.cpp; path = ../third_party/verovio/src/reh.cpp; sourceTree = "<group>"; };
+		FD15BB5E3EC53BD922962597 /* iovolpiano.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = iovolpiano.cpp; path = ../third_party/verovio/src/iovolpiano.cpp; sourceTree = "<group>"; };
+		FDF0453E2D8431071170A5DF /* adjustbeamsfunctor.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = adjustbeamsfunctor.cpp; path = ../third_party/verovio/src/adjustbeamsfunctor.cpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6D491DE96FD063F8C38EF024 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A41EDE4305EAB6AFF46C80F6 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2535CAF82A7DD3D9DC28C1F1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				50DAE511C81058BF0958A231 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		50DAE511C81058BF0958A231 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				274E7CD1C445250E3725159F /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		BCB5EA501BBFEB48B9CEEAC9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				463E15182D3C11BDDF6F1153 /* VerovioFFI.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FC8006ADD6C9272B20BCC2F8 = {
+			isa = PBXGroup;
+			children = (
+				BCB5EA501BBFEB48B9CEEAC9 /* Products */,
+				2535CAF82A7DD3D9DC28C1F1 /* Frameworks */,
+				E58C6513C2F4D8EB1674DC5E /* verovio_ffi.cpp */,
+				58D29FD9AE3A083C94D2A688 /* c_wrapper.cpp */,
+				A5BCD2711DA59BAED3A167E9 /* abbr.cpp */,
+				AD5A86DAB4F09FA4C6E3393D /* accid.cpp */,
+				5917C547BF85CB3102E8DC7D /* add.cpp */,
+				D875F14FF10CC53FCACF1B5B /* adjustaccidxfunctor.cpp */,
+				D7D5A7E7203B27FBE1B4FC2D /* adjustarpegfunctor.cpp */,
+				DEC941E14A34E45BB637943A /* adjustarticfunctor.cpp */,
+				FDF0453E2D8431071170A5DF /* adjustbeamsfunctor.cpp */,
+				D8BBBD314EC474AF9D6AE1F7 /* adjustclefchangesfunctor.cpp */,
+				28CB6C1E9D082B2E214133B9 /* adjustdotsfunctor.cpp */,
+				757B289C34194BE8AA928E18 /* adjustfloatingpositionerfunctor.cpp */,
+				64DA82F60C8E4CDFB840EA88 /* adjustgracexposfunctor.cpp */,
+				4A0D0CCC87F38753297D5BFB /* adjustharmgrpsspacingfunctor.cpp */,
+				E308989CB45CF43928F7E898 /* adjustlayersfunctor.cpp */,
+				04A3084E466B4DE15E8D11EC /* adjustneumexfunctor.cpp */,
+				67A625438BDB5624299A924E /* adjustossiastaffdeffunctor.cpp */,
+				03F8C7B84D820C7487659C50 /* adjustslursfunctor.cpp */,
+				B24D89D0D7FB211AF63D2D0B /* adjuststaffoverlapfunctor.cpp */,
+				84C422F97F9959B86AD533CB /* adjustsylspacingfunctor.cpp */,
+				D49BD6009DAC85B33E5AC4BD /* adjusttempofunctor.cpp */,
+				86DF8B8D61A956D03AD7303D /* adjusttupletsxfunctor.cpp */,
+				61C8456DC4B88E7BD95D25E0 /* adjusttupletsyfunctor.cpp */,
+				85A3A5128EFE0AB4CBC2C5CB /* adjustxoverflowfunctor.cpp */,
+				C51489C3EFFE64FADF68A9A3 /* adjustxposfunctor.cpp */,
+				061991325320CDA20E3398D8 /* adjustxrelfortranscriptionfunctor.cpp */,
+				0CE5ED0223FEC41BED0CB94C /* adjustyposfunctor.cpp */,
+				DC0FD3C1FD23199C563BB595 /* adjustyrelfortranscriptionfunctor.cpp */,
+				8EB0A6742545B5605DB26BDF /* alignfunctor.cpp */,
+				E3DE180514F764B04F946D42 /* altsyminterface.cpp */,
+				16C7E3DD0AF2BDA2A35E7F85 /* anchoredtext.cpp */,
+				0C3872105CD754BA5506D5C0 /* annot.cpp */,
+				8E97C6D7BB40A2C3F4A7EA60 /* annotscore.cpp */,
+				5843B59E8CCDFA8DAB595CC4 /* app.cpp */,
+				1AEDC0C6316C53CBFF050EBE /* areaposinterface.cpp */,
+				9C5DDFD337950660D7F3F02F /* arpeg.cpp */,
+				945A50363D2E604EAA7531E3 /* artic.cpp */,
+				3BEDB0D95A3B7DF340D2AE0C /* barline.cpp */,
+				BDEC71AC313F8D282B8F70CE /* bboxdevicecontext.cpp */,
+				CBDA803FA2B3A43FD0238BE3 /* beam.cpp */,
+				6D92B44403E7A011DF79C315 /* beamspan.cpp */,
+				C458943FF080067DD4593B4A /* beatrpt.cpp */,
+				A08E2B118E4A6DCA5CDC1179 /* boundingbox.cpp */,
+				6893D134D69642BC50B9A374 /* bracketspan.cpp */,
+				F4D90230C45D7965B6037449 /* breath.cpp */,
+				4BAC2B8A2E29CA3484773470 /* btrem.cpp */,
+				EBB28E2F8748C3EB26F2527F /* cachehorizontallayoutfunctor.cpp */,
+				68BC5736A146BE6888593609 /* caesura.cpp */,
+				EB5F2FF9F5ED7A09D13DB108 /* calcalignmentpitchposfunctor.cpp */,
+				6F11BBD129790FA8DCFA59BF /* calcalignmentxposfunctor.cpp */,
+				BF0C2710FE0021F0DA2164EA /* calcarticfunctor.cpp */,
+				40F1B8BC452AFF9B2331F915 /* calcbboxoverflowsfunctor.cpp */,
+				6ACEBE6D106445FC07EC3470 /* calcchordnoteheadsfunctor.cpp */,
+				3329A88538744C20FDACCBC6 /* calcdotsfunctor.cpp */,
+				17D1339E3DD0B672B1339CC0 /* calcledgerlinesfunctor.cpp */,
+				1B82B6A64F92435802441610 /* calcligatureorneumeposfunctor.cpp */,
+				471D2DA15196DFBB62C8AF6F /* calcslurdirectionfunctor.cpp */,
+				0890465253EA4CB02D9B0EA3 /* calcspanningbeamspansfunctor.cpp */,
+				066AFB3AC5135E8B6F464E8D /* calcstemfunctor.cpp */,
+				96B4E1068D49127A6614D4EE /* castofffunctor.cpp */,
+				1745AEE6D978A209AE07EEBF /* choice.cpp */,
+				90B9ECC84B4EB9FCA7F67DDF /* chord.cpp */,
+				44E78F061FA4AF40091D52DA /* clef.cpp */,
+				E9D0CB757235E63FCB6468BF /* controlelement.cpp */,
+				F10CE82021504746062F88AA /* convertfunctor.cpp */,
+				D10C367E76E2B4EBCF238643 /* corr.cpp */,
+				4E79B415C2810E20EE7886A1 /* course.cpp */,
+				975E7F61A90B1737B703ADDF /* cpmark.cpp */,
+				CB158292BA70C0819D6E956F /* crc.cpp */,
+				EF8FF5295876BD866AB44608 /* customtuning.cpp */,
+				4650E3041B682056C4AE91C8 /* custos.cpp */,
+				C66BF44D32BE2F8DF1DB6CED /* damage.cpp */,
+				F1B73B291A79F81D905AE532 /* del.cpp */,
+				BF96BB279CD8664D8F3268E5 /* devicecontext.cpp */,
+				A8D910CBB7A4ECE2134FE232 /* dir.cpp */,
+				BCD365EE6CDD65DE20892C55 /* div.cpp */,
+				BD9E246ED1B22C40A4B863FE /* divline.cpp */,
+				38B6456FAD4F1401719F7CFC /* doc.cpp */,
+				0C3E1011C91024F67E859A57 /* docselection.cpp */,
+				7807A4F66C450153363BEA8D /* dot.cpp */,
+				2D91D3A4FDCD78D60793E677 /* drawinginterface.cpp */,
+				866BF1E9181C28E183096A9B /* durationinterface.cpp */,
+				F1E89CE46D0FF4ED37B56D96 /* dynam.cpp */,
+				88C1F3C22C62A155A01462E0 /* editfunctor.cpp */,
+				A0D4F644E2D1583DB876BBAA /* editorial.cpp */,
+				01B442C83DABB6FE9907D3B2 /* editortoolkit.cpp */,
+				0FB2EC26C3FF01720F663DD0 /* editortoolkit_cmn.cpp */,
+				956E082C7C38461AB109F4F4 /* editortoolkit_neume.cpp */,
+				BC4EDDEFF0151FDEF5279599 /* editortoolkit_shared.cpp */,
+				5DDE342E81CECD0E286F3758 /* elementpart.cpp */,
+				B8098929F11F1E0260B60613 /* ending.cpp */,
+				4BDB54B3AE70F6280BB225FB /* episema.cpp */,
+				C80A684815CDF4C8B46FFEAB /* expan.cpp */,
+				DFBD9ED2012ECA6559E61296 /* expansion.cpp */,
+				05EACF034F5720CB8971BA29 /* expansionmap.cpp */,
+				BCC16DCE1275A91E1D20D460 /* f.cpp */,
+				A68357822600BC418F024D1D /* facsimile.cpp */,
+				152C5FBC6A1206D9613F2064 /* facsimilefunctor.cpp */,
+				C3FA7F260258DEDF45EFC413 /* facsimileinterface.cpp */,
+				1F88BCEAE4B0ACBABE0E18E7 /* fb.cpp */,
+				D9CDC42DEF8136BA164E5632 /* featureextractor.cpp */,
+				A6C159D53C02054B6AED84AB /* fermata.cpp */,
+				34E6E2963C8936D2575EC850 /* fig.cpp */,
+				49AD96DF49AB4B2E9990E4DE /* filereader.cpp */,
+				7D45BACA2E1A7E416FFDF049 /* findfunctor.cpp */,
+				48F4A4365F4A8DAFA2EF7DE3 /* findlayerelementsfunctor.cpp */,
+				C0E541B765BC0F4EE47E49EF /* fing.cpp */,
+				307B73FCBB5E7D1CE0DE4AA9 /* floatingobject.cpp */,
+				AC0FF46EE61F2A0B66625CC2 /* fraction.cpp */,
+				54749381FAC5BE82411D4213 /* ftrem.cpp */,
+				3F4CE8142453CA9272DAF70A /* functorinterface.cpp */,
+				70C2C7F3BD1084FDA35E6033 /* genericlayerelement.cpp */,
+				1EE7249788EBA5A995AFC185 /* gliss.cpp */,
+				9C4E0205571E432715DB9C9C /* glyph.cpp */,
+				42B9E7B1590B7AC67935B9D7 /* gracegrp.cpp */,
+				D7F1B2AADC7FD9D580837E04 /* graphic.cpp */,
+				052CEEA671C7F1F937F14986 /* grpsym.cpp */,
+				970117614848B72C876611EB /* hairpin.cpp */,
+				0A94C59CA410D48D582ECF2C /* halfmrpt.cpp */,
+				65AF113A7736F2F9F6BCB39C /* harm.cpp */,
+				9800FE8468071CFF95AA8BE6 /* horizontalaligner.cpp */,
+				41BA777D07116E92E4670A28 /* humlib.cpp */,
+				638D22493E15B7C3BC189749 /* instrdef.cpp */,
+				84C12E64A3A328EE7A483F55 /* ioabc.cpp */,
+				E1EFC412F566AE8F32BAF51F /* iobase.cpp */,
+				E8A2C570DB6F03A62F586B32 /* iocmme.cpp */,
+				8D3EDCC79393C4A6A7A93742 /* iodarms.cpp */,
+				E22CE52C30A8256BC02F652F /* iogabc.cpp */,
+				5D87400B5F201EDC28540A4D /* iohumdrum.cpp */,
+				90881B2EBCB0EB91317F21A7 /* iomei.cpp */,
+				80DC3756072C1675D103FF48 /* iomusxml.cpp */,
+				D330BDBFD6595BC8AB84D0B2 /* iopae.cpp */,
+				FD15BB5E3EC53BD922962597 /* iovolpiano.cpp */,
+				2E55C23E7D90CE83ECD78EAF /* justifyfunctor.cpp */,
+				5C521716A09BEB21223DB3F4 /* keyaccid.cpp */,
+				BA01AC3278325B6B1230FBA4 /* keysig.cpp */,
+				801936386D2F8AF80C482E3C /* label.cpp */,
+				6B6E4981E930569C2378B8F0 /* labelabbr.cpp */,
+				1281D5BF6F80BD96FBF94F70 /* layer.cpp */,
+				2B568E8858C5D488C4725C2A /* layerdef.cpp */,
+				17704EAA3FC8ECB06CE66BCB /* layerelement.cpp */,
+				17C7A9D69227193D346139B7 /* lb.cpp */,
+				171FFDB243EA20CE68B337DA /* lem.cpp */,
+				45267B70CD65CCB0C7E47C45 /* ligature.cpp */,
+				52D374F3E7F17A4E875B19EE /* linkinginterface.cpp */,
+				076A4BD549FB8EA5179EE4CB /* liquescent.cpp */,
+				EB85C106DFE09BD650AE46F5 /* lv.cpp */,
+				50A8E1416505BC53EFE0F498 /* mdiv.cpp */,
+				6DB979135177D120A8FE9B66 /* measure.cpp */,
+				F63B6D545C5A48FAF019BC95 /* mensur.cpp */,
+				594FAAE9B8892FE78B801126 /* metersig.cpp */,
+				C8A5405E9A2ED11303C5BF69 /* metersiggrp.cpp */,
+				CFABBCF01247C8BE6DFB57AF /* Binasc.cpp */,
+				F21021A5683A12F833EA87B0 /* MidiEvent.cpp */,
+				104C8720406BC2913D10BA52 /* MidiEventList.cpp */,
+				8E384FB17B5CDA0DB248A32D /* MidiFile.cpp */,
+				413D97A1E082ED3F3DD6D752 /* MidiMessage.cpp */,
+				57879D5BE88C161BC3F6FFAD /* midifunctor.cpp */,
+				739CCCE0C19853FB815C847B /* miscfunctor.cpp */,
+				B81C195811BD31CC28EFEE14 /* mnum.cpp */,
+				BF906583BB0C4879D5B86241 /* mordent.cpp */,
+				5BDECA185EAA2AD93C627AF1 /* mrest.cpp */,
+				3EB9FCBAA91B78701D2CDD93 /* mrpt.cpp */,
+				F6876677C6821F7EA056D031 /* mrpt2.cpp */,
+				54A69F9C68B2B9F4AFFB84C5 /* mspace.cpp */,
+				DA573591E0D2E3C76FE1BE3D /* multirest.cpp */,
+				A056CF0112E339B0B6827FE4 /* multirpt.cpp */,
+				F2596B898F4DBA2547D7E83B /* nc.cpp */,
+				94B9EB319305CF98356488EF /* neume.cpp */,
+				982AA9D280181775B779110A /* note.cpp */,
+				C29D37BCC5F59D547D013B0C /* num.cpp */,
+				CA9703515BC547D9FA0C7962 /* object.cpp */,
+				5940A45C19D5D59B2576D175 /* octave.cpp */,
+				0D3991B519D630E4D5941D28 /* offsetinterface.cpp */,
+				C18724BA58721024FA3CFE73 /* options.cpp */,
+				95F7A7BBD37383B6EAF6BA8C /* orig.cpp */,
+				80A750AD94667D6A4C4004D7 /* oriscus.cpp */,
+				A449EFDF89028CDCAC64E6F1 /* ornam.cpp */,
+				741B0A4FBB7BF29E5E038DE4 /* ossia.cpp */,
+				792045C579661718F05D0F13 /* page.cpp */,
+				0477600BA70D059B751B73BB /* pageelement.cpp */,
+				A2BAA734C79EF39806D23F7F /* pagemilestone.cpp */,
+				0DDF821D745F6752BC1245DE /* pages.cpp */,
+				27850A6B27870EACF6AA2355 /* pb.cpp */,
+				5F0595A424C2E771B01CD9C0 /* pedal.cpp */,
+				3A0A545C6EF3A5ACA5754DED /* pgfoot.cpp */,
+				C3C797D05525160B3370E59D /* pghead.cpp */,
+				11E644D5D5E382364079DF4E /* phrase.cpp */,
+				181BFC774EF638BEFCC2CB07 /* pitchinflection.cpp */,
+				28F9B28FEC817CD1F630436A /* pitchinterface.cpp */,
+				212F8FE0B32CBFDF6286AC77 /* plica.cpp */,
+				2AC630E55EA5F38A7B0E6260 /* plistinterface.cpp */,
+				0F17C5C386050B8A9FD34F1F /* positioninterface.cpp */,
+				DB6DF4D04332B4297A4B68F1 /* preparedatafunctor.cpp */,
+				56698DD4987FE53608DECDB0 /* proport.cpp */,
+				F98726C0CB141114F26F2A52 /* pugixml.cpp */,
+				2E48524BDECE71D8A4D0E3BE /* quilisma.cpp */,
+				1F24EBEDC2855CD8EDC6B533 /* rdg.cpp */,
+				260E6FAF4F7EB2548C4419D7 /* ref.cpp */,
+				8F4863FE782B07C8A6560752 /* reg.cpp */,
+				FCB63A1167A76BA4F935912B /* reh.cpp */,
+				5C4EFAE830F2D2263B7E1143 /* rend.cpp */,
+				B2BAF02CC358E4655DF3EE9C /* repeatmark.cpp */,
+				1F1B49398E3763F22A87B89B /* resetfunctor.cpp */,
+				C20B554E919D95286FE4E162 /* resources.cpp */,
+				F94571398302E5E7431DA12E /* rest.cpp */,
+				B1CA87E2ACBB275C1F746653 /* restore.cpp */,
+				BBBF85ADB87918D07A93081B /* runningelement.cpp */,
+				6BEE5AF06364DF92EBEEF661 /* runtimeclock.cpp */,
+				6CE812E07914428FD1606195 /* savefunctor.cpp */,
+				EEDB5221E62D707D89C7FB58 /* sb.cpp */,
+				B2C28FB5CB5B286CD40BEB0B /* score.cpp */,
+				65C77840BBCC5F43FFEC6360 /* scoredef.cpp */,
+				8ECAEB4865C9C379645E0EEB /* scoredefinterface.cpp */,
+				0650222068C7D02DB8B61D75 /* scoringupfunctor.cpp */,
+				B09A85D6A974CF5C034CD102 /* section.cpp */,
+				47F6D0E013CADAF7E6A7B3AF /* setscoredeffunctor.cpp */,
+				815B26B1D26915D178171642 /* sic.cpp */,
+				B88CD39BD96963FA087AEBC0 /* slur.cpp */,
+				D06071C583E2A58AE63EBD44 /* space.cpp */,
+				8680C619D96286C84762C8FB /* staff.cpp */,
+				A640B392FF2CBA84D9F624BA /* staffdef.cpp */,
+				8E10BFAFAED7B6BAB1025532 /* staffgrp.cpp */,
+				71A272F9DBC9418B03BD3699 /* stem.cpp */,
+				2758C297560AEAC105C8F214 /* strophicus.cpp */,
+				7D76739D368ACB664AD1AADF /* subst.cpp */,
+				1BE1E2C9722149E2B6DD18F2 /* supplied.cpp */,
+				E53826518F8776B6FA88929D /* surface.cpp */,
+				B4CD8B39B3B394B99AF838A7 /* svg.cpp */,
+				B28D53488EC89508DD21D139 /* svgdevicecontext.cpp */,
+				E4F67335B016AB41099835B3 /* syl.cpp */,
+				E30197C4005322D411D15901 /* syllable.cpp */,
+				DDDF69667D9DB5C7208F2EC6 /* symbol.cpp */,
+				F8769F761FD726CC789D60AD /* symboldef.cpp */,
+				211A938B2216970C6065661F /* symboltable.cpp */,
+				BBE62280D100FA73DACE6990 /* system.cpp */,
+				67FEBFA3E0CF2F1DF4C5AC83 /* systemelement.cpp */,
+				691EC3AA3018227A45A5D80C /* systemmilestone.cpp */,
+				A9A21D6C62FD927642476249 /* tabdursym.cpp */,
+				AD7EEC56F935F3C6FB4ACD07 /* tabgrp.cpp */,
+				968964A33574D4F353362640 /* tempo.cpp */,
+				ACFCF54697427E4186E21BE2 /* text.cpp */,
+				834FDDEBFEAF15E05ADEDF5A /* textdirinterface.cpp */,
+				498020C89DE91005670092FF /* textelement.cpp */,
+				4121FE411624BF8E10F4F1D4 /* textlayoutelement.cpp */,
+				C6C982A6D4678AF47CF219F6 /* tie.cpp */,
+				B57F3F4CAF8243E29106A167 /* timeinterface.cpp */,
+				74364C8C874EF284D7F280CD /* timemap.cpp */,
+				1998CDADBE624EED117AC547 /* timestamp.cpp */,
+				774221526BBCFDF10DA4F441 /* toolkit.cpp */,
+				86B1ADEA1ABFB89D20E613AA /* transposefunctor.cpp */,
+				3BBC08E725836ED20E44FE6D /* transposition.cpp */,
+				4053BB0C062E66256BCD444F /* trill.cpp */,
+				EDF333236D630C18CFCCAA8E /* tuning.cpp */,
+				87DA8F40D5C663CFFBDC7810 /* tuplet.cpp */,
+				AC8754A49C2B77524A9BD55E /* turn.cpp */,
+				55E6F520034BCC2339798AC5 /* unclear.cpp */,
+				F1147A735312DCC8780621B3 /* verse.cpp */,
+				C80B54DAF1D26CE2B7277AA4 /* verticalaligner.cpp */,
+				44E8E2C941E6C3D0C8786EAB /* view.cpp */,
+				FAFB7DE011120599D448959F /* view_beam.cpp */,
+				4931DBA32D781BEDFA76EF1E /* view_control.cpp */,
+				26D25AD10256686BEE14F922 /* view_element.cpp */,
+				C17FDF82A97907814DFFCC47 /* view_graph.cpp */,
+				137FEEF18AEBE0BD7D45F59E /* view_mensural.cpp */,
+				3C55F6D3B97A90BF6FF3C93B /* view_neume.cpp */,
+				C99AC6530687CCB2491C48FE /* view_page.cpp */,
+				AD6972A7D2F45096ED2BC812 /* view_slur.cpp */,
+				B4F6EB6A3FBFF9BE2C449AD5 /* view_tab.cpp */,
+				A68D66C26AF7660F1F733C53 /* view_text.cpp */,
+				BC0FC99EFE27231F238687DC /* view_tuplet.cpp */,
+				6A2AFA99C7FFAC8514F93065 /* vrv.cpp */,
+				7F0E66DB9931BA4497932937 /* zone.cpp */,
+				7499A3CA6ED32E7968607A62 /* attconverter.cpp */,
+				49926E6C7BAAF927EC608A23 /* attmodule.cpp */,
+				1D1B9290A7699A56D1A9BF3B /* atts_analytical.cpp */,
+				44AC689836A777F648E057B7 /* atts_cmn.cpp */,
+				C82ED7BA0825319804BA1ADC /* atts_cmnornaments.cpp */,
+				58B42D9232D28E22B0AAB09C /* atts_critapp.cpp */,
+				8816814CC20A90224F44793C /* atts_edittrans.cpp */,
+				B78AF41DD2868AC30617B18A /* atts_externalsymbols.cpp */,
+				0F087571529784BD1A89E1C7 /* atts_facsimile.cpp */,
+				762BEDB4AE11ABFAA5115616 /* atts_figtable.cpp */,
+				F5B348FE452866081034B66A /* atts_fingering.cpp */,
+				CA3CD50F4F54B2745E43BD9E /* atts_gestural.cpp */,
+				B2878ABBDBE06CA51B2FEEFE /* atts_harmony.cpp */,
+				A8506FAE062669F57FD60C2E /* atts_header.cpp */,
+				536F4BD27F6602DB720F79A6 /* atts_mei.cpp */,
+				02984155F3E57E90CDB86D93 /* atts_mensural.cpp */,
+				23BE5766D2F008B40DB23286 /* atts_midi.cpp */,
+				CCEC181CC9DDB98CB3C74CEF /* atts_neumes.cpp */,
+				62D429FE6A0FAB21ED0224AE /* atts_pagebased.cpp */,
+				E546501F24A05659E4EA2A93 /* atts_performance.cpp */,
+				8631525269EC782A995B11F0 /* atts_shared.cpp */,
+				78FA1D0BE2DF3DA9875D04A7 /* atts_stringtab.cpp */,
+				7A0C90CFB1BA1B1FDCAD55FA /* atts_usersymbols.cpp */,
+				49EC7C52D2CDEC33673F623E /* atts_visual.cpp */,
+				C9A1103677A30910F7C39025 /* verovio_ffi.h */,
+				1480BBD998F1C62877AF4960 /* jsonxx.cc */,
+				108970E8F160EF0BA96E545E /* att.cpp */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		22B09C43D812981AEBF29A4B /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C3404F03BA276D619604D549 /* verovio_ffi.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		FBB2ECE8EEECCDFD17FE6F7D /* VerovioFFI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AEEFDE15789F946E3166AAD6 /* Build configuration list for PBXNativeTarget "VerovioFFI" */;
+			buildPhases = (
+				22B09C43D812981AEBF29A4B /* Headers */,
+				C51AC62B8B2ECC78DB8FEA0A /* Sources */,
+				6D491DE96FD063F8C38EF024 /* Frameworks */,
+				F6E47E70B68FB694C02BFA92 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VerovioFFI;
+			productName = VerovioFFI;
+			productReference = 463E15182D3C11BDDF6F1153 /* VerovioFFI.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BD3B87ED81D340EAF40F5A55 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 2600;
+			};
+			buildConfigurationList = 83AFE6F486F3B7B3D6FA335C /* Build configuration list for PBXProject "VerovioFFI" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FC8006ADD6C9272B20BCC2F8;
+			minimizedProjectReferenceProxies = 0;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = BCB5EA501BBFEB48B9CEEAC9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FBB2ECE8EEECCDFD17FE6F7D /* VerovioFFI */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F6E47E70B68FB694C02BFA92 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C51AC62B8B2ECC78DB8FEA0A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				92F4DB4F5B74B5E3CF8758BF /* verovio_ffi.cpp in Sources */,
+				DF70195E4497449887DAF836 /* c_wrapper.cpp in Sources */,
+				F7E8CDB64AD5DD3F07C4B1F8 /* abbr.cpp in Sources */,
+				5B3A4692339D915735A84DD2 /* accid.cpp in Sources */,
+				53F99D7AEBFDECD1A9307ADB /* add.cpp in Sources */,
+				3BA8E2BA41B49FB3369A1292 /* adjustaccidxfunctor.cpp in Sources */,
+				1972BDB6DB4FCEBE1E589F97 /* adjustarpegfunctor.cpp in Sources */,
+				BF0B700E9CA632EB087D71AF /* adjustarticfunctor.cpp in Sources */,
+				F93A2C571DD9900AF0175B76 /* adjustbeamsfunctor.cpp in Sources */,
+				4274722575D93CDAA193DFA9 /* adjustclefchangesfunctor.cpp in Sources */,
+				0EA8CF4F4D4FA48181AC9325 /* adjustdotsfunctor.cpp in Sources */,
+				1D99B3BA629420D2F9CB78E5 /* adjustfloatingpositionerfunctor.cpp in Sources */,
+				C95B1A8D8A2DDA119926E3ED /* adjustgracexposfunctor.cpp in Sources */,
+				007E2B5902C7B84656F50B57 /* adjustharmgrpsspacingfunctor.cpp in Sources */,
+				6DA475D07F939AAAC5274EB4 /* adjustlayersfunctor.cpp in Sources */,
+				09F406FB54E3F3559AE3BE61 /* adjustneumexfunctor.cpp in Sources */,
+				5D3ED0B4CF506386C84A7ACE /* adjustossiastaffdeffunctor.cpp in Sources */,
+				87223498606E871AAE25E0BE /* adjustslursfunctor.cpp in Sources */,
+				FE270253533A0296E1A3ABF6 /* adjuststaffoverlapfunctor.cpp in Sources */,
+				964F58851C8C0B9A1C332B24 /* adjustsylspacingfunctor.cpp in Sources */,
+				0B0FDB61CA059176CCF72220 /* adjusttempofunctor.cpp in Sources */,
+				74CE638BD8BB21A2E5DF46B3 /* adjusttupletsxfunctor.cpp in Sources */,
+				759B6F096D2D7ECF0324E6EF /* adjusttupletsyfunctor.cpp in Sources */,
+				2A78781033FD6ECE381CA044 /* adjustxoverflowfunctor.cpp in Sources */,
+				E8A4163BD17444F5454A92E6 /* adjustxposfunctor.cpp in Sources */,
+				25379C7A0C58CA6A2A195825 /* adjustxrelfortranscriptionfunctor.cpp in Sources */,
+				1969DCD3EA4DC54671F12B6B /* adjustyposfunctor.cpp in Sources */,
+				863DF649B224C6ED4F331E7C /* adjustyrelfortranscriptionfunctor.cpp in Sources */,
+				D885A861BFB24DB42DE769A4 /* alignfunctor.cpp in Sources */,
+				AECFF4633AEB10ADC135719E /* altsyminterface.cpp in Sources */,
+				86600B77FDC1A0BA17852255 /* anchoredtext.cpp in Sources */,
+				B71771D5F3D7562369A10EC2 /* annot.cpp in Sources */,
+				187831A305EAD3DC6DD69496 /* annotscore.cpp in Sources */,
+				DA2CF63C397731C1A8BA6E0F /* app.cpp in Sources */,
+				7396D1414D0A05E5E44C30E4 /* areaposinterface.cpp in Sources */,
+				D60F6496CFB9007DF140237E /* arpeg.cpp in Sources */,
+				9DD373B06BAD819D1FE10EF8 /* artic.cpp in Sources */,
+				EC38DB68A39E8EE7B4A47168 /* barline.cpp in Sources */,
+				EAC93AFF08D0AD7FAE544136 /* bboxdevicecontext.cpp in Sources */,
+				3838DA4826C683C193AE0158 /* beam.cpp in Sources */,
+				5AF320020E29C6976B9D8304 /* beamspan.cpp in Sources */,
+				87AEC3841519D6E70ACE33BF /* beatrpt.cpp in Sources */,
+				B155002D05F180D874C3BDEF /* boundingbox.cpp in Sources */,
+				B96810A8AECED6ECA6D81271 /* bracketspan.cpp in Sources */,
+				315C94315341E14E5976E085 /* breath.cpp in Sources */,
+				1C367531CAC5144716879F94 /* btrem.cpp in Sources */,
+				B38B040186E02FAC7E96FD35 /* cachehorizontallayoutfunctor.cpp in Sources */,
+				B4BB2124822E31CD4BD7F816 /* caesura.cpp in Sources */,
+				45ED9A2896F687C07CA832FA /* calcalignmentpitchposfunctor.cpp in Sources */,
+				57F7C327801C859789289977 /* calcalignmentxposfunctor.cpp in Sources */,
+				03AAB59E6ED0D8EB15D789F9 /* calcarticfunctor.cpp in Sources */,
+				D99112FB6C9530F7978F677C /* calcbboxoverflowsfunctor.cpp in Sources */,
+				C12DFB6A62B5B1DC0A5F693D /* calcchordnoteheadsfunctor.cpp in Sources */,
+				0275DA006BDDB8A24A8AB336 /* calcdotsfunctor.cpp in Sources */,
+				F150F983F1527E24955C9E56 /* calcledgerlinesfunctor.cpp in Sources */,
+				977C22C5367E355C3781245F /* calcligatureorneumeposfunctor.cpp in Sources */,
+				8E79F3F8D88E9315507B80A7 /* calcslurdirectionfunctor.cpp in Sources */,
+				12A41ECC6EF240223772BF34 /* calcspanningbeamspansfunctor.cpp in Sources */,
+				AC437E23323A111E7E4C482F /* calcstemfunctor.cpp in Sources */,
+				F250848E949B06F8075A6D50 /* castofffunctor.cpp in Sources */,
+				C1290B9F9ACBBCA2CA028354 /* choice.cpp in Sources */,
+				7A3FEB1B488CEBE132AA6FB0 /* chord.cpp in Sources */,
+				E15CC9AB245101D9FE5B1C22 /* clef.cpp in Sources */,
+				C235FCD14A907DDEC81D75E4 /* controlelement.cpp in Sources */,
+				CD751C4098C2563091A59DC4 /* convertfunctor.cpp in Sources */,
+				7383A55DADCE89B2537FCA6D /* corr.cpp in Sources */,
+				CDD8C5BD037E63AEC0F5F62A /* course.cpp in Sources */,
+				995BB4DD65C579E77D640748 /* cpmark.cpp in Sources */,
+				AAF2707DC95B6AF4235DE33D /* crc.cpp in Sources */,
+				920C27D4372EF22096B7AECC /* customtuning.cpp in Sources */,
+				B90B50976F1D46F827F528A8 /* custos.cpp in Sources */,
+				2118D44B390BF9A040E847F8 /* damage.cpp in Sources */,
+				8783AC5AB6685707C70B84BC /* del.cpp in Sources */,
+				980208FE1AD7C209A32A903A /* devicecontext.cpp in Sources */,
+				5DFD593414A0F75CACB5F215 /* dir.cpp in Sources */,
+				3C5B7975D128BF31897CC2DA /* div.cpp in Sources */,
+				21E4BC9BEC6C8727DE44851A /* divline.cpp in Sources */,
+				D3220166BA9256A9C0CA7C25 /* doc.cpp in Sources */,
+				30312CA5D3A3520AB7CBD9D3 /* docselection.cpp in Sources */,
+				A59988649DE8D1CEBFF40128 /* dot.cpp in Sources */,
+				A907CB48BF39313B808D2230 /* drawinginterface.cpp in Sources */,
+				16E077566C492CE6BC70A9F7 /* durationinterface.cpp in Sources */,
+				88F8DFB0FE67C7EAA9D9B502 /* dynam.cpp in Sources */,
+				18FA11CEE274F6DC942EF3CA /* editfunctor.cpp in Sources */,
+				852D710B1C8457729E05A7A5 /* editorial.cpp in Sources */,
+				7365638A52FEAB57AC89E34B /* editortoolkit.cpp in Sources */,
+				EAB38AE32A5D15C320BFCFDD /* editortoolkit_cmn.cpp in Sources */,
+				F72DC50818150E8CA13C887B /* editortoolkit_neume.cpp in Sources */,
+				DDB649BA2D94C24704321DBD /* editortoolkit_shared.cpp in Sources */,
+				460DBF332C7B924C07360EE9 /* elementpart.cpp in Sources */,
+				A289F466189B5C5B8F965C14 /* ending.cpp in Sources */,
+				116FAE02AE11AFDC093A227A /* episema.cpp in Sources */,
+				94F5BD8A72EA14ED7E4ADAC5 /* expan.cpp in Sources */,
+				92271E973E68869964D297EC /* expansion.cpp in Sources */,
+				EF9231F761FB92A8B40D1431 /* expansionmap.cpp in Sources */,
+				86A54598A506C303AABE2F7B /* f.cpp in Sources */,
+				DB84283D98AAAE2FB6C82279 /* facsimile.cpp in Sources */,
+				3221920542ED3C90ADC21964 /* facsimilefunctor.cpp in Sources */,
+				674FD546E98C68BA93BDD588 /* facsimileinterface.cpp in Sources */,
+				F97F075CD17B09B1D2CDF18F /* fb.cpp in Sources */,
+				93EAE0D899B5D16B1E62CA36 /* featureextractor.cpp in Sources */,
+				57193D07F7607B22404FE73C /* fermata.cpp in Sources */,
+				D88F2B4F8C4F56F5F11784FA /* fig.cpp in Sources */,
+				B29FD5EEE0C24227A217327B /* filereader.cpp in Sources */,
+				20B131C9AFBAB3B31F0A75A9 /* findfunctor.cpp in Sources */,
+				092BA509F89A9421D08CD2D2 /* findlayerelementsfunctor.cpp in Sources */,
+				760C7E57C28BCB0B46FB8A4D /* fing.cpp in Sources */,
+				648715BEB3918CCA41C7F361 /* floatingobject.cpp in Sources */,
+				005854E0B461318A44725D9B /* fraction.cpp in Sources */,
+				6778CDB6AED750D162B7E572 /* ftrem.cpp in Sources */,
+				8A7DF8BFACE738EFF25F3C6B /* functorinterface.cpp in Sources */,
+				52CF1908F8AA963464B5C2F9 /* genericlayerelement.cpp in Sources */,
+				AE01E0FFA89861634A0C104E /* gliss.cpp in Sources */,
+				3AE1040519DB8907DB2AE9C9 /* glyph.cpp in Sources */,
+				DB9D3FC4DBF64891ACA3C359 /* gracegrp.cpp in Sources */,
+				63D7A45DCA3F07BD83C5366F /* graphic.cpp in Sources */,
+				F196E61641FEDFF274A27810 /* grpsym.cpp in Sources */,
+				04439CFBD08EC780D46BDC8D /* hairpin.cpp in Sources */,
+				8D2EF58AE1FF67D5697562E2 /* halfmrpt.cpp in Sources */,
+				0BC4A59A9931EF3DA04EAE31 /* harm.cpp in Sources */,
+				CC3B0E7E307170F5D3A6E441 /* horizontalaligner.cpp in Sources */,
+				A229858379974F04FF105A7A /* humlib.cpp in Sources */,
+				8434A19982D484D12A509F10 /* instrdef.cpp in Sources */,
+				E614B7A8978AB210FFD98CD9 /* ioabc.cpp in Sources */,
+				69DF93D4DFDD57BE0BFBB907 /* iobase.cpp in Sources */,
+				35BFB21FD5EA8FB2B0C701FB /* iocmme.cpp in Sources */,
+				D3FC04C146E641A924E1EF88 /* iodarms.cpp in Sources */,
+				B59C4C6AC9328302DD30E602 /* iogabc.cpp in Sources */,
+				1BB89833DF4ADF4B550260EC /* iohumdrum.cpp in Sources */,
+				5D30E12D058EB66DEFC8F715 /* iomei.cpp in Sources */,
+				CE4A363398600AA128695CA2 /* iomusxml.cpp in Sources */,
+				905203D53261DAEB79D40D3D /* iopae.cpp in Sources */,
+				30082A32CF024D6AB88E9766 /* iovolpiano.cpp in Sources */,
+				EE63AAF3D3C287C4E7746DE6 /* justifyfunctor.cpp in Sources */,
+				34C1323D19CEC91BD80B8886 /* keyaccid.cpp in Sources */,
+				53AD4A0CA5C41543E71E5909 /* keysig.cpp in Sources */,
+				0247A78A06B61BBF84D87B8D /* label.cpp in Sources */,
+				B4C02A04E418CE00686C12E2 /* labelabbr.cpp in Sources */,
+				A7439316A818D42C7B812BF4 /* layer.cpp in Sources */,
+				73C86AE77081DC6BB7878682 /* layerdef.cpp in Sources */,
+				922437BEEC3785C7A6D2ADAD /* layerelement.cpp in Sources */,
+				E350BF946EB3B8464249BC6C /* lb.cpp in Sources */,
+				ED2AC2D1FE67D72439B54034 /* lem.cpp in Sources */,
+				34AD71D4623BDA39348184D4 /* ligature.cpp in Sources */,
+				AE4127A0450D8B88F1DA18A7 /* linkinginterface.cpp in Sources */,
+				21899D599D1F1C45C4F65C03 /* liquescent.cpp in Sources */,
+				03E95E3C00A4AC93DF5F116E /* lv.cpp in Sources */,
+				8F1509A7D7120D475AB39050 /* mdiv.cpp in Sources */,
+				74DE447B29D31D8BEC31419F /* measure.cpp in Sources */,
+				8734CC32FFE89B4CEF1DAEB7 /* mensur.cpp in Sources */,
+				B063AFE48E962024FB05D3DF /* metersig.cpp in Sources */,
+				76A7F9E62E1C7941E38FF212 /* metersiggrp.cpp in Sources */,
+				875E06662A48633D2BB34904 /* Binasc.cpp in Sources */,
+				BC3F965A63D055A8ECC6F163 /* MidiEvent.cpp in Sources */,
+				DFFDAB6135A6834E506EB4E6 /* MidiEventList.cpp in Sources */,
+				6CFF6FCDD5F7CF4C4E2F6444 /* MidiFile.cpp in Sources */,
+				083CAD7C10053C71285B0CC0 /* MidiMessage.cpp in Sources */,
+				E302DFDBAD5856BF222BF1E5 /* midifunctor.cpp in Sources */,
+				915E1E65FC4D0BD6EFBB5896 /* miscfunctor.cpp in Sources */,
+				7BEAAD36C74C08674C01F79C /* mnum.cpp in Sources */,
+				D4B87784B5FEC48173ADF85E /* mordent.cpp in Sources */,
+				F4BFEA9BC0D288C5D42E0787 /* mrest.cpp in Sources */,
+				45130A9F0BC4457418351887 /* mrpt.cpp in Sources */,
+				5FCD6BC13F27AD102B728CAB /* mrpt2.cpp in Sources */,
+				85C35B6C01F88189F8D79C6D /* mspace.cpp in Sources */,
+				6AB5485B697C80322AD71585 /* multirest.cpp in Sources */,
+				E698B97FF14FF267B75620B9 /* multirpt.cpp in Sources */,
+				D243C1AE6A7ED6DE3F47CF8C /* nc.cpp in Sources */,
+				5FF2BEB3C5554FEB4E838B82 /* neume.cpp in Sources */,
+				92068ED3758670BD9AEEF017 /* note.cpp in Sources */,
+				AB9E62C6183C9A9C821C7A12 /* num.cpp in Sources */,
+				93FCC67C9A48B84466FA15B8 /* object.cpp in Sources */,
+				F93F50EFA5A62EF6A4F2AC5E /* octave.cpp in Sources */,
+				C98A66530D5FB5C471F4A24E /* offsetinterface.cpp in Sources */,
+				F893B93C6208C4514AD20B59 /* options.cpp in Sources */,
+				ED397D6070561BE938019E87 /* orig.cpp in Sources */,
+				B8A05559E3428525CC0144FC /* oriscus.cpp in Sources */,
+				A39010ED5545F710D4307471 /* ornam.cpp in Sources */,
+				8235D8370E5A9984971E65E7 /* ossia.cpp in Sources */,
+				D47DD5923E2D40A3CB29DA67 /* page.cpp in Sources */,
+				D68700B7AFD1F15598DB5903 /* pageelement.cpp in Sources */,
+				B27D66668A479663CEFD3D23 /* pagemilestone.cpp in Sources */,
+				78CD228B872F3954F91E7D1B /* pages.cpp in Sources */,
+				29DFBE9A944DA1CB96D2CC7D /* pb.cpp in Sources */,
+				6983AFBEA9FCA67B77D68BB4 /* pedal.cpp in Sources */,
+				5FFFF300255E9E32237DA3D8 /* pgfoot.cpp in Sources */,
+				BDC699C02DB8B4F8BD68126C /* pghead.cpp in Sources */,
+				A3C8523FEC8D47EA58951BC2 /* phrase.cpp in Sources */,
+				10DC301E756843ECCD205E30 /* pitchinflection.cpp in Sources */,
+				4AC33BDB9E0EF87CBD57B237 /* pitchinterface.cpp in Sources */,
+				13E5469E579E6FA8E583D60B /* plica.cpp in Sources */,
+				B54906BC3CB2BD6AF6637C35 /* plistinterface.cpp in Sources */,
+				62F0DD2DB6E454E3E85B8725 /* positioninterface.cpp in Sources */,
+				CDF76069EB60CE8D7078AF05 /* preparedatafunctor.cpp in Sources */,
+				72650B83E4A48C01E762C448 /* proport.cpp in Sources */,
+				080B068D671642013F2B6886 /* pugixml.cpp in Sources */,
+				E795EAEBCCBE3797921FB8D8 /* quilisma.cpp in Sources */,
+				08B08E46E9295D6529C6107D /* rdg.cpp in Sources */,
+				DE914F13D75EB35624FAF0A7 /* ref.cpp in Sources */,
+				92FF669CCEA12B93DF232331 /* reg.cpp in Sources */,
+				9D2B823986A6F1BB193BAE30 /* reh.cpp in Sources */,
+				9CC6A60B3C611D8D67F7F98C /* rend.cpp in Sources */,
+				F95A7844E0A8DD044D10ED5E /* repeatmark.cpp in Sources */,
+				B5E617C5F96F4FBD648C10EA /* resetfunctor.cpp in Sources */,
+				E5164FED6D3097CC38AED967 /* resources.cpp in Sources */,
+				607EE63F70638C843238C252 /* rest.cpp in Sources */,
+				C3C9466FD4BFBBFCDEDADB4A /* restore.cpp in Sources */,
+				EADCA062EEFFDD5B30DFB1E0 /* runningelement.cpp in Sources */,
+				EAF3B514CFDBE8EED60F5FC2 /* runtimeclock.cpp in Sources */,
+				A62019D709BCBE3DE185E74F /* savefunctor.cpp in Sources */,
+				4312D76D02133ACE22B0F6D7 /* sb.cpp in Sources */,
+				AFC74DCB485C5875A9262A79 /* score.cpp in Sources */,
+				BB2C45E675BA16A3FF3F2428 /* scoredef.cpp in Sources */,
+				65F86DB9C606A3303D7EA009 /* scoredefinterface.cpp in Sources */,
+				461600C93B98583361E97E32 /* scoringupfunctor.cpp in Sources */,
+				E40ACEE2F0DFD8D004135247 /* section.cpp in Sources */,
+				65388A3E6921DAF148F80067 /* setscoredeffunctor.cpp in Sources */,
+				2346FBB566F3CDFD10E560D8 /* sic.cpp in Sources */,
+				7FF57BB58A7639671BBF526C /* slur.cpp in Sources */,
+				9DBC9A0EF97B712DFCC24989 /* space.cpp in Sources */,
+				C847340A25362B173DD82B5D /* staff.cpp in Sources */,
+				6C4407F3F22164ECF8DAE847 /* staffdef.cpp in Sources */,
+				404D2F55672DCCBE372B17EA /* staffgrp.cpp in Sources */,
+				413AEFA658189E723D5C0606 /* stem.cpp in Sources */,
+				E09CA0B8F1C4A88CA6B8F8EE /* strophicus.cpp in Sources */,
+				E2063255A32613E26D41E630 /* subst.cpp in Sources */,
+				265061ADA733FBF57332678B /* supplied.cpp in Sources */,
+				60BB506CAB45AA73EC2F944E /* surface.cpp in Sources */,
+				213B1DFD46CF99F2B34574B5 /* svg.cpp in Sources */,
+				EA9E7752B5BD7C2FD6056D36 /* svgdevicecontext.cpp in Sources */,
+				20117EEC8097284117641629 /* syl.cpp in Sources */,
+				75D98EC95E2B66A3EDE8CD6C /* syllable.cpp in Sources */,
+				040F903FAA1FBF98F900917E /* symbol.cpp in Sources */,
+				5CCB492A6515BD2C9E2B6EBF /* symboldef.cpp in Sources */,
+				30F82E349722E824A8D4FFB8 /* symboltable.cpp in Sources */,
+				BC85B26DD412AF98B3BA0AB6 /* system.cpp in Sources */,
+				64D4F87E5682BE8175D94261 /* systemelement.cpp in Sources */,
+				48115B03580D501CD3AFD05D /* systemmilestone.cpp in Sources */,
+				A7611825CEBA81543386871E /* tabdursym.cpp in Sources */,
+				2FC00AC4BEFD786C6A5B0609 /* tabgrp.cpp in Sources */,
+				CFD16A8AB938F63D07BC852C /* tempo.cpp in Sources */,
+				65AE6DF43FECFBFB3C78645F /* text.cpp in Sources */,
+				6585AC7621FEF31F33002A1E /* textdirinterface.cpp in Sources */,
+				26E7C694FD455256618C47A5 /* textelement.cpp in Sources */,
+				CE8B41698F1C950EF6A9ADEF /* textlayoutelement.cpp in Sources */,
+				CA4868DF88123559F202B885 /* tie.cpp in Sources */,
+				C9140AADEFD54D78E3378794 /* timeinterface.cpp in Sources */,
+				C86DDC37D9B908FD7521622A /* timemap.cpp in Sources */,
+				0A9C1F585582AD4B7C95A670 /* timestamp.cpp in Sources */,
+				5938227C34E66E9A9557BEC7 /* toolkit.cpp in Sources */,
+				BD75C5D30AC4FF9A7EFF8AC7 /* transposefunctor.cpp in Sources */,
+				F803718647905A09210CB73C /* transposition.cpp in Sources */,
+				781010E3309F9F9D892B04A0 /* trill.cpp in Sources */,
+				72E0ACE52976B46D089AB74E /* tuning.cpp in Sources */,
+				F74978A895B11C0FB5D32715 /* tuplet.cpp in Sources */,
+				BC42C2A26C359A6E6AADC9C4 /* turn.cpp in Sources */,
+				A095553B3F9532E95B3AC460 /* unclear.cpp in Sources */,
+				1A2D45B6B16001F1D8F2565D /* verse.cpp in Sources */,
+				4F206299DE0F512AB1FA4C1D /* verticalaligner.cpp in Sources */,
+				703A709EA28A567753B254E7 /* view.cpp in Sources */,
+				D073E92C416CB3F63CEEA01B /* view_beam.cpp in Sources */,
+				73E96EEBE746385070AD99E8 /* view_control.cpp in Sources */,
+				0632AC80A90B6AB2AE667745 /* view_element.cpp in Sources */,
+				27926D9F8B595210458B9A17 /* view_graph.cpp in Sources */,
+				34F038ECB78F29E8A9384F3C /* view_mensural.cpp in Sources */,
+				6464A246A4FCB528A330AFF0 /* view_neume.cpp in Sources */,
+				D97F996ACEB7AD3A45A0D531 /* view_page.cpp in Sources */,
+				8CE8275FF115ADF8E716A954 /* view_slur.cpp in Sources */,
+				1246D9123C6D4E3DAA99B92D /* view_tab.cpp in Sources */,
+				2C2019E25EFE4AFCE33A0541 /* view_text.cpp in Sources */,
+				0BDDBB1CA32DD91F1A75BE0D /* view_tuplet.cpp in Sources */,
+				206E1009FE9108C9B67E0334 /* vrv.cpp in Sources */,
+				F1D899B06BAA2831F887D188 /* zone.cpp in Sources */,
+				375C3E7C2AE9DEBB068EEB8B /* attconverter.cpp in Sources */,
+				63467AD3F16EF140F300DC68 /* attmodule.cpp in Sources */,
+				8A5B6F8D93CF4795AE8A0A8C /* atts_analytical.cpp in Sources */,
+				332E4884E78E83D173E0A151 /* atts_cmn.cpp in Sources */,
+				AC734389836EEB52C497EAB8 /* atts_cmnornaments.cpp in Sources */,
+				1C2A5A25378ADDA9EFBB40C0 /* atts_critapp.cpp in Sources */,
+				45D8AF4E64268B2F1BC06416 /* atts_edittrans.cpp in Sources */,
+				8EC8B86486E1BDFE5E6EE3A6 /* atts_externalsymbols.cpp in Sources */,
+				13A4EB419F2F73922247063A /* atts_facsimile.cpp in Sources */,
+				9AFB27D6CC2AFF80A7D165AB /* atts_figtable.cpp in Sources */,
+				EB92B10CF20357BAE7CA546B /* atts_fingering.cpp in Sources */,
+				C9C8FE0362FE01043476D7F6 /* atts_gestural.cpp in Sources */,
+				1AEDF2B68805C4DF5BCA26A2 /* atts_harmony.cpp in Sources */,
+				97BFA102B1951D5175A98EE9 /* atts_header.cpp in Sources */,
+				351FB342B5F24A3A1CC6D423 /* atts_mei.cpp in Sources */,
+				C531266356A63ED82B050659 /* atts_mensural.cpp in Sources */,
+				C4C5306C220C7339F7D79F84 /* atts_midi.cpp in Sources */,
+				E26E933130EA189BAEA81C7F /* atts_neumes.cpp in Sources */,
+				FB285DFBC4F3108C6B3E6B59 /* atts_pagebased.cpp in Sources */,
+				855FBC078154E29C19BB6044 /* atts_performance.cpp in Sources */,
+				938257E4515D09D284903836 /* atts_shared.cpp in Sources */,
+				B20037DE40DF6F9CEBDA42C7 /* atts_stringtab.cpp in Sources */,
+				55B42991F4F90535627C4A63 /* atts_usersymbols.cpp in Sources */,
+				FFB531F3CD128E72A2938486 /* atts_visual.cpp in Sources */,
+				087BCD8D431A11CDF852A9A6 /* jsonxx.cc in Sources */,
+				12BC0630C8C7ED4EC28B4C7D /* att.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		016C11A0785B73E749388551 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_REQUIRED = NO;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../src",
+					"$(SRCROOT)/../third_party/verovio/include",
+					"$(SRCROOT)/../third_party/verovio/include/vrv",
+					"$(SRCROOT)/../third_party/verovio/include/pugi",
+					"$(SRCROOT)/../third_party/verovio/include/midi",
+					"$(SRCROOT)/../third_party/verovio/include/crc",
+					"$(SRCROOT)/../third_party/verovio/include/hum",
+					"$(SRCROOT)/../third_party/verovio/include/json",
+					"$(SRCROOT)/../third_party/verovio/include/tuning-library",
+					"$(SRCROOT)/../third_party/verovio/include/zip",
+					"$(SRCROOT)/../third_party/verovio/libmei/dist",
+					"$(SRCROOT)/../third_party/verovio/libmei/addons",
+				);
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"NO_ABC_SUPPORT=1",
+					"NO_HUMDRUM_SUPPORT=1",
+					"NO_DARMS_SUPPORT=1",
+					"NO_RUNTIME=1",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.verovio.VerovioFFI;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		3142004B18F25BC879A3C15F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+					"NO_ABC_SUPPORT=1",
+					"NO_HUMDRUM_SUPPORT=1",
+					"NO_DARMS_SUPPORT=1",
+					"NO_RUNTIME=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		533F08E282378D78563D254B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_REQUIRED = NO;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../src",
+					"$(SRCROOT)/../third_party/verovio/include",
+					"$(SRCROOT)/../third_party/verovio/include/vrv",
+					"$(SRCROOT)/../third_party/verovio/include/pugi",
+					"$(SRCROOT)/../third_party/verovio/include/midi",
+					"$(SRCROOT)/../third_party/verovio/include/crc",
+					"$(SRCROOT)/../third_party/verovio/include/hum",
+					"$(SRCROOT)/../third_party/verovio/include/json",
+					"$(SRCROOT)/../third_party/verovio/include/tuning-library",
+					"$(SRCROOT)/../third_party/verovio/include/zip",
+					"$(SRCROOT)/../third_party/verovio/libmei/dist",
+					"$(SRCROOT)/../third_party/verovio/libmei/addons",
+				);
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"NO_ABC_SUPPORT=1",
+					"NO_HUMDRUM_SUPPORT=1",
+					"NO_DARMS_SUPPORT=1",
+					"NO_RUNTIME=1",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.verovio.VerovioFFI;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		6B799126D13337223803E3A0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				DEAD_CODE_STRIPPING = YES;
+				DEPLOYMENT_POSTPROCESSING = YES;
+				ENABLE_BITCODE = NO;
+				GCC_DATA_SECTIONS = YES;
+				GCC_FUNCTION_SECTIONS = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
+				GCC_OPTIMIZATION_LEVEL = z;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				LLVM_LTO = YES_THIN;
+				STRIP_STYLE = non-global;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		83AFE6F486F3B7B3D6FA335C /* Build configuration list for PBXProject "VerovioFFI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3142004B18F25BC879A3C15F /* Debug */,
+				6B799126D13337223803E3A0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AEEFDE15789F946E3166AAD6 /* Build configuration list for PBXNativeTarget "VerovioFFI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				016C11A0785B73E749388551 /* Release */,
+				533F08E282378D78563D254B /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BD3B87ED81D340EAF40F5A55 /* Project object */;
+}

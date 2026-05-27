@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   s.homepage         = 'https://www.verovio.org'
   s.license          = { :type => 'LGPL-3.0', :file => '../LICENSE' }
   s.author           = { 'verovio_flutter' => 'noreply@example.com' }
-  s.platform         = :ios, '12.0'
+  s.platform         = :ios, '13.0'
   s.source           = { :path => '.' }
   s.source_files        = 'Classes/**/*', '../src/verovio_ffi.h'
   s.public_header_files = 'Classes/**/*.h'
