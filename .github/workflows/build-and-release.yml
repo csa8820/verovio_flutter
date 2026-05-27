@@ -134,7 +134,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p third_party/verovio/include/vrv
-          (cd third_party/verovio && bash tools/get_git_commit.sh)
+          (cd third_party/verovio/tools && bash ./get_git_commit.sh)
           bash tool/build_ios_xcframework.sh
 
       - name: Verify iOS artifact paths
