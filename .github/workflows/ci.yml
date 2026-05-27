@@ -49,6 +49,7 @@ jobs:
 
       - name: Normalize Android local.properties
         run: |
+          mkdir -p assets/verovio_data
           cat > android/local.properties <<EOF
           sdk.dir=${ANDROID_SDK_ROOT}
           flutter.sdk=${FLUTTER_ROOT}
@@ -95,6 +96,10 @@ jobs:
       - name: Fetch example packages
         working-directory: example
         run: flutter pub get
+
+      - name: Install iOS pods
+        working-directory: example/ios
+        run: pod install
 
       - name: Build example iOS (debug, no codesign)
         working-directory: example
