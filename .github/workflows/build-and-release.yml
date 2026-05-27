@@ -1,0 +1,244 @@
+name: Build & Release Artifacts
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  validate-version:
+    name: Validate tag version
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.validate.outputs.version }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate tag against pubspec version
+        id: validate
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          TAG_NAME="${GITHUB_REF_NAME}"
+          if [[ "${TAG_NAME}" != v* ]]; then
+            echo "::error::unexpected tag name: ${TAG_NAME}"
+            exit 1
+          fi
+
+          TAG_VERSION="${TAG_NAME#v}"
+          PUBSPEC_VERSION="$(sed -n 's/^version:[[:space:]]*//p' pubspec.yaml | head -n1)"
+
+          if [[ -z "${PUBSPEC_VERSION}" ]]; then
+            echo "::error::could not read version from pubspec.yaml"
+            exit 1
+          fi
+
+          if [[ "${TAG_VERSION}" != "${PUBSPEC_VERSION}" ]]; then
+            echo "::error::tag ${TAG_NAME} does not match pubspec.yaml version ${PUBSPEC_VERSION}"
+            exit 1
+          fi
+
+          echo "version=${TAG_VERSION}" >> "${GITHUB_OUTPUT}"
+
+  build-android:
+    name: Build Android artifacts
+    needs: validate-version
+    runs-on: ubuntu-latest
+    env:
+      ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
+      ANDROID_HOME: /usr/local/lib/android/sdk
+      FLUTTER_SUPPRESS_ANALYTICS: "true"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Set up Flutter stable
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.24.1
+          cache: true
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android NDK r26d
+        shell: bash
+        run: |
+          set -euo pipefail
+          SDKMANAGER="${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager"
+          if [[ ! -x "${SDKMANAGER}" ]]; then
+            SDKMANAGER="$(command -v sdkmanager)"
+          fi
+          yes | "${SDKMANAGER}" --licenses
+          "${SDKMANAGER}" --install "ndk;26.1.10909125"
+
+      - name: Build Android .so libraries
+        shell: bash
+        env:
+          ANDROID_NDK: /usr/local/lib/android/sdk/ndk/26.1.10909125
+        run: |
+          set -euo pipefail
+          bash tool/build_android_so.sh
+
+      - name: Verify Android artifact paths
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -d android/src/main/jniLibs/arm64-v8a
+          test -f android/src/main/jniLibs/arm64-v8a/libverovio_flutter.so
+          test -d android/src/main/jniLibs/x86_64
+          test -f android/src/main/jniLibs/x86_64/libverovio_flutter.so
+
+      - name: Upload Android artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-jnilibs
+          path: android/src/main/jniLibs/
+          if-no-files-found: error
+
+  build-ios:
+    name: Build iOS artifacts
+    needs: validate-version
+    runs-on: macos-14
+    env:
+      FLUTTER_SUPPRESS_ANALYTICS: "true"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Set up Flutter stable
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.24.1
+          cache: true
+
+      - name: Build iOS xcframework
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash tool/build_ios_xcframework.sh
+
+      - name: Verify iOS artifact paths
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -d ios/Frameworks/VerovioFFI.xcframework
+          test -f ios/Frameworks/VerovioFFI.xcframework/Info.plist
+
+      - name: Upload iOS artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-xcframework
+          path: ios/Frameworks/VerovioFFI.xcframework/
+          if-no-files-found: error
+
+  commit-artifacts:
+    name: Commit artifacts to main
+    needs:
+      - validate-version
+      - build-android
+      - build-ios
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          submodules: recursive
+          fetch-depth: 0
+          token: ${{ github.token }}
+
+      - name: Download Android artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: android-jnilibs
+          path: android/src/main/jniLibs/
+
+      - name: Download iOS artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: ios-xcframework
+          path: ios/Frameworks/VerovioFFI.xcframework/
+
+      - name: Refresh verovio data
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash tool/sync_verovio_sources.sh
+
+      - name: Commit and retag release artifacts
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          VERSION="${{ needs.validate-version.outputs.version }}"
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add android/src/main/jniLibs ios/Frameworks assets/verovio_data
+
+          if git diff --cached --quiet; then
+            echo "No artifact changes detected; creating an empty release commit."
+            git commit --allow-empty -m "chore(release): rebuild artifacts for ${VERSION}"
+          else
+            git commit -m "chore(release): rebuild artifacts for ${VERSION}"
+          fi
+
+          git push origin main
+
+          git tag -f "v${VERSION}"
+          git push -f origin "v${VERSION}"
+
+  github-release:
+    name: Create GitHub Release
+    needs:
+      - validate-version
+      - commit-artifacts
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout tagged release commit
+        uses: actions/checkout@v4
+        with:
+          ref: v${{ needs.validate-version.outputs.version }}
+          submodules: recursive
+
+      - name: Pack release tarball
+        id: pack
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          VERSION="${{ needs.validate-version.outputs.version }}"
+          TAR_PATH="${RUNNER_TEMP}/verovio_flutter-${VERSION}.tar.gz"
+
+          tar -czf "${TAR_PATH}" \
+            --exclude=third_party \
+            --exclude=build \
+            --exclude=.git \
+            .
+
+          test -f "${TAR_PATH}"
+          echo "tar_path=${TAR_PATH}" >> "${GITHUB_OUTPUT}"
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ needs.validate-version.outputs.version }}
+          files: ${{ steps.pack.outputs.tar_path }}
+          generate_release_notes: true
