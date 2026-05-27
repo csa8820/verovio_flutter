@@ -1,0 +1,6 @@
+framework module VerovioFramework {
+  umbrella header "VerovioFramework.h"
+  export *
+
+  module * { export * }
+}

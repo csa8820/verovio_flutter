@@ -1,0 +1,124 @@
+import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
+import 'package:path_provider/path_provider.dart';
+
+class VerovioResourceManager {
+  VerovioResourceManager._();
+
+  static const String _assetsPrefix = 'packages/verovio_flutter/assets/verovio_data/';
+  static const String _versionAssetPath = 'native/VEROVIO_VERSION';
+  static const String _versionFileName = 'VERSION';
+
+  static Future<String>? _inFlight;
+
+  static Future<String> ensureVerovioAssetsReady() {
+    final inFlight = _inFlight;
+    if (inFlight != null) {
+      return inFlight;
+    }
+
+    final future = _ensureVerovioAssetsReadyImpl();
+    _inFlight = future;
+    future.whenComplete(() {
+      if (identical(_inFlight, future)) {
+        _inFlight = null;
+      }
+    });
+    return future;
+  }
+
+  static Future<String> _ensureVerovioAssetsReadyImpl() async {
+    try {
+      final supportDirectory = await getApplicationSupportDirectory();
+      final targetDirectory = Directory(
+        _joinPath(supportDirectory.path, 'verovio_data'),
+      );
+      final targetVersionFile = File(
+        _joinPath(targetDirectory.path, _versionFileName),
+      );
+      final version = await _loadVersion();
+
+      if (await _isVersionCurrent(targetVersionFile, version)) {
+        return targetDirectory.path;
+      }
+
+      if (await targetDirectory.exists()) {
+        await targetDirectory.delete(recursive: true);
+      }
+      await targetDirectory.create(recursive: true);
+
+      final manifestJson = await rootBundle.loadString('AssetManifest.json');
+      final manifest = jsonDecode(manifestJson);
+      if (manifest is! Map<String, dynamic>) {
+        throw StateError(
+          'AssetManifest.json did not contain a map; found ${manifest.runtimeType}',
+        );
+      }
+
+      final assetPaths = manifest.keys
+          .whereType<String>()
+          .where((path) => path.startsWith(_assetsPrefix))
+          .toList()
+        ..sort();
+
+      for (final assetPath in assetPaths) {
+        final relativePath = assetPath.substring(_assetsPrefix.length);
+        final outputFile = File(
+          _joinPath(targetDirectory.path, relativePath),
+        );
+        await outputFile.parent.create(recursive: true);
+        final bytes = await rootBundle.load(assetPath);
+        await outputFile.writeAsBytes(
+          bytes.buffer.asUint8List(bytes.offsetInBytes, bytes.lengthInBytes),
+          flush: true,
+        );
+      }
+
+      await targetVersionFile.parent.create(recursive: true);
+      await targetVersionFile.writeAsString(version, flush: true);
+
+      debugPrint('Verovio assets copied to ${targetDirectory.path}');
+      return targetDirectory.path;
+    } catch (error, stackTrace) {
+      throw StateError(
+        'ensureVerovioAssetsReady failed: $error\n$stackTrace',
+      );
+    }
+  }
+
+  static Future<String> _loadVersion() async {
+    try {
+      final version = await rootBundle.loadString(_versionAssetPath);
+      final trimmed = version.trim();
+      if (trimmed.isEmpty) {
+        throw StateError('$_versionAssetPath is empty');
+      }
+      return trimmed;
+    } on FlutterError catch (_) {
+      return 'dev-snapshot';
+    }
+  }
+
+  static Future<bool> _isVersionCurrent(File targetVersionFile, String version) async {
+    if (!await targetVersionFile.exists()) {
+      return false;
+    }
+
+    final existingVersion = await targetVersionFile.readAsString();
+    return existingVersion.trim() == version.trim();
+  }
+
+  static String _joinPath(String left, String right) {
+    if (left.isEmpty) {
+      return right;
+    }
+    if (left.endsWith(Platform.pathSeparator)) {
+      return '$left$right';
+    }
+    return '$left${Platform.pathSeparator}$right';
+  }
+}

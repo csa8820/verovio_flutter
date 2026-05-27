@@ -1,0 +1,21 @@
+apply plugin: "com.android.library"
+
+android {
+    namespace = "com.csa8820.verovio_flutter"
+    compileSdk = 34
+
+    defaultConfig {
+        minSdk = 21
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ["src/main/jniLibs"]
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+}

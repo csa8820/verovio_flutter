@@ -1,0 +1,4 @@
+[submodule "third_party/verovio"]
+	path = third_party/verovio
+	url = https://github.com/rism-digital/verovio.git
+	branch = develop

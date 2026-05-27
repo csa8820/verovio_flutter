@@ -1,0 +1,401 @@
+import 'dart:async';
+import 'dart:convert';
+import 'dart:isolate';
+import 'dart:typed_data';
+
+import 'package:verovio_flutter/src/verovio_isolate_worker.dart';
+import 'package:verovio_flutter/src/verovio_resource_manager.dart';
+import 'package:verovio_flutter/src/verovio_service.dart';
+
+class _VerovioWorkerClient {
+  _VerovioWorkerClient._(
+    this._isolate,
+    this._controlPort,
+    this._responsePort,
+  ) {
+    _responseSubscription = _responsePort.listen(_handleResponse);
+  }
+
+  final Isolate _isolate;
+  final SendPort _controlPort;
+  final ReceivePort _responsePort;
+  late final StreamSubscription<dynamic> _responseSubscription;
+  final Map<int, Completer<Map<String, Object?>>> _pending =
+      <int, Completer<Map<String, Object?>>>{};
+  int _nextRequestId = 0;
+  bool _disposed = false;
+
+  static Future<_VerovioWorkerClient> connect({
+    required String resourcePath,
+  }) async {
+    final handshakePort = ReceivePort();
+    final responsePort = ReceivePort();
+    final isolate = await Isolate.spawn(
+      verovioIsolateWorkerEntryPoint,
+      <String, Object?>{
+        'handshakePort': handshakePort.sendPort,
+        'responsePort': responsePort.sendPort,
+      },
+    );
+    final controlPort = await handshakePort.first as SendPort;
+    final client = _VerovioWorkerClient._(
+      isolate,
+      controlPort,
+      responsePort,
+    );
+    try {
+      await client.sendRaw('spawn', <String, Object?>{
+        'resourcePath': resourcePath,
+      });
+      return client;
+    } catch (_) {
+      await client.forceDispose();
+      rethrow;
+    }
+  }
+
+  void _handleResponse(dynamic message) {
+    if (message is! Map) {
+      return;
+    }
+    final requestId = message['requestId'];
+    if (requestId is! int) {
+      return;
+    }
+    final completer = _pending.remove(requestId);
+    if (completer == null || completer.isCompleted) {
+      return;
+    }
+    completer.complete(message.cast<String, Object?>());
+  }
+
+  Future<Object?> sendRaw(String action,
+      [Map<String, Object?> payload = const <String, Object?>{}]) async {
+    if (_disposed) {
+      throw StateError('VerovioAsyncService has been disposed');
+    }
+    final requestId = _nextRequestId++;
+    final completer = Completer<Map<String, Object?>>();
+    _pending[requestId] = completer;
+    _controlPort.send(<String, Object?>{
+      'requestId': requestId,
+      'action': action,
+      'payload': payload,
+    });
+    final response = await completer.future;
+    if (response['ok'] == true) {
+      return response['result'];
+    }
+    throw VerovioException(
+      method: action,
+      log: response['error']?.toString() ?? '',
+    );
+  }
+
+  Future<void> forceDispose() async {
+    if (_disposed) {
+      return;
+    }
+    _disposed = true;
+    for (final completer in _pending.values) {
+      if (!completer.isCompleted) {
+        completer.completeError(
+          StateError('VerovioAsyncService has been disposed'),
+        );
+      }
+    }
+    _pending.clear();
+    await _responseSubscription.cancel();
+    _responsePort.close();
+    _isolate.kill(priority: Isolate.immediate);
+  }
+
+  Future<void> dispose() async {
+    if (_disposed) {
+      return;
+    }
+    try {
+      await sendRaw('dispose');
+    } finally {
+      await forceDispose();
+    }
+  }
+}
+
+class VerovioAsyncService {
+  VerovioAsyncService._(this._client);
+
+  final _VerovioWorkerClient _client;
+
+  static Future<VerovioAsyncService> spawn({
+    required String resourcePath,
+  }) async {
+    if (resourcePath.isEmpty) {
+      throw ArgumentError.value(
+          resourcePath, 'resourcePath', 'must not be empty');
+    }
+    if (!Uri.file(resourcePath).isAbsolute) {
+      throw ArgumentError.value(
+        resourcePath,
+        'resourcePath',
+        'must be an absolute path',
+      );
+    }
+
+    await VerovioResourceManager.ensureVerovioAssetsReady();
+    final client = await _VerovioWorkerClient.connect(resourcePath: resourcePath);
+    return VerovioAsyncService._(client);
+  }
+
+  Future<bool> setResourcePath(String resourcePath) async {
+    return await _client.sendRaw('setResourcePath', <String, Object?>{
+      'resourcePath': resourcePath,
+    }) as bool;
+  }
+
+  Future<void> setOptionsJson(String json) async {
+    await _client.sendRaw('setOptionsJson', <String, Object?>{'json': json});
+  }
+
+  Future<void> loadData(String data) async {
+    await _client.sendRaw('loadData', <String, Object?>{'data': data});
+  }
+
+  Future<void> loadZipDataBase64(String base64Data) async {
+    await _client.sendRaw('loadZipDataBase64', <String, Object?>{
+      'base64Data': base64Data,
+    });
+  }
+
+  Future<bool> loadZipDataBuffer(Uint8List bytes) async {
+    return await _client.sendRaw('loadZipDataBuffer', <String, Object?>{
+      'bytes': bytes,
+    }) as bool;
+  }
+
+  Future<int> get pageCount async {
+    return await _client.sendRaw('getPageCount') as int;
+  }
+
+  Future<String> renderToSvg(int pageNo, {bool xmlDeclaration = false}) async {
+    return await _client.sendRaw('renderToSvg', <String, Object?>{
+      'pageNo': pageNo,
+      'xmlDeclaration': xmlDeclaration,
+    }) as String;
+  }
+
+  Future<String> getLog() async {
+    return await _client.sendRaw('getLog') as String;
+  }
+
+  Future<String> getVersion() async {
+    return await _client.sendRaw('getVersion') as String;
+  }
+
+  Future<String> getAvailableOptions() async {
+    return await _client.sendRaw('getAvailableOptions') as String;
+  }
+
+  Future<String> getDefaultOptions() async {
+    return await _client.sendRaw('getDefaultOptions') as String;
+  }
+
+  Future<String> getOptions() async {
+    return await _client.sendRaw('getOptions') as String;
+  }
+
+  Future<String> getOptionUsageString() async {
+    return await _client.sendRaw('getOptionUsageString') as String;
+  }
+
+  Future<String> getDescriptiveFeatures(String jsonOptions) async {
+    return await _client.sendRaw('getDescriptiveFeatures', <String, Object?>{
+      'jsonOptions': jsonOptions,
+    }) as String;
+  }
+
+  Future<String> getElementAttr(String xmlId) async {
+    return await _client.sendRaw('getElementAttr', <String, Object?>{
+      'xmlId': xmlId,
+    }) as String;
+  }
+
+  Future<String> getElementsAtTime(int millisec) async {
+    return await _client.sendRaw('getElementsAtTime', <String, Object?>{
+      'millisec': millisec,
+    }) as String;
+  }
+
+  Future<String> getExpansionIdsForElement(String xmlId) async {
+    return await _client.sendRaw('getExpansionIdsForElement', <String, Object?>{
+      'xmlId': xmlId,
+    }) as String;
+  }
+
+  Future<String> getMidiValuesForElement(String xmlId) async {
+    return await _client.sendRaw('getMidiValuesForElement', <String, Object?>{
+      'xmlId': xmlId,
+    }) as String;
+  }
+
+  Future<String> getNotatedIdForElement(String xmlId) async {
+    return await _client.sendRaw('getNotatedIdForElement', <String, Object?>{
+      'xmlId': xmlId,
+    }) as String;
+  }
+
+  Future<String> getTimesForElement(String xmlId) async {
+    return await _client.sendRaw('getTimesForElement', <String, Object?>{
+      'xmlId': xmlId,
+    }) as String;
+  }
+
+  Future<String> getId() async {
+    return await _client.sendRaw('getId') as String;
+  }
+
+  Future<String> getResourcePath() async {
+    return await _client.sendRaw('getResourcePath') as String;
+  }
+
+  Future<String> getHumdrum() async {
+    return await _client.sendRaw('getHumdrum') as String;
+  }
+
+  Future<String> getMei(String jsonOptions) async {
+    return await _client.sendRaw('getMei', <String, Object?>{
+      'jsonOptions': jsonOptions,
+    }) as String;
+  }
+
+  Future<String> convertHumdrumToHumdrum(String data) async {
+    return await _client.sendRaw('convertHumdrumToHumdrum', <String, Object?>{
+      'data': data,
+    }) as String;
+  }
+
+  Future<String> convertHumdrumToMidi(String data) async {
+    return await _client.sendRaw('convertHumdrumToMidi', <String, Object?>{
+      'data': data,
+    }) as String;
+  }
+
+  Future<Uint8List> convertHumdrumToMidiBytes(String data) async {
+    return base64Decode(await convertHumdrumToMidi(data));
+  }
+
+  Future<String> convertMeiToHumdrum(String data) async {
+    return await _client.sendRaw('convertMeiToHumdrum', <String, Object?>{
+      'data': data,
+    }) as String;
+  }
+
+  Future<String> editInfo() async {
+    return await _client.sendRaw('editInfo') as String;
+  }
+
+  Future<String> validatePae(String data) async {
+    return await _client.sendRaw('validatePae', <String, Object?>{
+      'data': data,
+    }) as String;
+  }
+
+  Future<String> renderData(String data, String jsonOptions) async {
+    return await _client.sendRaw('renderData', <String, Object?>{
+      'data': data,
+      'jsonOptions': jsonOptions,
+    }) as String;
+  }
+
+  Future<String> renderToMidi() async {
+    return await _client.sendRaw('renderToMidi') as String;
+  }
+
+  Future<Uint8List> renderToMidiBytes() async {
+    return base64Decode(await renderToMidi());
+  }
+
+  Future<String> renderToPae() async {
+    return await _client.sendRaw('renderToPae') as String;
+  }
+
+  Future<String> renderToTimemap({String jsonOptions = ''}) async {
+    return await _client.sendRaw('renderToTimemap', <String, Object?>{
+      'jsonOptions': jsonOptions,
+    }) as String;
+  }
+
+  Future<String> renderToExpansionMap() async {
+    return await _client.sendRaw('renderToExpansionMap') as String;
+  }
+
+  Future<int> getScale() async {
+    return await _client.sendRaw('getScale') as int;
+  }
+
+  Future<bool> setScale(int scale) async {
+    return await _client.sendRaw('setScale', <String, Object?>{
+      'scale': scale,
+    }) as bool;
+  }
+
+  Future<int> getPageWithElement(String xmlId) async {
+    return await _client.sendRaw('getPageWithElement', <String, Object?>{
+      'xmlId': xmlId,
+    }) as int;
+  }
+
+  Future<int> getTimeForElement(String xmlId) async {
+    return await _client.sendRaw('getTimeForElement', <String, Object?>{
+      'xmlId': xmlId,
+    }) as int;
+  }
+
+  Future<bool> select(String selectionJson) async {
+    return await _client.sendRaw('select', <String, Object?>{
+      'selectionJson': selectionJson,
+    }) as bool;
+  }
+
+  Future<bool> setInputFrom(String inputFrom) async {
+    return await _client.sendRaw('setInputFrom', <String, Object?>{
+      'inputFrom': inputFrom,
+    }) as bool;
+  }
+
+  Future<bool> setOutputTo(String outputTo) async {
+    return await _client.sendRaw('setOutputTo', <String, Object?>{
+      'outputTo': outputTo,
+    }) as bool;
+  }
+
+  Future<bool> edit(String editorAction) async {
+    return await _client.sendRaw('edit', <String, Object?>{
+      'editorAction': editorAction,
+    }) as bool;
+  }
+
+  Future<void> redoLayout({String jsonOptions = ''}) async {
+    await _client.sendRaw('redoLayout', <String, Object?>{
+      'jsonOptions': jsonOptions,
+    });
+  }
+
+  Future<void> redoPagePitchPosLayout() async {
+    await _client.sendRaw('redoPagePitchPosLayout');
+  }
+
+  Future<void> resetOptions() async {
+    await _client.sendRaw('resetOptions');
+  }
+
+  Future<void> resetXmlIdSeed(int seed) async {
+    await _client.sendRaw('resetXmlIdSeed', <String, Object?>{
+      'seed': seed,
+    });
+  }
+
+  Future<void> dispose() async {
+    await _client.dispose();
+  }
+}
