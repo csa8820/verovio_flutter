@@ -120,6 +120,7 @@ LGPL-3.0. Verovio is LGPL-3.0; any derivative work must comply with the same obl
 - Rebuild Android `.so`: `bash tool/build_android_so.sh`
 - Rebuild iOS `.xcframework`: `bash tool/build_ios_xcframework.sh`
 - Sync upstream Verovio sources: `bash tool/sync_verovio_sources.sh`
+- GitHub Actions CI runs Android + iOS build validation on PRs and pushes to `main`.
 
 </details>
 

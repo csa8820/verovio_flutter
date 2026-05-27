@@ -1,0 +1,106 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  android-build:
+    name: Android build
+    runs-on: ubuntu-latest
+    env:
+      ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
+      ANDROID_HOME: /usr/local/lib/android/sdk
+      FLUTTER_SUPPRESS_ANALYTICS: true
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Set up Flutter stable
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.24.1
+          cache: true
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android NDK r26d
+        run: |
+          SDKMANAGER="${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager"
+          if [ ! -x "$SDKMANAGER" ]; then
+            SDKMANAGER="$(command -v sdkmanager)"
+          fi
+          yes | "$SDKMANAGER" --licenses
+          "$SDKMANAGER" --install "ndk;26.1.10909125"
+
+      - name: Normalize Android local.properties
+        run: |
+          mkdir -p assets/verovio_data
+          cat > android/local.properties <<EOF
+          sdk.dir=${ANDROID_SDK_ROOT}
+          flutter.sdk=${FLUTTER_ROOT}
+          EOF
+          cat > example/android/local.properties <<EOF
+          sdk.dir=${ANDROID_SDK_ROOT}
+          flutter.sdk=${FLUTTER_ROOT}
+          flutter.buildMode=debug
+          flutter.versionName=1.0.0
+          flutter.versionCode=1
+          EOF
+
+      - name: Fetch Dart packages
+        run: flutter pub get
+
+      - name: Analyze package
+        run: flutter analyze
+
+      - name: Fetch example packages
+        working-directory: example
+        run: flutter pub get
+
+      - name: Build example APK (debug)
+        working-directory: example
+        run: flutter build apk --debug
+
+  ios-build:
+    name: iOS build
+    runs-on: macos-14
+    env:
+      FLUTTER_SUPPRESS_ANALYTICS: true
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Set up Flutter stable
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.24.1
+          cache: true
+
+      - name: Fetch example packages
+        working-directory: example
+        run: flutter pub get
+
+      - name: Install iOS pods
+        working-directory: example/ios
+        run: pod install
+
+      - name: Build example iOS (debug, no codesign)
+        working-directory: example
+        run: flutter build ios --debug --no-codesign
