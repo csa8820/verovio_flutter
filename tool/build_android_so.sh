@@ -10,10 +10,16 @@ VEROVIO_TOOLS="$ROOT/third_party/verovio/tools"
 # Default to the ABIs Flutter actually ships. Override e.g. ABIS="arm64-v8a x86_64".
 ABIS="${ABIS:-arm64-v8a x86_64}"
 
-if [ -x "$ANDROID_NDK/toolchains/llvm/prebuilt/darwin-arm64/bin/llvm-strip" ]; then
-  NDK_HOST_TAG="darwin-arm64"
-else
-  NDK_HOST_TAG="darwin-x86_64"
+NDK_HOST_TAG=""
+for tag in darwin-arm64 darwin-x86_64 linux-x86_64; do
+  if [ -x "$ANDROID_NDK/toolchains/llvm/prebuilt/$tag/bin/llvm-strip" ]; then
+    NDK_HOST_TAG="$tag"
+    break
+  fi
+done
+if [ -z "$NDK_HOST_TAG" ]; then
+  echo "ERROR: cannot locate llvm-strip under $ANDROID_NDK/toolchains/llvm/prebuilt/{darwin-arm64,darwin-x86_64,linux-x86_64}" >&2
+  exit 1
 fi
 STRIP="$ANDROID_NDK/toolchains/llvm/prebuilt/$NDK_HOST_TAG/bin/llvm-strip"
 
