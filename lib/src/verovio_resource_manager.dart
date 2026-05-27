@@ -12,6 +12,17 @@ class VerovioResourceManager {
   static const String _assetsPrefix = 'packages/verovio_flutter/assets/verovio_data/';
   static const String _versionAssetPath = 'native/VEROVIO_VERSION';
   static const String _versionFileName = 'VERSION';
+  static const List<String> _requiredAssetPaths = <String>[
+    'Bravura.xml',
+    'Gootville.xml',
+    'Leipzig.xml',
+    'Leland.xml',
+    'Petaluma.xml',
+    'text/Times.xml',
+    'text/Times-bold.xml',
+    'text/Times-bold-italic.xml',
+    'text/Times-italic.xml',
+  ];
 
   static Future<String>? _inFlight;
 
@@ -64,6 +75,17 @@ class VerovioResourceManager {
           .where((path) => path.startsWith(_assetsPrefix))
           .toList()
         ..sort();
+
+      final missingAssets = _requiredAssetPaths
+          .map((relativePath) => '$_assetsPrefix$relativePath')
+          .where((path) => !assetPaths.contains(path))
+          .toList();
+      if (missingAssets.isNotEmpty) {
+        throw StateError(
+          'Verovio asset manifest is incomplete. Missing required assets: '
+          '${missingAssets.join(', ')}',
+        );
+      }
 
       for (final assetPath in assetPaths) {
         final relativePath = assetPath.substring(_assetsPrefix.length);

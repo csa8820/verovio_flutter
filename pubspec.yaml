@@ -28,6 +28,14 @@ dev_dependencies:
 flutter:
   assets:
     - assets/verovio_data/
+    # Explicitly list nested resource directories so Flutter includes the
+    # Verovio font glyph XML trees in AssetManifest on all platforms.
+    - assets/verovio_data/Bravura/
+    - assets/verovio_data/Gootville/
+    - assets/verovio_data/Leipzig/
+    - assets/verovio_data/Leland/
+    - assets/verovio_data/Petaluma/
+    - assets/verovio_data/text/
   # This section identifies this Flutter project as a plugin project.
   # The 'pluginClass' specifies the class (in Java, Kotlin, Swift, Objective-C, etc.)
   # which should be registered in the plugin registry. This is required for
