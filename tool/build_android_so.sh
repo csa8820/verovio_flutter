@@ -48,7 +48,8 @@ for ABI in $ABIS; do
     -DCMAKE_CXX_FLAGS_RELEASE="-O3 -DNDEBUG $FEATURE_DEFINES $SIZE_CFLAGS" \
     -DCMAKE_SHARED_LINKER_FLAGS_RELEASE="$SIZE_LDFLAGS"
 
-  cmake --build "$BUILD" -j"$(sysctl -n hw.ncpu)"
+  # cmake --build "$BUILD" -j"$(sysctl -n hw.ncpu)"
+  cmake --build "$BUILD" -j"2"
 
   mkdir -p "$OUT/$ABI"
   cp "$BUILD/libverovio_flutter.so" "$OUT/$ABI/"

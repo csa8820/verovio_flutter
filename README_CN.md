@@ -1,20 +1,29 @@
 # verovio_flutter
 
-[![License: LGPL-3.0](https://img.shields.io/badge/License-LGPL--3.0-blue.svg)](LICENSE)
+**在 Flutter 应用里渲染高质量五线谱 —— 从 MEI / MusicXML / ABC / Humdrum / PAE 直接生成 SVG。**
 
-`verovio_flutter` 是基于 Verovio 的 Flutter FFI 插件，遵循 LGPL-3.0。  
-任何派生作品也必须遵守同样的 LGPL-3.0 许可证要求。
+[![License: LGPL-3.0](https://img.shields.io/badge/License-LGPL--3.0-blue.svg)](LICENSE)
+[![Platform](https://img.shields.io/badge/platform-Android%20%7C%20iOS-blue.svg)]()
+[![Verovio](https://img.shields.io/badge/Verovio-6.2.1-orange.svg)]()
 
 Language: [English](README.md) | [中文](README_CN.md)
 
-> 当前发布树体积快照：
->
-> - `android/src/main/jniLibs`: `14M`
-> - `ios/Frameworks/VerovioFFI.xcframework`: `8.6M`
-> - `assets/verovio_data`: `11M`
-> - **总计：** `33.6M`
->
-> Android 使用 `--split-per-abi` 后，单个 APK 的增量体积大约是 `6.8M`（`arm64-v8a`）和 `7.2M`（`x86_64`），未计入 APK 压缩差异。
+<p align="center">
+  <img src="doc/images/hero.png" alt="肖邦 升f小调玛祖卡 Op.6 No.1，由 verovio_flutter 排版" width="600"/>
+  <br/>
+  <sub><i>肖邦 升f小调玛祖卡 Op.6 No.1，由 <code>verovio_flutter</code> 从 MEI 源文件直接渲染。</i></sub>
+</p>
+
+`verovio_flutter` 是一个 Flutter FFI 插件，把 [Verovio](https://www.verovio.org/) —— MEI 社区、RISM、Music Encoding Initiative 都在用的开源乐谱排版引擎 —— 原生集成进 Android 和 iOS App。**不依赖服务器、不依赖 WebView、不依赖网络**，纯本地排版。
+
+## 为什么用它
+
+- **真正的乐谱排版**：连音线、跨小节连线、装饰音、歌词、多声部、自动换页等都按出版级标准处理，不是简单画音符。
+- **完全离线**：通过 FFI 直接调用原生 C++ 库，没有 HTTP、没有 JS 桥接。
+- **多种输入格式**：MEI、MusicXML、Humdrum、ABC、Plaine & Easie。
+- **输出 SVG**：矢量图任意缩放，可嵌入自己的 Widget、导出 PDF，也可以自行后处理（高亮、动画等）。
+- **不会卡 UI**：`VerovioService.spawn` 在独立 Isolate 中跑排版，主线程零阻塞。
+- **体积可控**：Android 启用 `--split-per-abi` 后单架构增量仅约 7 MB。
 
 ## 安装
 
@@ -26,60 +35,94 @@ dependencies:
       ref: v0.1.0
 ```
 
-## 最小使用示例
-
-示例工程 `example/lib/main.dart` 是一个最小的 SVG 展示器。下面的代码演示与其一致的核心流程：创建 `VerovioService`、加载 MEI/XML、渲染 SVG，然后在 Flutter 中展示。
+## 快速上手
 
 ```dart
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:verovio_flutter/verovio_flutter.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  // 1. 解包 Verovio 字体与资源（首次启动一次即可）。
   final resourcePath = await VerovioResourceManager.ensureVerovioAssetsReady();
-  final service = await VerovioService.spawn(resourcePath: resourcePath);
-  service.loadData('''<mei xmlns="http://www.music-encoding.org/ns/mei">
-  <music><body><mdiv><score><section/></score></mdiv></body></music>
-</mei>''');
 
+  // 2. 启动排版 Isolate。
+  final service = await VerovioService.spawn(resourcePath: resourcePath);
+
+  // 3. 喂入 MEI / MusicXML / ABC / Humdrum 数据。
+  service.loadData('''<mei xmlns="http://www.music-encoding.org/ns/mei">
+    <music><body><mdiv><score><section/></score></mdiv></body></music>
+  </mei>''');
+
+  // 4. 取出任意一页 SVG 并显示。
   final svg = service.renderToSvg(1);
+
   runApp(MaterialApp(
     home: Scaffold(
-      appBar: AppBar(title: const Text('verovio_flutter demo')),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
-        child: SelectableText(svg),
-      ),
+      appBar: AppBar(title: const Text('verovio_flutter')),
+      body: SvgPicture.string(svg),
     ),
   ));
 }
 ```
+
+完整可运行示例见 [`example/`](example) 目录。
+
+## 效果展示
+
+下面所有图都是 Verovio 在真实设备上从 MEI 源文件直接排版生成的 —— 你看到的就是你 App 用户最终看到的。
+
+| 带歌词的声乐谱 | 钢琴技巧性写作 |
+|:---:|:---:|
+| ![Mozart — Das Veilchen](doc/images/vocal_with_lyrics.png) | ![Debussy — Golliwogg's Cakewalk](doc/images/piano_solo.png) |
+| *莫扎特 — 紫罗兰, K.476* | *德彪西 — 小黑人的步态舞* |
 
 ## 平台支持
 
 | 平台 | 最低版本 | 架构 |
 |------|----------|------|
 | Android | API 21 | arm64-v8a / x86_64 |
-| iOS | 13.0 | arm64(device) / arm64+x86_64(simulator) |
+| iOS | 13.0 | arm64（真机）/ arm64 + x86_64（模拟器）|
 
-## 版本对应关系
+## 体积
 
-`verovio_flutter 0.1.0 → Verovio version-2.7.1-10372-g8100cb396`
+| 组成 | 大小 |
+|------|------|
+| `android/src/main/jniLibs` | 14 MB |
+| `ios/Frameworks/VerovioFFI.xcframework` | 8.6 MB |
+| `assets/verovio_data`（字体 + Schema）| 11 MB |
+| **打包总计** | **33.6 MB** |
+
+Android 使用 `--split-per-abi` 后的单架构安装增量：**约 6.8 MB**（`arm64-v8a`）/ **7.2 MB**（`x86_64`），未计 APK 压缩差异。
+
+## API 文档
+
+完整的 `VerovioService` 接口（渲染选项、翻页、MIDI 导出、time-map 等）请见 [`doc/api.md`](doc/api.md)。
+
+## 版本对应
+
+| verovio_flutter | Verovio 上游 |
+|-----------------|--------------|
+| 0.1.0 | `version-6.2.1` |
+
+## 许可证
+
+LGPL-3.0。Verovio 本身就是 LGPL-3.0，任何派生作品必须遵守相同的条款。在遵守 LGPL 动态链接条款的前提下，可以在闭源 App 中使用。
 
 ## 维护者指南
 
 <details>
 <summary>构建与同步命令</summary>
 
-- 初始化 submodule：
-  `git clone --recurse-submodules https://github.com/csa8820/verovio_flutter`
-- 重新构建 Android `.so`：
-  `bash tool/build_android_so.sh`
-- 重新构建 iOS `.xcframework`：
-  `bash tool/build_ios_xcframework.sh`
-- 同步资源：
-  `bash tool/sync_verovio_sources.sh`
+- 拉取代码（含子模块）：`git clone --recurse-submodules https://github.com/csa8820/verovio_flutter`
+- 重新构建 Android `.so`：`bash tool/build_android_so.sh`
+- 重新构建 iOS `.xcframework`：`bash tool/build_ios_xcframework.sh`
+- 同步上游 Verovio 源码：`bash tool/sync_verovio_sources.sh`
 
 </details>
 
+## 鸣谢
+
+底层引擎来自 RISM Digital Center 的 [Verovio](https://github.com/rism-digital/verovio)。本插件只提供 Flutter / FFI 胶水代码，所有排版能力都属于他们。

@@ -1,3 +1,7 @@
+## Unreleased
+
+- Verovio submodule upgraded to `version-6.2.1` (`8d42439dc9231f6c87779287b542febcb3d609b3`).
+
 ## 0.1.0
 
 - First public release of `verovio_flutter`.
