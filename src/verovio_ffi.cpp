@@ -27,12 +27,21 @@ extern "C" {
 
 VrvToolkitHandle vrv_ffi_create(const char* resource_path) {
     try {
+        vrv::Toolkit* toolkit = new vrv::Toolkit(false);  // Create without initializing fonts
+        if (!toolkit) return nullptr;
+
+        // Now explicitly set the resource path, which will initialize fonts properly
+        std::string path = "/data";
         if (resource_path && resource_path[0] != '\0') {
-            vrv::SetDefaultResourcePath(resource_path);
-        } else {
-            vrv::SetDefaultResourcePath("/data");
+            path = resource_path;
         }
-        return new vrv::Toolkit();
+
+        if (!toolkit->SetResourcePath(path)) {
+            delete toolkit;
+            return nullptr;
+        }
+
+        return toolkit;
     } catch (...) {
         return nullptr;
     }
