@@ -1,3 +1,5 @@
-// Relative import to be able to reuse the C sources.
-// See the comment in ../verovio_flutter.podspec for more information.
-#include "../../src/verovio_flutter.c"
+// FFI plugin placeholder for iOS.
+//
+// The Verovio native implementation is shipped as a prebuilt
+// vendored_frameworks xcframework, so this translation unit intentionally
+// contains no native bridge code.

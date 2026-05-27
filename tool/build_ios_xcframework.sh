@@ -115,14 +115,14 @@ if 'verovio_ffi.cpp in Sources' not in files_block:
 
 framework_sources_start = text.find('BB4C4A4E22A930A3001F6AF0 /* Sources */ = {')
 if framework_sources_start == -1:
-    raise SystemExit('Could not locate VerovioFramework sources build phase')
+    raise SystemExit('Could not locate VerovioFFI sources build phase')
 framework_files_start = text.find(files_anchor, framework_sources_start)
 if framework_files_start == -1:
-    raise SystemExit('Could not locate VerovioFramework sources list')
+    raise SystemExit('Could not locate VerovioFFI sources list')
 framework_files_start += len(files_anchor)
 framework_files_end = text.find('\n\t\t\t\t);\n', framework_files_start)
 if framework_files_end == -1:
-    raise SystemExit('Could not locate end of VerovioFramework sources list')
+    raise SystemExit('Could not locate end of VerovioFFI sources list')
 framework_files_block = text[framework_files_start:framework_files_end]
 if 'verovio_ffi.cpp in Sources' not in framework_files_block:
     framework_files_block = framework_files_block + f'\t\t\t\t\t{framework_build_file_id} /* verovio_ffi.cpp in Sources */,\n'
@@ -266,18 +266,50 @@ echo "Creating xcframework..."
   -framework "$SIM_ARCHIVE/Products/Library/Frameworks/VerovioFramework.framework" \
   -output "$XCFRAMEWORK_OUT"
 
+# The upstream framework product is still named VerovioFramework.framework.
+# For the Flutter plugin we rename the vendored slices to VerovioFFI.framework
+# so CocoaPods and Xcode resolve the vendored framework name consistently.
+for framework_dir in "$XCFRAMEWORK_OUT"/*/VerovioFramework.framework; do
+  [[ -d "$framework_dir" ]] || continue
+  mv "$framework_dir" "${framework_dir%VerovioFramework.framework}VerovioFFI.framework"
+done
+for binary in "$XCFRAMEWORK_OUT"/*/VerovioFFI.framework/VerovioFramework; do
+  [[ -f "$binary" ]] || continue
+  mv "$binary" "${binary%VerovioFramework}VerovioFFI"
+  "$XCODEBUILD" -version >/dev/null
+  install_name_tool -id "@rpath/VerovioFFI.framework/VerovioFFI" "${binary%VerovioFramework}VerovioFFI"
+done
+python3 - "$XCFRAMEWORK_OUT" <<'PY'
+from __future__ import annotations
+
+import pathlib
+import sys
+
+root = pathlib.Path(sys.argv[1])
+for path in root.rglob('*'):
+    if not path.is_file():
+        continue
+    try:
+        text = path.read_text()
+    except UnicodeDecodeError:
+        continue
+    if 'VerovioFramework' not in text:
+        continue
+    path.write_text(text.replace('VerovioFramework', 'VerovioFFI'))
+PY
+
 # Strip the bundled `data/` from each framework slice.
 # These SMuFL font resources are shipped to the app via `assets/verovio_data/`
 # (see VerovioResourceManager) and unpacked at runtime to
 # getApplicationSupportDirectory(); the copy inside the framework would just
 # duplicate ~11MB per slice into the final IPA.
-for data_dir in "$XCFRAMEWORK_OUT"/*/VerovioFramework.framework/data; do
+for data_dir in "$XCFRAMEWORK_OUT"/*/VerovioFFI.framework/data; do
   [[ -d "$data_dir" ]] || continue
   rm -rf "$data_dir"
 done
 
 echo "Done: $XCFRAMEWORK_OUT"
-for slice in "$XCFRAMEWORK_OUT"/*/VerovioFramework.framework/VerovioFramework; do
+for slice in "$XCFRAMEWORK_OUT"/*/VerovioFFI.framework/VerovioFFI; do
   [[ -f "$slice" ]] || continue
   printf '  %-40s %s\n' "$(basename "$(dirname "$(dirname "$slice")")")" "$(du -h "$slice" | cut -f1)"
 done
