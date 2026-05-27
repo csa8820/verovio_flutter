@@ -27,7 +27,6 @@ migrate_working_dir/
 **/doc/api/
 .dart_tool/
 build/
-assets/verovio_data/
 src/verovio/
 
 # Local virtualenv used by tool/render_readme_images.py
