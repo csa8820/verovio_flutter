@@ -9,9 +9,7 @@
 Language: [English](README.md) | [中文](README_CN.md)
 
 <p align="center">
-  <img src="doc/images/hero.png" alt="肖邦 升f小调玛祖卡 Op.6 No.1，由 verovio_flutter 排版" width="600"/>
-  <br/>
-  <sub><i>肖邦 升f小调玛祖卡 Op.6 No.1，由 <code>verovio_flutter</code> 从 MEI 源文件直接渲染。</i></sub>
+  <img src="doc/images/iphone-demo.png" alt="verovio_flutter iPhone 演示" height="360"/>
 </p>
 
 `verovio_flutter` 是一个 Flutter FFI 插件，把 [Verovio](https://www.verovio.org/) —— MEI 社区、RISM、Music Encoding Initiative 都在用的开源乐谱排版引擎 —— 原生集成进 Android 和 iOS App。**不依赖服务器、不依赖 WebView、不依赖网络**，纯本地排版。
@@ -66,15 +64,6 @@ Future<void> main() async {
 ```
 
 完整可运行示例见 [`example/`](example) 目录。
-
-## 效果展示
-
-下面所有图都是 Verovio 在真实设备上从 MEI 源文件直接排版生成的 —— 你看到的就是你 App 用户最终看到的。
-
-| 带歌词的声乐谱 | 钢琴技巧性写作 |
-|:---:|:---:|
-| ![Mozart — Das Veilchen](doc/images/vocal_with_lyrics.png) | ![Debussy — Golliwogg's Cakewalk](doc/images/piano_solo.png) |
-| *莫扎特 — 紫罗兰, K.476* | *德彪西 — 小黑人的步态舞* |
 
 ## 平台支持
 

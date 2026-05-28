@@ -9,9 +9,7 @@
 Language: [English](README.md) | [中文](README_CN.md)
 
 <p align="center">
-  <img src="doc/images/hero.png" alt="Chopin — Mazurka in F-sharp Minor, Op.6 No.1, engraved by verovio_flutter" width="600"/>
-  <br/>
-  <sub><i>Chopin — Mazurka Op.6 No.1, rendered by <code>verovio_flutter</code> from MEI source.</i></sub>
+  <img src="doc/images/iphone-demo.png" alt="verovio_flutter demo on iPhone" height="360"/>
 </p>
 
 `verovio_flutter` is a Flutter FFI plugin that embeds [Verovio](https://www.verovio.org/) — the open-source music notation engraving library used by the MEI community, RISM, and the Music Encoding Initiative — directly into your Android and iOS apps. No server, no WebView, no network. Just native engraving on device.
@@ -66,15 +64,6 @@ Future<void> main() async {
 ```
 
 A complete runnable example lives in [`example/`](example).
-
-## Gallery
-
-All images below are produced by Verovio on-device from MEI sources — what you see is what your users will see.
-
-| Vocal score with lyrics | Virtuosic piano writing |
-|:---:|:---:|
-| ![Mozart — Das Veilchen](doc/images/vocal_with_lyrics.png) | ![Debussy — Golliwogg's Cakewalk](doc/images/piano_solo.png) |
-| *Mozart — Das Veilchen, K.476* | *Debussy — Golliwogg's Cakewalk* |
 
 ## Platform support
 
