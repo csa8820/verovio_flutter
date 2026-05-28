@@ -27,7 +27,7 @@ Language: [English](README.md) | [中文](README_CN.md)
 
 ```yaml
 dependencies:
-  verovio_flutter: ^0.1.5
+  verovio_flutter: ^0.1.6
 ```
 
 ## 快速上手
@@ -117,7 +117,7 @@ Android 使用 `--split-per-abi` 后的单架构安装增量：**约 6.8 MB**（
 | 0.1.2 | `version-6.2.1` (`8d42439dc9231f6c87779287b542febcb3d609b3`) |
 | 0.1.3 | `version-6.2.1` (`8d42439dc9231f6c87779287b542febcb3d609b3`) |
 | 0.1.4 | `version-6.2.1` (`8d42439dc9231f6c87779287b542febcb3d609b3`) |
-| 0.1.5 | `version-6.2.1` (`8d42439dc9231f6c87779287b542febcb3d609b3`) |
+| 0.1.6 | `version-6.2.1` (`8d42439dc9231f6c87779287b542febcb3d609b3`) |
 
 ## 许可证
 

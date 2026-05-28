@@ -1,11 +1,11 @@
 ## Unreleased
 
-## 0.1.5
+## 0.1.6
 
 - Fix: Replaced the deprecated `AssetManifest.json` lookup in `VerovioResourceManager` with `AssetManifest.loadFromAssetBundle`, restoring asset extraction on Flutter versions that no longer emit the legacy JSON manifest.
 - Lowered the minimum SDK constraints to `Dart >=3.0.0` / `Flutter >=3.10.0` to broaden compatibility.
 - Downgraded the `flutter_lints` dev dependency to `^3.0.0` to align with the new lower SDK bound.
-- Bumped the package version to `0.1.5` and refreshed the install snippets in the docs.
+- Bumped the package version to `0.1.6` and refreshed the install snippets in the docs.
 
 ## 0.1.4
 
