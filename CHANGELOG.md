@@ -1,5 +1,10 @@
 ## Unreleased
 
+## 0.1.2
+
+- Unified the public API around `VerovioAsyncService` and updated the English/Chinese docs accordingly.
+- Added cache and troubleshooting guidance for package users.
+
 ## 0.1.1
 
 - Verovio submodule upgraded to `version-6.2.1` (`8d42439dc9231f6c87779287b542febcb3d609b3`).
