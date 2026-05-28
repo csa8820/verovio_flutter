@@ -7,7 +7,7 @@ License：LGPL-3.0，见 [LICENSE](../LICENSE)
 官方参考文档：[Verovio Toolkit Methods](https://book.verovio.org/toolkit-reference/toolkit-methods.html)
 
 > 说明：本文以 `lib/verovio_flutter.dart` 和 `lib/src/*.dart` 的**实际代码**为准。
-> 其中 `architecture.md` 里出现的 `create()` 示例、`VerovioException(errorCode/message)` 字段模型、以及 `VerovioPageCache.get(pageNo)` / `VerovioService` 串行化描述，和当前代码存在出入；以本文件和源码为准。
+> 其中 `architecture.md` 里出现的 `create()` 示例、`VerovioException(errorCode/message)` 字段模型、以及 `VerovioPageCache.get(pageNo)` 等描述，和当前代码存在出入；以本文件和源码为准。
 
 ## Quick Start
 
@@ -18,144 +18,144 @@ Future<void> main() async {
   // 1. 准备 Verovio 资源目录（首次启动会自动拷贝 assets/verovio_data/）
   final resourcePath = await VerovioResourceManager.ensureVerovioAssetsReady();
 
-  // 2. 创建 Toolkit 包装器
-  final service = await VerovioService.spawn(resourcePath: resourcePath);
+  // 2. 在 worker isolate 中创建异步 Toolkit 包装器
+  final service = await VerovioAsyncService.spawn(resourcePath: resourcePath);
 
   try {
     // 3. 加载 MEI 文本
     const mei = '<mei xmlns="http://www.music-encoding.org/ns/mei"></mei>';
-    service.loadData(mei);
+    await service.loadData(mei);
 
     // 4. 获取页数并渲染首页
-    final pageCount = service.pageCount;
-    final svg = service.renderToSvg(1);
+    final pageCount = await service.pageCount;
+    final svg = await service.renderToSvg(1);
 
     // 5. 把 SVG 交给 Flutter UI / WebView / 文件导出等后续流程
     print('页数：$pageCount');
     print(svg);
   } finally {
-    // 6. 释放 native 资源
+    // 6. 释放 native 资源（同时终止 worker isolate）
     await service.dispose();
   }
 }
 ```
 
+
 ## 使用前说明
 
-- `Verovio Toolkit` 本身**非线程安全**。当前仓库同时提供：
-  - `VerovioService`：同步 FFI 直连封装；
-  - `VerovioAsyncService`：`isolate` 串行化封装（本文不展开逐方法表，但它也由 `lib/verovio_flutter.dart` 导出）。
+- `Verovio Toolkit` 本身**非线程安全**。本插件统一通过 `VerovioAsyncService`(基于 worker isolate 的异步封装)对外提供服务。
 - 下游不要跨 isolate 传递 `Pointer`；也不要自己缓存 native 指针。
 - `spawn()` 的 `resourcePath` 必须是**绝对路径**。
 - 资源初始化遵循以下规则：
   1. 首次启动时，把 `assets/verovio_data/` 复制到应用支持目录；
   2. `VERSION` 文件与 `native/VEROVIO_VERSION` 不一致时会重拷贝；
-  3. `spawn()` 内部会先调用 `VerovioResourceManager.ensureVerovioAssetsReady()`，再创建 Toolkit。
+3. `spawn()` 内部会先调用 `VerovioResourceManager.ensureVerovioAssetsReady()`，再创建 Toolkit。
 
 ---
 
 ## API 参考
 
-### VerovioService
+### VerovioAsyncService
 
-> 说明：以下签名以 `lib/src/verovio_service.dart` 为准。若 `architecture.md` 里的命名或示例不同，以这里为准。
+> 说明：以下签名以 `lib/src/verovio_async_service.dart` 为准。所有方法都返回 `Future`，由 worker isolate 串行执行,主线程不会被阻塞。
 
 #### 生命周期与资源
 
 | 方法签名 (Dart) | 对应 Verovio Toolkit 方法名 | 作用 | 参数说明 | 返回值说明 | 简短使用示例 | VerovioException |
 | --- | --- | --- | --- | --- | --- | --- |
-| `static Future<VerovioService> spawn({required String resourcePath})` | `Toolkit()` | 创建 `VerovioService`，并校验/初始化 Verovio 资源目录。 | `resourcePath: String`，Verovio 资源目录绝对路径。 | 返回已创建的 `VerovioService`。 | `final service = await VerovioService.spawn(resourcePath: path);` | 否。参数非法会抛 `ArgumentError`，native 创建失败会抛 `StateError`。 |
-| `Future<void> dispose()` | `~Toolkit()` | 销毁 native Toolkit 实例并释放资源。 | 无。 | `void`。 | `await service.dispose();` | 否。重复调用会直接返回。 |
-| `bool setResourcePath(String resourcePath)` | `SetResourcePath` | 切换 Verovio 的资源目录。 | `resourcePath: String`，绝对路径。 | `true` 表示成功。 | `service.setResourcePath(path);` | 是。native 返回 `false` 时抛 `VerovioException`。 |
-| `String getResourcePath()` | `GetResourcePath` | 读取当前资源目录。 | 无。 | 当前资源目录路径字符串。 | `final path = service.getResourcePath();` | 是。native 返回空指针时抛 `VerovioException`。 |
-| `String getVersion()` | `GetVersion` | 读取当前 Verovio 版本号。 | 无。 | 版本字符串。 | `final version = service.getVersion();` | 是。native 返回空指针时抛 `VerovioException`。 |
+| `static Future<VerovioAsyncService> spawn({required String resourcePath})` | `Toolkit()` | 启动 worker isolate 并创建 Verovio 实例。 | `resourcePath: String`，Verovio 资源目录绝对路径。 | 返回已创建的 `VerovioAsyncService`。 | `final service = await VerovioAsyncService.spawn(resourcePath: path);` | 否。参数非法会抛 `ArgumentError`，native 创建失败会抛 `StateError`。 |
+| `Future<void> dispose()` | `~Toolkit()` | 销毁 native Toolkit 实例并终止 worker isolate。 | 无。 | `Future<void>`。 | `await service.dispose();` | 否。重复调用会直接返回。 |
+| `Future<bool> setResourcePath(String resourcePath)` | `SetResourcePath` | 切换 Verovio 的资源目录。 | `resourcePath: String`，绝对路径。 | `true` 表示成功。 | `await service.setResourcePath(path);` | 是。native 返回 `false` 时抛 `VerovioException`。 |
+| `Future<String> getResourcePath()` | `GetResourcePath` | 读取当前资源目录。 | 无。 | 当前资源目录路径字符串。 | `final path = await service.getResourcePath();` | 是。native 返回空指针时抛 `VerovioException`。 |
+| `Future<String> getVersion()` | `GetVersion` | 读取当前 Verovio 版本号。 | 无。 | 版本字符串。 | `final version = await service.getVersion();` | 是。native 返回空指针时抛 `VerovioException`。 |
 
 #### 加载与解析
 
 | 方法签名 (Dart) | 对应 Verovio Toolkit 方法名 | 作用 | 参数说明 | 返回值说明 | 简短使用示例 | VerovioException |
 | --- | --- | --- | --- | --- | --- | --- |
-| `void loadData(String data)` | `LoadData` | 加载 MEI / MusicXML / 其他文本输入。 | `data: String`，输入文本。 | `void`。 | `service.loadData(mei);` | 是。native 返回失败时抛 `VerovioException`。 |
-| `void loadZipDataBase64(String base64Data)` | `LoadZipDataBase64` | 加载 base64 编码的压缩 MXL 数据。 | `base64Data: String`，base64 字符串。 | `void`。 | `service.loadZipDataBase64(mxlBase64);` | 是。native 返回失败时抛 `VerovioException`。 |
-| `bool loadZipDataBuffer(Uint8List bytes)` | `LoadZipDataBuffer` | 加载原始压缩 MXL 字节缓冲区。 | `bytes: Uint8List`，压缩字节。 | `true` 表示成功。 | `service.loadZipDataBuffer(bytes);` | 是。native 返回 `false` 时抛 `VerovioException`。 |
-| `int get pageCount` | `GetPageCount` | 读取当前内容的页数。 | 无。 | 页数整数。 | `final pages = service.pageCount;` | 是。native 返回 `-1` 时抛 `VerovioException`。 |
-| `bool setInputFrom(String inputFrom)` | `SetInputFrom` | 指定输入格式来源。 | `inputFrom: String`，例如 `mei`、`musicxml`。 | `true` 表示成功。 | `service.setInputFrom('mei');` | 否。失败只会返回 `false`。 |
-| `bool setOutputTo(String outputTo)` | `SetOutputTo` | 指定输出格式目标。 | `outputTo: String`，例如 `mei`、`humdrum`。 | `true` 表示成功。 | `service.setOutputTo('mei');` | 否。失败只会返回 `false`。 |
+| `Future<void> loadData(String data)` | `LoadData` | 加载 MEI / MusicXML / 其他文本输入。 | `data: String`，输入文本。 | `Future<void>`。 | `await service.loadData(mei);` | 是。native 返回失败时抛 `VerovioException`。 |
+| `Future<void> loadZipDataBase64(String base64Data)` | `LoadZipDataBase64` | 加载 base64 编码的压缩 MXL 数据。 | `base64Data: String`，base64 字符串。 | `Future<void>`。 | `await service.loadZipDataBase64(mxlBase64);` | 是。native 返回失败时抛 `VerovioException`。 |
+| `Future<bool> loadZipDataBuffer(Uint8List bytes)` | `LoadZipDataBuffer` | 加载原始压缩 MXL 字节缓冲区。 | `bytes: Uint8List`，压缩字节。 | `true` 表示成功。 | `await service.loadZipDataBuffer(bytes);` | 是。native 返回 `false` 时抛 `VerovioException`。 |
+| `Future<int> get pageCount` | `GetPageCount` | 读取当前内容的页数。 | 无。 | 页数整数。 | `final pages = await service.pageCount;` | 是。native 返回 `-1` 时抛 `VerovioException`。 |
+| `Future<bool> setInputFrom(String inputFrom)` | `SetInputFrom` | 指定输入格式来源。 | `inputFrom: String`，例如 `mei`、`musicxml`。 | `true` 表示成功。 | `await service.setInputFrom('mei');` | 否。失败只会返回 `false`。 |
+| `Future<bool> setOutputTo(String outputTo)` | `SetOutputTo` | 指定输出格式目标。 | `outputTo: String`，例如 `mei`、`humdrum`。 | `true` 表示成功。 | `await service.setOutputTo('mei');` | 否。失败只会返回 `false`。 |
 
 #### Options
 
 | 方法签名 (Dart) | 对应 Verovio Toolkit 方法名 | 作用 | 参数说明 | 返回值说明 | 简短使用示例 | VerovioException |
 | --- | --- | --- | --- | --- | --- | --- |
-| `String getAvailableOptions()` | `GetAvailableOptions` | 获取全部可用选项及元数据。 | 无。 | JSON 字符串。 | `final json = service.getAvailableOptions();` | 是。native 返回空指针时抛 `VerovioException`。 |
-| `String getDefaultOptions()` | `GetDefaultOptions` | 获取全部选项默认值。 | 无。 | JSON 字符串。 | `final json = service.getDefaultOptions();` | 是。native 返回空指针时抛 `VerovioException`。 |
-| `String getOptions()` | `GetOptions` | 获取当前已设置的选项。 | 无。 | JSON 字符串。 | `final json = service.getOptions();` | 是。native 返回空指针时抛 `VerovioException`。 |
-| `void setOptionsJson(String json)` | `SetOptions` / `SetOptionsJson` | 用 JSON 一次性设置选项。 | `json: String`，Verovio 选项 JSON。 | `void`。 | `service.setOptionsJson('{"scale":40}');` | 是。native 返回失败时抛 `VerovioException`。 |
-| `String getOptionUsageString()` | `GetOptionUsageString` | 获取选项使用说明。 | 无。 | 说明文本。 | `final usage = service.getOptionUsageString();` | 是。native 返回空指针时抛 `VerovioException`。 |
-| `String getDescriptiveFeatures(String jsonOptions)` | `GetDescriptiveFeatures` | 根据选项提取描述性特征。 | `jsonOptions: String`，JSON 选项字符串。 | JSON 字符串。 | `final features = service.getDescriptiveFeatures('{}');` | 是。native 返回空指针时抛 `VerovioException`。 |
-| `void resetOptions()` | `ResetOptions` | 把选项恢复默认值。 | 无。 | `void`。 | `service.resetOptions();` | 否。 |
+| `Future<String> getAvailableOptions()` | `GetAvailableOptions` | 获取全部可用选项及元数据。 | 无。 | JSON 字符串。 | `final json = await service.getAvailableOptions();` | 是。native 返回空指针时抛 `VerovioException`。 |
+| `Future<String> getDefaultOptions()` | `GetDefaultOptions` | 获取全部选项默认值。 | 无。 | JSON 字符串。 | `final json = await service.getDefaultOptions();` | 是。native 返回空指针时抛 `VerovioException`。 |
+| `Future<String> getOptions()` | `GetOptions` | 获取当前已设置的选项。 | 无。 | JSON 字符串。 | `final json = await service.getOptions();` | 是。native 返回空指针时抛 `VerovioException`。 |
+| `Future<void> setOptionsJson(String json)` | `SetOptions` / `SetOptionsJson` | 用 JSON 一次性设置选项。 | `json: String`，Verovio 选项 JSON。 | `Future<void>`。 | `await service.setOptionsJson('{"scale":40}');` | 是。native 返回失败时抛 `VerovioException`。 |
+| `Future<String> getOptionUsageString()` | `GetOptionUsageString` | 获取选项使用说明。 | 无。 | 说明文本。 | `final usage = await service.getOptionUsageString();` | 是。native 返回空指针时抛 `VerovioException`。 |
+| `Future<String> getDescriptiveFeatures(String jsonOptions)` | `GetDescriptiveFeatures` | 根据选项提取描述性特征。 | `jsonOptions: String`，JSON 选项字符串。 | JSON 字符串。 | `final features = await service.getDescriptiveFeatures('{}');` | 是。native 返回空指针时抛 `VerovioException`。 |
+| `Future<void> resetOptions()` | `ResetOptions` | 把选项恢复默认值。 | 无。 | `Future<void>`。 | `await service.resetOptions();` | 否。 |
 
 #### 元素查询
 
 | 方法签名 (Dart) | 对应 Verovio Toolkit 方法名 | 作用 | 参数说明 | 返回值说明 | 简短使用示例 | VerovioException |
 | --- | --- | --- | --- | --- | --- | --- |
-| `String getElementAttr(String xmlId)` | `GetElementAttr` | 查询指定 `xml:id` 元素的属性。 | `xmlId: String`，元素 ID。 | JSON 字符串。 | `final attrs = service.getElementAttr('n1');` | 是。native 返回空指针时抛 `VerovioException`。 |
-| `String getElementsAtTime(int millisec)` | `GetElementsAtTime` | 查询某个时间点正在播放的元素。 | `millisec: int`，毫秒时间点。 | JSON 字符串。 | `final ids = service.getElementsAtTime(1200);` | 是。native 返回空指针时抛 `VerovioException`。 |
-| `String getExpansionIdsForElement(String xmlId)` | `GetExpansionIdsForElement` | 查询展开/原始元素对应的 ID 列表。 | `xmlId: String`，元素 ID。 | JSON 字符串。 | `final ids = service.getExpansionIdsForElement('n1');` | 是。native 返回空指针时抛 `VerovioException`。 |
-| `String getMidiValuesForElement(String xmlId)` | `GetMIDIValuesForElement` | 查询元素对应的 MIDI 数值。 | `xmlId: String`，元素 ID。 | JSON 字符串。 | `final midi = service.getMidiValuesForElement('n1');` | 是。native 返回空指针时抛 `VerovioException`。 |
-| `String getNotatedIdForElement(String xmlId)` | `GetNotatedIdForElement` | 查询谱面上对应的 notated ID。 | `xmlId: String`，元素 ID。 | 字符串。 | `final id = service.getNotatedIdForElement('n1');` | 是。native 返回空指针时抛 `VerovioException`。 |
-| `String getTimesForElement(String xmlId)` | `GetTimesForElement` | 查询元素的记谱时间和真实时间。 | `xmlId: String`，元素 ID。 | JSON 字符串。 | `final times = service.getTimesForElement('n1');` | 是。native 返回空指针时抛 `VerovioException`。 |
-| `String getId()` | `GetID` | 读取当前 Toolkit 实例 ID。 | 无。 | 字符串。 | `final id = service.getId();` | 是。native 返回空指针时抛 `VerovioException`。 |
-| `int getPageWithElement(String xmlId)` | `GetPageWithElement` | 查询元素所在页码。 | `xmlId: String`，元素 ID。 | 页码整数；找不到时通常为 `0`。 | `final page = service.getPageWithElement('n1');` | 是。native 返回 `-1` 时抛 `VerovioException`。 |
-| `int getTimeForElement(String xmlId)` | `GetTimeForElement` | 查询元素的时间位置。 | `xmlId: String`，元素 ID。 | 毫秒整数。 | `final time = service.getTimeForElement('n1');` | 是。native 返回 `-1` 时抛 `VerovioException`。 |
+| `Future<String> getElementAttr(String xmlId)` | `GetElementAttr` | 查询指定 `xml:id` 元素的属性。 | `xmlId: String`，元素 ID。 | JSON 字符串。 | `final attrs = await service.getElementAttr('n1');` | 是。native 返回空指针时抛 `VerovioException`。 |
+| `Future<String> getElementsAtTime(int millisec)` | `GetElementsAtTime` | 查询某个时间点正在播放的元素。 | `millisec: int`，毫秒时间点。 | JSON 字符串。 | `final ids = await service.getElementsAtTime(1200);` | 是。native 返回空指针时抛 `VerovioException`。 |
+| `Future<String> getExpansionIdsForElement(String xmlId)` | `GetExpansionIdsForElement` | 查询展开/原始元素对应的 ID 列表。 | `xmlId: String`，元素 ID。 | JSON 字符串。 | `final ids = await service.getExpansionIdsForElement('n1');` | 是。native 返回空指针时抛 `VerovioException`。 |
+| `Future<String> getMidiValuesForElement(String xmlId)` | `GetMIDIValuesForElement` | 查询元素对应的 MIDI 数值。 | `xmlId: String`，元素 ID。 | JSON 字符串。 | `final midi = await service.getMidiValuesForElement('n1');` | 是。native 返回空指针时抛 `VerovioException`。 |
+| `Future<String> getNotatedIdForElement(String xmlId)` | `GetNotatedIdForElement` | 查询谱面上对应的 notated ID。 | `xmlId: String`，元素 ID。 | 字符串。 | `final id = await service.getNotatedIdForElement('n1');` | 是。native 返回空指针时抛 `VerovioException`。 |
+| `Future<String> getTimesForElement(String xmlId)` | `GetTimesForElement` | 查询元素的记谱时间和真实时间。 | `xmlId: String`，元素 ID。 | JSON 字符串。 | `final times = await service.getTimesForElement('n1');` | 是。native 返回空指针时抛 `VerovioException`。 |
+| `Future<String> getId()` | `GetID` | 读取当前 Toolkit 实例 ID。 | 无。 | 字符串。 | `final id = await service.getId();` | 是。native 返回空指针时抛 `VerovioException`。 |
+| `Future<int> getPageWithElement(String xmlId)` | `GetPageWithElement` | 查询元素所在页码。 | `xmlId: String`，元素 ID。 | 页码整数；找不到时通常为 `0`。 | `final page = await service.getPageWithElement('n1');` | 是。native 返回 `-1` 时抛 `VerovioException`。 |
+| `Future<int> getTimeForElement(String xmlId)` | `GetTimeForElement` | 查询元素的时间位置。 | `xmlId: String`，元素 ID。 | 毫秒整数。 | `final time = await service.getTimeForElement('n1');` | 是。native 返回 `-1` 时抛 `VerovioException`。 |
 
 #### 渲染与导出
 
 | 方法签名 (Dart) | 对应 Verovio Toolkit 方法名 | 作用 | 参数说明 | 返回值说明 | 简短使用示例 | VerovioException |
 | --- | --- | --- | --- | --- | --- | --- |
-| `String renderToSvg(int pageNo, {bool xmlDeclaration = false})` | `RenderToSVG` | 把指定页渲染成 SVG。 | `pageNo: int`，页码；`xmlDeclaration: bool`，是否输出 XML 声明。 | SVG 字符串。 | `final svg = service.renderToSvg(1);` | 是。native 返回空指针时抛 `VerovioException`。 |
-| `String renderToMidi()` | `RenderToMIDI` | 导出 MIDI 内容。 | 无。 | base64 编码的 MIDI 字符串。 | `final midiBase64 = service.renderToMidi();` | 是。native 返回空指针时抛 `VerovioException`。 |
-| `Uint8List renderToMidiBytes()` | 无（Dart 辅助方法） | 将 `renderToMidi()` 的 base64 结果直接解码成字节。 | 无。 | `Uint8List`。 | `final midiBytes = service.renderToMidiBytes();` | 否。若 base64 非法，会抛 `FormatException`。 |
-| `String renderToPae()` | `RenderToPAE` | 导出 PAE 文本。 | 无。 | 字符串。 | `final pae = service.renderToPae();` | 是。native 返回空指针时抛 `VerovioException`。 |
-| `String renderToTimemap({String jsonOptions = ''})` | `RenderToTimemap` | 导出时间映射。 | `jsonOptions: String`，JSON 选项字符串，可为空。 | JSON 字符串。 | `final tm = service.renderToTimemap();` | 是。native 返回空指针时抛 `VerovioException`。 |
-| `String renderToExpansionMap()` | `RenderToExpansionMap` | 导出展开映射。 | 无。 | JSON 字符串。 | `final map = service.renderToExpansionMap();` | 是。native 返回空指针时抛 `VerovioException`。 |
-| `String renderData(String data, String jsonOptions)` | `RenderData` | 一步完成“设置 + 加载 + 渲染首屏”。 | `data: String`，输入文本；`jsonOptions: String`，选项 JSON。 | SVG 字符串。 | `final svg = service.renderData(mei, '{}');` | 是。native 返回空指针时抛 `VerovioException`。 |
+| `Future<String> renderToSvg(int pageNo, {bool xmlDeclaration = false})` | `RenderToSVG` | 把指定页渲染成 SVG。 | `pageNo: int`，页码；`xmlDeclaration: bool`，是否输出 XML 声明。 | SVG 字符串。 | `final svg = await service.renderToSvg(1);` | 是。native 返回空指针时抛 `VerovioException`。 |
+| `Future<String> renderToMidi()` | `RenderToMIDI` | 导出 MIDI 内容。 | 无。 | base64 编码的 MIDI 字符串。 | `final midiBase64 = await service.renderToMidi();` | 是。native 返回空指针时抛 `VerovioException`。 |
+| `Future<Uint8List> renderToMidiBytes()` | 无（Dart 辅助方法） | 将 `renderToMidi()` 的 base64 结果直接解码成字节。 | 无。 | `Uint8List`。 | `final midiBytes = await service.renderToMidiBytes();` | 否。若 base64 非法，会抛 `FormatException`。 |
+| `Future<String> renderToPae()` | `RenderToPAE` | 导出 PAE 文本。 | 无。 | 字符串。 | `final pae = await service.renderToPae();` | 是。native 返回空指针时抛 `VerovioException`。 |
+| `Future<String> renderToTimemap({String jsonOptions = ''})` | `RenderToTimemap` | 导出时间映射。 | `jsonOptions: String`，JSON 选项字符串，可为空。 | JSON 字符串。 | `final tm = await service.renderToTimemap();` | 是。native 返回空指针时抛 `VerovioException`。 |
+| `Future<String> renderToExpansionMap()` | `RenderToExpansionMap` | 导出展开映射。 | 无。 | JSON 字符串。 | `final map = await service.renderToExpansionMap();` | 是。native 返回空指针时抛 `VerovioException`。 |
+| `Future<String> renderData(String data, String jsonOptions)` | `RenderData` | 一步完成“设置 + 加载 + 渲染首屏”。 | `data: String`，输入文本；`jsonOptions: String`，选项 JSON。 | SVG 字符串。 | `final svg = await service.renderData(mei, '{}');` | 是。native 返回空指针时抛 `VerovioException`。 |
 
 #### 转换
 
 | 方法签名 (Dart) | 对应 Verovio Toolkit 方法名 | 作用 | 参数说明 | 返回值说明 | 简短使用示例 | VerovioException |
 | --- | --- | --- | --- | --- | --- | --- |
-| `String getHumdrum()` | `GetHumdrum` | 读取当前 Humdrum 缓冲区。 | 无。 | Humdrum 字符串。 | `final humdrum = service.getHumdrum();` | 是。native 返回空指针时抛 `VerovioException`。 |
-| `String getMei(String jsonOptions)` | `GetMEI` | 把当前内容导出为 MEI。 | `jsonOptions: String`，JSON 选项字符串。 | MEI XML 字符串。 | `final mei = service.getMei('{}');` | 是。native 返回空指针时抛 `VerovioException`。 |
-| `String convertHumdrumToHumdrum(String data)` | `ConvertHumdrumToHumdrum` | 对 Humdrum 输入做过滤/转换。 | `data: String`，Humdrum 文本。 | Humdrum 字符串。 | `final out = service.convertHumdrumToHumdrum(humdrum);` | 是。native 返回空指针时抛 `VerovioException`。 |
-| `String convertHumdrumToMidi(String data)` | `ConvertHumdrumToMIDI` | 把 Humdrum 转成 base64 MIDI。 | `data: String`，Humdrum 文本。 | base64 MIDI 字符串。 | `final midiBase64 = service.convertHumdrumToMidi(humdrum);` | 是。native 返回空指针时抛 `VerovioException`。 |
-| `Uint8List convertHumdrumToMidiBytes(String data)` | 无（Dart 辅助方法） | 将 `convertHumdrumToMidi()` 的 base64 结果直接解码成字节。 | `data: String`，Humdrum 文本。 | `Uint8List`。 | `final midiBytes = service.convertHumdrumToMidiBytes(humdrum);` | 否。若 base64 非法，会抛 `FormatException`。 |
-| `String convertMeiToHumdrum(String data)` | `ConvertMEIToHumdrum` | 把 MEI / XML 转成 Humdrum。 | `data: String`，MEI 或 XML 文本。 | Humdrum 字符串。 | `final humdrum = service.convertMeiToHumdrum(mei);` | 是。native 返回空指针时抛 `VerovioException`。 |
-| `String validatePae(String data)` | `ValidatePAE` | 校验 Plaine & Easie 输入。 | `data: String`，PAE 文本。 | 校验结果字符串。 | `final result = service.validatePae(pae);` | 是。native 返回空指针时抛 `VerovioException`。 |
+| `Future<String> getHumdrum()` | `GetHumdrum` | 读取当前 Humdrum 缓冲区。 | 无。 | Humdrum 字符串。 | `final humdrum = await service.getHumdrum();` | 是。native 返回空指针时抛 `VerovioException`。 |
+| `Future<String> getMei(String jsonOptions)` | `GetMEI` | 把当前内容导出为 MEI。 | `jsonOptions: String`，JSON 选项字符串。 | MEI XML 字符串。 | `final mei = await service.getMei('{}');` | 是。native 返回空指针时抛 `VerovioException`。 |
+| `Future<String> convertHumdrumToHumdrum(String data)` | `ConvertHumdrumToHumdrum` | 对 Humdrum 输入做过滤/转换。 | `data: String`，Humdrum 文本。 | Humdrum 字符串。 | `final out = await service.convertHumdrumToHumdrum(humdrum);` | 是。native 返回空指针时抛 `VerovioException`。 |
+| `Future<String> convertHumdrumToMidi(String data)` | `ConvertHumdrumToMIDI` | 把 Humdrum 转成 base64 MIDI。 | `data: String`，Humdrum 文本。 | base64 MIDI 字符串。 | `final midiBase64 = await service.convertHumdrumToMidi(humdrum);` | 是。native 返回空指针时抛 `VerovioException`。 |
+| `Future<Uint8List> convertHumdrumToMidiBytes(String data)` | 无（Dart 辅助方法） | 将 `convertHumdrumToMidi()` 的 base64 结果直接解码成字节。 | `data: String`，Humdrum 文本。 | `Uint8List`。 | `final midiBytes = await service.convertHumdrumToMidiBytes(humdrum);` | 否。若 base64 非法，会抛 `FormatException`。 |
+| `Future<String> convertMeiToHumdrum(String data)` | `ConvertMEIToHumdrum` | 把 MEI / XML 转成 Humdrum。 | `data: String`，MEI 或 XML 文本。 | Humdrum 字符串。 | `final humdrum = await service.convertMeiToHumdrum(mei);` | 是。native 返回空指针时抛 `VerovioException`。 |
+| `Future<String> validatePae(String data)` | `ValidatePAE` | 校验 Plaine & Easie 输入。 | `data: String`，PAE 文本。 | 校验结果字符串。 | `final result = await service.validatePae(pae);` | 是。native 返回空指针时抛 `VerovioException`。 |
 
 #### 布局与编辑
 
 | 方法签名 (Dart) | 对应 Verovio Toolkit 方法名 | 作用 | 参数说明 | 返回值说明 | 简短使用示例 | VerovioException |
 | --- | --- | --- | --- | --- | --- | --- |
-| `int getScale()` | `GetScale` | 读取当前缩放比例。 | 无。 | 整数缩放值。 | `final scale = service.getScale();` | 是。native 返回 `-1` 时抛 `VerovioException`。 |
-| `bool setScale(int scale)` | `SetScale` | 设置缩放比例。 | `scale: int`，缩放值。 | `true` 表示成功。 | `service.setScale(40);` | 否。失败只会返回 `false`。 |
-| `bool select(String selectionJson)` | `Select` | 选中一组元素或位置。 | `selectionJson: String`，Verovio selection JSON。 | `true` 表示成功。 | `service.select('{"ids":["n1"]}');` | 否。失败只会返回 `false`。 |
-| `bool edit(String editorAction)` | `Edit` | 执行编辑动作。 | `editorAction: String`，编辑动作字符串。 | `true` 表示成功。 | `service.edit('delete');` | 否。失败只会返回 `false`。 |
-| `String editInfo()` | `EditInfo` | 读取编辑信息。 | 无。 | 字符串。 | `final info = service.editInfo();` | 是。native 返回空指针时抛 `VerovioException`。 |
-| `void redoLayout({String jsonOptions = ''})` | `RedoLayout` | 重新布局，并可附带 JSON 选项。 | `jsonOptions: String`，可为空。 | `void`。 | `service.redoLayout(jsonOptions: '{}');` | 否。 |
-| `void redoPagePitchPosLayout()` | `RedoPagePitchPosLayout` | 只重算当前页音高垂直位置。 | 无。 | `void`。 | `service.redoPagePitchPosLayout();` | 否。 |
-| `void resetXmlIdSeed(int seed)` | `ResetXmlIdSeed` | 重置 `xml:id` 种子。 | `seed: int`，整数种子。 | `void`。 | `service.resetXmlIdSeed(1);` | 否。 |
+| `Future<int> getScale()` | `GetScale` | 读取当前缩放比例。 | 无。 | 整数缩放值。 | `final scale = await service.getScale();` | 是。native 返回 `-1` 时抛 `VerovioException`。 |
+| `Future<bool> setScale(int scale)` | `SetScale` | 设置缩放比例。 | `scale: int`，缩放值。 | `true` 表示成功。 | `await service.setScale(40);` | 否。失败只会返回 `false`。 |
+| `Future<bool> select(String selectionJson)` | `Select` | 选中一组元素或位置。 | `selectionJson: String`，Verovio selection JSON。 | `true` 表示成功。 | `await service.select('{"ids":["n1"]}');` | 否。失败只会返回 `false`。 |
+| `Future<bool> edit(String editorAction)` | `Edit` | 执行编辑动作。 | `editorAction: String`，编辑动作字符串。 | `true` 表示成功。 | `await service.edit('delete');` | 否。失败只会返回 `false`。 |
+| `Future<String> editInfo()` | `EditInfo` | 读取编辑信息。 | 无。 | 字符串。 | `final info = await service.editInfo();` | 是。native 返回空指针时抛 `VerovioException`。 |
+| `Future<void> redoLayout({String jsonOptions = ''})` | `RedoLayout` | 重新布局，并可附带 JSON 选项。 | `jsonOptions: String`，可为空。 | `Future<void>`。 | `await service.redoLayout(jsonOptions: '{}');` | 否。 |
+| `Future<void> redoPagePitchPosLayout()` | `RedoPagePitchPosLayout` | 只重算当前页音高垂直位置。 | 无。 | `Future<void>`。 | `await service.redoPagePitchPosLayout();` | 否。 |
+| `Future<void> resetXmlIdSeed(int seed)` | `ResetXmlIdSeed` | 重置 `xml:id` 种子。 | `seed: int`，整数种子。 | `Future<void>`。 | `await service.resetXmlIdSeed(1);` | 否。 |
 
 #### 日志
 
 | 方法签名 (Dart) | 对应 Verovio Toolkit 方法名 | 作用 | 参数说明 | 返回值说明 | 简短使用示例 | VerovioException |
 | --- | --- | --- | --- | --- | --- | --- |
-| `String getLog()` | `GetLog` | 读取最近一次错误或日志。 | 无。 | 日志字符串。 | `final log = service.getLog();` | 是。native 返回空指针时抛 `VerovioException`。 |
+| `Future<String> getLog()` | `GetLog` | 读取最近一次错误或日志。 | 无。 | 日志字符串。 | `final log = await service.getLog();` | 是。native 返回空指针时抛 `VerovioException`。 |
 
 #### 说明
 
-- `VerovioService` 的公共方法大多是**同步**封装；只有 `spawn()` 和 `dispose()` 返回 `Future`。
-- 对于返回 `String` 的方法，如果 native 失败，通常会抛 `VerovioException(method: ..., log: ...)`，其中 `log` 来自 `getLog()`。
+- `VerovioAsyncService` 的每个方法都会返回 `Future`,实际的 FFI 调用在 worker isolate 中串行执行。
+- 对于返回 `String` 的方法，如果 native 失败，通常会抛 `VerovioException(method: ..., log: ...)`，其中 `log` 来自 worker 中的 `getLog()`。
 - 对于返回 `bool` 的方法，`false` 一般表示 native 拒绝或参数不合法；这些方法**不会**自动抛 `VerovioException`。
 - `loadData()` / `loadZipDataBase64()` / `renderToSvg()` 等方法的失败信息，通常可以直接看异常里的 `log`。
+- `dispose()` 会先通知 worker 销毁 native 实例，再终止 isolate;重复调用安全。
 
 ---
 
@@ -163,7 +163,7 @@ Future<void> main() async {
 
 **作用**：把 `assets/verovio_data/` 解压/复制到应用支持目录，供 `SetResourcePath` 使用。
 
-**使用方式**：通常由 `VerovioService.spawn()` / `VerovioAsyncService.spawn()` 内部自动调用，下游一般无需手动操作。
+**使用方式**：通常由 `VerovioAsyncService.spawn()` 内部自动调用，下游一般无需手动操作。
 
 | 方法签名 (Dart) | 作用 | 参数说明 | 返回值说明 | 简短使用示例 | 备注 |
 | --- | --- | --- | --- | --- | --- |
@@ -173,7 +173,7 @@ Future<void> main() async {
 
 - 首次运行：从 asset bundle 把 `assets/verovio_data/` 复制到 `getApplicationSupportDirectory()/verovio_data/`。
 - 版本变化：读取 `native/VEROVIO_VERSION`，如果和目标目录里的 `VERSION` 不一致，就会删除旧目录并重新复制。
-- 一般只需要把 `ensureVerovioAssetsReady()` 的返回值传给 `VerovioService.spawn(resourcePath: ...)`。
+- 一般只需要把 `ensureVerovioAssetsReady()` 的返回值传给 `VerovioAsyncService.spawn(resourcePath: ...)`。
 
 ---
 
@@ -195,7 +195,7 @@ Future<void> main() async {
 - 缓存是内存中的 `LinkedHashMap`。
 - 读取命中项时，会把该项移动到队尾，实现 LRU 行为。
 - 超过 `capacity` 时，会删除最旧项。
-- 该类本身不持有 `VerovioService`，你可以把任意渲染回调传给它。
+- 该类本身不持有 `VerovioAsyncService`，你可以把任意渲染回调传给它。
 
 ---
 

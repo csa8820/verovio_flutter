@@ -20,7 +20,7 @@ Language: [English](README.md) | [中文](README_CN.md)
 - **Works offline** — everything runs natively on the device via FFI. No HTTP, no JS bridge.
 - **Multiple input formats** — MEI, MusicXML, Humdrum, ABC, Plaine & Easie.
 - **SVG output** — vector graphics that scale on any screen, embed in your own widgets, export to PDF, or post-process freely.
-- **Isolate-friendly** — `VerovioService.spawn` runs on a worker isolate so rendering never blocks your UI.
+- **Isolate-friendly** — `VerovioAsyncService` runs the toolkit on a worker isolate so rendering never blocks your UI.
 - **Drop-in size** — ~7 MB per ABI after `--split-per-abi` on Android.
 
 ## Install
@@ -43,16 +43,16 @@ Future<void> main() async {
   // 1. Unpack the Verovio font/data assets once.
   final resourcePath = await VerovioResourceManager.ensureVerovioAssetsReady();
 
-  // 2. Spawn an engraving isolate.
-  final service = await VerovioService.spawn(resourcePath: resourcePath);
+  // 2. Spawn a worker isolate that owns the toolkit.
+  final service = await VerovioAsyncService.spawn(resourcePath: resourcePath);
 
   // 3. Feed it MEI / MusicXML / ABC / Humdrum.
-  service.loadData('''<mei xmlns="http://www.music-encoding.org/ns/mei">
+  await service.loadData('''<mei xmlns="http://www.music-encoding.org/ns/mei">
     <music><body><mdiv><score><section/></score></mdiv></body></music>
   </mei>''');
 
   // 4. Get an SVG string for any page and draw it.
-  final svg = service.renderToSvg(1);
+  final svg = await service.renderToSvg(1);
 
   runApp(MaterialApp(
     home: Scaffold(
@@ -63,7 +63,23 @@ Future<void> main() async {
 }
 ```
 
+`VerovioAsyncService` runs every FFI call on a dedicated worker isolate, so your UI thread stays responsive. This is the only recommended entry point.
+
 A complete runnable example lives in [`example/`](example).
+
+### Optional page cache
+
+If you render the same page repeatedly, `VerovioPageCache` can keep SVG strings in memory:
+
+```dart
+final cache = VerovioPageCache(capacity: 32);
+final svg = await cache.getOrRender(
+  data: mei,
+  optionsJson: '{}',
+  pageNo: 1,
+  render: () => service.renderToSvg(1),
+);
+```
 
 ## Platform support
 
@@ -85,7 +101,14 @@ Per-ABI install footprint on Android with `--split-per-abi`: **~6.8 MB** (`arm64
 
 ## API reference
 
-See [`doc/api.md`](doc/api.md) for the full `VerovioService` surface (options, page navigation, MIDI export, time-map, etc.).
+See [`doc/api.md`](doc/api.md) for the full `VerovioAsyncService` surface (options, page navigation, MIDI export, time-map, etc.), along with `VerovioResourceManager` and `VerovioPageCache`.
+
+## Troubleshooting
+
+- **`spawn()` throws `ArgumentError`**: make sure `resourcePath` is an absolute path returned by `VerovioResourceManager.ensureVerovioAssetsReady()`.
+- **`VerovioException` after `loadData()`**: inspect `exception.log`; Verovio usually explains the parse or layout error there.
+- **Empty output / `pageCount == 0`**: confirm the input is a supported score format and that the data is not empty.
+- **Package score is lower than expected on pub.dev**: republish after documentation changes, then wait for pub.dev to reanalyze the package.
 
 ## Version mapping
 

@@ -1,3 +1,5 @@
+// ignore_for_file: public_member_api_docs
+
 import 'dart:async';
 import 'dart:ffi';
 import 'dart:isolate';
@@ -49,12 +51,13 @@ class _VerovioWorker {
   Future<void> _queue = Future<void>.value();
 
   late final Map<String, Object? Function(Map<String, Object?> payload)>
-      _genericHandlers = <String, Object? Function(Map<String, Object?>)> {
+      _genericHandlers = <String, Object? Function(Map<String, Object?>)>{
     'getAvailableOptions': (_) => _requireService().getAvailableOptions(),
     'getDefaultOptions': (_) => _requireService().getDefaultOptions(),
     'getOptions': (_) => _requireService().getOptions(),
     'getOptionUsageString': (_) => _requireService().getOptionUsageString(),
-    'getDescriptiveFeatures': (payload) => _requireService().getDescriptiveFeatures(
+    'getDescriptiveFeatures': (payload) =>
+        _requireService().getDescriptiveFeatures(
           _stringArg(payload, 'jsonOptions'),
         ),
     'getElementAttr': (payload) => _requireService().getElementAttr(
@@ -65,13 +68,14 @@ class _VerovioWorker {
         ),
     'getExpansionIdsForElement': (payload) =>
         _requireService().getExpansionIdsForElement(
-      _stringArg(payload, 'xmlId'),
-    ),
+          _stringArg(payload, 'xmlId'),
+        ),
     'getMidiValuesForElement': (payload) =>
         _requireService().getMidiValuesForElement(
-      _stringArg(payload, 'xmlId'),
-    ),
-    'getNotatedIdForElement': (payload) => _requireService().getNotatedIdForElement(
+          _stringArg(payload, 'xmlId'),
+        ),
+    'getNotatedIdForElement': (payload) =>
+        _requireService().getNotatedIdForElement(
           _stringArg(payload, 'xmlId'),
         ),
     'getTimesForElement': (payload) => _requireService().getTimesForElement(
@@ -83,7 +87,8 @@ class _VerovioWorker {
     'getMei': (payload) => _requireService().getMei(
           _stringArg(payload, 'jsonOptions'),
         ),
-    'convertHumdrumToHumdrum': (payload) => _requireService().convertHumdrumToHumdrum(
+    'convertHumdrumToHumdrum': (payload) =>
+        _requireService().convertHumdrumToHumdrum(
           _stringArg(payload, 'data'),
         ),
     'convertHumdrumToMidi': (payload) => _requireService().convertHumdrumToMidi(
@@ -213,7 +218,8 @@ class _VerovioWorker {
       'getLog' => _getLog(),
       'getVersion' => _getVersion(),
       'dispose' => null,
-      _ => throw ArgumentError.value(request.action, 'action', 'Unknown action'),
+      _ =>
+        throw ArgumentError.value(request.action, 'action', 'Unknown action'),
     };
   }
 

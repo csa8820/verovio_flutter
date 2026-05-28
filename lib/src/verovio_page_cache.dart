@@ -1,6 +1,8 @@
 import 'dart:collection';
 
+/// Simple in-memory cache for rendered Verovio pages.
 class VerovioPageCache {
+  /// Creates a cache with the given maximum [capacity].
   VerovioPageCache({int capacity = 32}) : assert(capacity > 0) {
     if (capacity <= 0) {
       throw ArgumentError.value(capacity, 'capacity', 'must be greater than 0');
@@ -9,8 +11,10 @@ class VerovioPageCache {
   }
 
   late final int _capacity;
-  final LinkedHashMap<String, String> _entries = LinkedHashMap<String, String>();
+  final LinkedHashMap<String, String> _entries =
+      LinkedHashMap<String, String>();
 
+  /// Returns a cached page render or stores a fresh render result.
   Future<String> getOrRender({
     required String data,
     required String optionsJson,
@@ -32,10 +36,12 @@ class VerovioPageCache {
     return svg;
   }
 
+  /// Clears all cached render results.
   void invalidateAll() {
     _entries.clear();
   }
 
+  /// Returns the number of cached entries.
   int get length => _entries.length;
 
   int _fnv1a64(String s) {

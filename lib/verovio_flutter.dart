@@ -1,3 +1,4 @@
+/// Convenience export for the Verovio Flutter toolkit APIs.
 library verovio_flutter;
 
 export 'src/verovio_service.dart' show VerovioService, VerovioException;

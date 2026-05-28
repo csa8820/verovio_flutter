@@ -20,7 +20,7 @@ Language: [English](README.md) | [中文](README_CN.md)
 - **完全离线**：通过 FFI 直接调用原生 C++ 库，没有 HTTP、没有 JS 桥接。
 - **多种输入格式**：MEI、MusicXML、Humdrum、ABC、Plaine & Easie。
 - **输出 SVG**：矢量图任意缩放，可嵌入自己的 Widget、导出 PDF，也可以自行后处理（高亮、动画等）。
-- **不会卡 UI**：`VerovioService.spawn` 在独立 Isolate 中跑排版，主线程零阻塞。
+- **不会卡 UI**：`VerovioAsyncService` 在独立 Isolate 中跑排版,主线程零阻塞。
 - **体积可控**：Android 启用 `--split-per-abi` 后单架构增量仅约 7 MB。
 
 ## 安装
@@ -43,16 +43,16 @@ Future<void> main() async {
   // 1. 解包 Verovio 字体与资源（首次启动一次即可）。
   final resourcePath = await VerovioResourceManager.ensureVerovioAssetsReady();
 
-  // 2. 启动排版 Isolate。
-  final service = await VerovioService.spawn(resourcePath: resourcePath);
+  // 2. 启动持有 Toolkit 的 worker Isolate。
+  final service = await VerovioAsyncService.spawn(resourcePath: resourcePath);
 
   // 3. 喂入 MEI / MusicXML / ABC / Humdrum 数据。
-  service.loadData('''<mei xmlns="http://www.music-encoding.org/ns/mei">
+  await service.loadData('''<mei xmlns="http://www.music-encoding.org/ns/mei">
     <music><body><mdiv><score><section/></score></mdiv></body></music>
   </mei>''');
 
   // 4. 取出任意一页 SVG 并显示。
-  final svg = service.renderToSvg(1);
+  final svg = await service.renderToSvg(1);
 
   runApp(MaterialApp(
     home: Scaffold(
@@ -63,7 +63,23 @@ Future<void> main() async {
 }
 ```
 
+`VerovioAsyncService` 把每个 FFI 调用都派发到独立的 worker isolate,主线程不会被阻塞。请统一使用这一异步入口。
+
 完整可运行示例见 [`example/`](example) 目录。
+
+### 可选页面缓存
+
+如果同一页会反复渲染，可以用 `VerovioPageCache` 缓存 SVG 字符串：
+
+```dart
+final cache = VerovioPageCache(capacity: 32);
+final svg = await cache.getOrRender(
+  data: mei,
+  optionsJson: '{}',
+  pageNo: 1,
+  render: () => service.renderToSvg(1),
+);
+```
 
 ## 平台支持
 
@@ -85,7 +101,14 @@ Android 使用 `--split-per-abi` 后的单架构安装增量：**约 6.8 MB**（
 
 ## API 文档
 
-完整的 `VerovioService` 接口（渲染选项、翻页、MIDI 导出、time-map 等）请见 [`doc/api.md`](doc/api.md)。
+完整的 `VerovioAsyncService` 接口（渲染选项、翻页、MIDI 导出、time-map 等）请见 [`doc/api.md`](doc/api.md),该文档同时概述 `VerovioResourceManager` 和 `VerovioPageCache`。
+
+## 常见问题
+
+- **`spawn()` 抛 `ArgumentError`**：请确认 `resourcePath` 是 `VerovioResourceManager.ensureVerovioAssetsReady()` 返回的绝对路径。
+- **`loadData()` 后抛 `VerovioException`**：优先查看 `exception.log`，Verovio 通常会给出解析或排版错误原因。
+- **输出为空 / `pageCount == 0`**：确认输入确实是支持的谱面格式，而且数据不是空字符串。
+- **pub.dev 分数没立即变化**：重新发布后需要等待 pub.dev 重新分析包。
 
 ## 版本对应
 

@@ -1,16 +1,26 @@
 # verovio_flutter_example
 
-Demonstrates how to use the verovio_flutter plugin.
+This folder contains the Flutter example app for `verovio_flutter`.
 
-## Getting Started
+## What it shows
 
-This project is a starting point for a Flutter application.
+- How to add `verovio_flutter` to a Flutter app
+- How to prepare Verovio assets with `VerovioResourceManager`
+- How to spawn a `VerovioService` or `VerovioAsyncService`
+- How to render score data to SVG and show it in the UI
 
-A few resources to get you started if this is your first Flutter project:
+## Running the example
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+From the repository root:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```bash
+cd example
+flutter run
+```
+
+The example package includes a small `assets/testdata/` bundle with sample MEI and MusicXML files you can load during local experimentation.
+
+## Notes
+
+- The example app is intentionally lightweight and may be adapted to your own playback / rendering workflow.
+- If you only need the API reference, see [`../doc/api.md`](../doc/api.md).

@@ -6,10 +6,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 
+/// Manages copying Verovio assets into the app support directory.
 class VerovioResourceManager {
   VerovioResourceManager._();
 
-  static const String _assetsPrefix = 'packages/verovio_flutter/assets/verovio_data/';
+  static const String _assetsPrefix =
+      'packages/verovio_flutter/assets/verovio_data/';
   static const String _versionAssetPath = 'native/VEROVIO_VERSION';
   static const String _versionFileName = 'VERSION';
   static const List<String> _requiredAssetPaths = <String>[
@@ -26,6 +28,7 @@ class VerovioResourceManager {
 
   static Future<String>? _inFlight;
 
+  /// Ensures the bundled Verovio assets are available on disk.
   static Future<String> ensureVerovioAssetsReady() {
     final inFlight = _inFlight;
     if (inFlight != null) {
@@ -125,7 +128,8 @@ class VerovioResourceManager {
     }
   }
 
-  static Future<bool> _isVersionCurrent(File targetVersionFile, String version) async {
+  static Future<bool> _isVersionCurrent(
+      File targetVersionFile, String version) async {
     if (!await targetVersionFile.exists()) {
       return false;
     }

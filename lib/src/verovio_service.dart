@@ -8,16 +8,23 @@ import 'package:verovio_flutter/src/verovio_bindings.dart';
 import 'package:verovio_flutter/src/verovio_loader.dart';
 import 'package:verovio_flutter/src/verovio_resource_manager.dart';
 
+/// Exception thrown when a Verovio call fails.
 class VerovioException implements Exception {
+  /// Creates an exception for the failed Verovio [method].
   VerovioException({required this.method, this.log = ''});
 
+  /// The Verovio API method that failed.
   final String method;
+
+  /// The native Verovio log captured for the failure.
   final String log;
 
+  /// Returns a readable description of the failure.
   @override
   String toString() => 'VerovioException(method: $method, log: $log)';
 }
 
+/// Synchronous wrapper around the native Verovio toolkit.
 class VerovioService {
   VerovioService._(this._bindings, this._handle);
 
@@ -25,6 +32,7 @@ class VerovioService {
   VrvToolkitHandle? _handle;
   bool _disposed = false;
 
+  /// Creates a Verovio toolkit instance backed by the native library.
   static Future<VerovioService> spawn({required String resourcePath}) async {
     if (resourcePath.isEmpty) {
       throw ArgumentError.value(
@@ -121,6 +129,8 @@ class VerovioService {
     return value;
   }
 
+  /// Updates the resource path used by the toolkit.
+  /// Updates the resource path used by the toolkit.
   bool setResourcePath(String resourcePath) {
     return _ensureBool(
       _withUtf8(resourcePath, (nativeValue) {
@@ -133,6 +143,8 @@ class VerovioService {
     );
   }
 
+  /// Applies a JSON string of Verovio options.
+  /// Applies a JSON string of Verovio options.
   void setOptionsJson(String json) {
     _ensureBool(
       _withUtf8(json, (nativeValue) {
@@ -145,6 +157,8 @@ class VerovioService {
     );
   }
 
+  /// Loads input data into the toolkit.
+  /// Loads input data into the toolkit.
   void loadData(String data) {
     _ensureBool(
       _withUtf8(data, (nativeValue) {
@@ -157,6 +171,8 @@ class VerovioService {
     );
   }
 
+  /// Loads zipped input data from a Base64 string.
+  /// Loads zipped input data from a Base64 string.
   void loadZipDataBase64(String base64Data) {
     _ensureBool(
       _withUtf8(base64Data, (nativeValue) {
@@ -169,6 +185,8 @@ class VerovioService {
     );
   }
 
+  /// Loads zipped input data from raw bytes.
+  /// Loads zipped input data from raw bytes.
   bool loadZipDataBuffer(Uint8List bytes) {
     return _ensureBool(
       _withBytes(bytes, (nativeBytes) {
@@ -182,9 +200,11 @@ class VerovioService {
     );
   }
 
+  /// Returns the number of pages currently available.
   int get pageCount => _ensureInt(
       _bindings.vrv_ffi_get_page_count(_requireHandle()), 'getPageCount');
 
+  /// Renders the requested page as SVG markup.
   String renderToSvg(int pageNo, {bool xmlDeclaration = false}) {
     return _takeString(
       _bindings.vrv_ffi_render_to_svg(
@@ -196,10 +216,12 @@ class VerovioService {
     );
   }
 
+  /// Returns the current Verovio log output.
   String getLog() {
     return _takeString(_bindings.vrv_ffi_get_log(_requireHandle()), 'getLog');
   }
 
+  /// Returns the native Verovio version string.
   String getVersion() {
     return _takeString(
       _bindings.vrv_ffi_get_version(_requireHandle()),
@@ -207,6 +229,7 @@ class VerovioService {
     );
   }
 
+  /// Returns the list of available options as JSON.
   String getAvailableOptions() {
     return _takeString(
       _bindings.vrv_ffi_get_available_options(_requireHandle()),
@@ -214,6 +237,7 @@ class VerovioService {
     );
   }
 
+  /// Returns the default options as JSON.
   String getDefaultOptions() {
     return _takeString(
       _bindings.vrv_ffi_get_default_options(_requireHandle()),
@@ -221,6 +245,7 @@ class VerovioService {
     );
   }
 
+  /// Returns the current option state as JSON.
   String getOptions() {
     return _takeString(
       _bindings.vrv_ffi_get_options(_requireHandle()),
@@ -228,6 +253,7 @@ class VerovioService {
     );
   }
 
+  /// Returns a human-readable description of the available options.
   String getOptionUsageString() {
     return _takeString(
       _bindings.vrv_ffi_get_option_usage_string(_requireHandle()),
@@ -235,6 +261,7 @@ class VerovioService {
     );
   }
 
+  /// Returns a description of the features enabled by [jsonOptions].
   String getDescriptiveFeatures(String jsonOptions) {
     return _takeString(
       _withUtf8(jsonOptions, (nativeValue) {
@@ -247,6 +274,7 @@ class VerovioService {
     );
   }
 
+  /// Returns the attributes for the element identified by [xmlId].
   String getElementAttr(String xmlId) {
     return _takeString(
       _withUtf8(xmlId, (nativeValue) {
@@ -259,6 +287,7 @@ class VerovioService {
     );
   }
 
+  /// Returns the elements active at the given time in milliseconds.
   String getElementsAtTime(int millisec) {
     return _takeString(
       _bindings.vrv_ffi_get_elements_at_time(_requireHandle(), millisec),
@@ -266,6 +295,7 @@ class VerovioService {
     );
   }
 
+  /// Returns the expansion IDs for the element identified by [xmlId].
   String getExpansionIdsForElement(String xmlId) {
     return _takeString(
       _withUtf8(xmlId, (nativeValue) {
@@ -278,6 +308,7 @@ class VerovioService {
     );
   }
 
+  /// Returns MIDI values for the element identified by [xmlId].
   String getMidiValuesForElement(String xmlId) {
     return _takeString(
       _withUtf8(xmlId, (nativeValue) {
@@ -290,6 +321,7 @@ class VerovioService {
     );
   }
 
+  /// Returns the notated ID for the element identified by [xmlId].
   String getNotatedIdForElement(String xmlId) {
     return _takeString(
       _withUtf8(xmlId, (nativeValue) {
@@ -302,6 +334,7 @@ class VerovioService {
     );
   }
 
+  /// Returns the times associated with the element identified by [xmlId].
   String getTimesForElement(String xmlId) {
     return _takeString(
       _withUtf8(xmlId, (nativeValue) {
@@ -314,10 +347,12 @@ class VerovioService {
     );
   }
 
+  /// Returns the toolkit instance ID.
   String getId() {
     return _takeString(_bindings.vrv_ffi_get_id(_requireHandle()), 'getId');
   }
 
+  /// Returns the currently configured resource path.
   String getResourcePath() {
     return _takeString(
       _bindings.vrv_ffi_get_resource_path(_requireHandle()),
@@ -325,6 +360,7 @@ class VerovioService {
     );
   }
 
+  /// Returns the current score as Humdrum text.
   String getHumdrum() {
     return _takeString(
       _bindings.vrv_ffi_get_humdrum(_requireHandle()),
@@ -332,6 +368,7 @@ class VerovioService {
     );
   }
 
+  /// Returns the current score as MEI using [jsonOptions].
   String getMei(String jsonOptions) {
     return _takeString(
       _withUtf8(jsonOptions, (nativeValue) {
@@ -341,6 +378,7 @@ class VerovioService {
     );
   }
 
+  /// Converts Humdrum input to normalized Humdrum output.
   String convertHumdrumToHumdrum(String data) {
     return _takeString(
       _withUtf8(data, (nativeValue) {
@@ -353,6 +391,7 @@ class VerovioService {
     );
   }
 
+  /// Converts Humdrum input to Base64-encoded MIDI data.
   String convertHumdrumToMidi(String data) {
     return _takeString(
       _withUtf8(data, (nativeValue) {
@@ -365,10 +404,12 @@ class VerovioService {
     );
   }
 
+  /// Converts Humdrum input directly to MIDI bytes.
   Uint8List convertHumdrumToMidiBytes(String data) {
     return base64Decode(convertHumdrumToMidi(data));
   }
 
+  /// Converts MEI input to Humdrum text.
   String convertMeiToHumdrum(String data) {
     return _takeString(
       _withUtf8(data, (nativeValue) {
@@ -381,11 +422,13 @@ class VerovioService {
     );
   }
 
+  /// Returns the current editor information string.
   String editInfo() {
     return _takeString(
         _bindings.vrv_ffi_edit_info(_requireHandle()), 'editInfo');
   }
 
+  /// Validates PAE input and returns the result string.
   String validatePae(String data) {
     return _takeString(
       _withUtf8(data, (nativeValue) {
@@ -395,6 +438,7 @@ class VerovioService {
     );
   }
 
+  /// Renders arbitrary input data using the provided JSON options.
   String renderData(String data, String jsonOptions) {
     return _takeString(
       _withUtf8(data, (nativeData) {
@@ -410,6 +454,8 @@ class VerovioService {
     );
   }
 
+  /// Renders the current score to Base64-encoded MIDI data.
+  /// Renders the current score to Base64-encoded MIDI data.
   String renderToMidi() {
     return _takeString(
       _bindings.vrv_ffi_render_to_midi(_requireHandle()),
@@ -417,8 +463,11 @@ class VerovioService {
     );
   }
 
+  /// Renders the current score to MIDI bytes.
+  /// Renders the current score to MIDI bytes.
   Uint8List renderToMidiBytes() => base64Decode(renderToMidi());
 
+  /// Renders the current score to PAE text.
   String renderToPae() {
     return _takeString(
       _bindings.vrv_ffi_render_to_pae(_requireHandle()),
@@ -426,6 +475,7 @@ class VerovioService {
     );
   }
 
+  /// Renders the current score to a time map.
   String renderToTimemap({String jsonOptions = ''}) {
     return _takeString(
       _withUtf8(jsonOptions, (nativeValue) {
@@ -436,6 +486,7 @@ class VerovioService {
     );
   }
 
+  /// Renders the current score to an expansion map.
   String renderToExpansionMap() {
     return _takeString(
       _bindings.vrv_ffi_render_to_expansion_map(_requireHandle()),
@@ -443,6 +494,8 @@ class VerovioService {
     );
   }
 
+  /// Returns the current engraving scale.
+  /// Returns the current engraving scale.
   int getScale() {
     return _ensureInt(
       _bindings.vrv_ffi_get_scale(_requireHandle()),
@@ -450,6 +503,8 @@ class VerovioService {
     );
   }
 
+  /// Sets the engraving scale.
+  /// Sets the engraving scale.
   bool setScale(int scale) {
     return _ensureBool(
       _bindings.vrv_ffi_set_scale(_requireHandle(), scale),
@@ -457,6 +512,7 @@ class VerovioService {
     );
   }
 
+  /// Returns the page that contains the element identified by [xmlId].
   int getPageWithElement(String xmlId) {
     return _ensureInt(
       _withUtf8(xmlId, (nativeValue) {
@@ -469,6 +525,7 @@ class VerovioService {
     );
   }
 
+  /// Returns the time position for the element identified by [xmlId].
   int getTimeForElement(String xmlId) {
     return _ensureInt(
       _withUtf8(xmlId, (nativeValue) {
@@ -481,6 +538,7 @@ class VerovioService {
     );
   }
 
+  /// Applies a selection described by [selectionJson].
   bool select(String selectionJson) {
     return _ensureBool(
       _withUtf8(selectionJson, (nativeValue) {
@@ -490,6 +548,7 @@ class VerovioService {
     );
   }
 
+  /// Sets the current input format.
   bool setInputFrom(String inputFrom) {
     return _ensureBool(
       _withUtf8(inputFrom, (nativeValue) {
@@ -499,6 +558,7 @@ class VerovioService {
     );
   }
 
+  /// Sets the current output format.
   bool setOutputTo(String outputTo) {
     return _ensureBool(
       _withUtf8(outputTo, (nativeValue) {
@@ -508,6 +568,7 @@ class VerovioService {
     );
   }
 
+  /// Applies an editor action string.
   bool edit(String editorAction) {
     return _withUtf8(
       editorAction,
@@ -517,6 +578,7 @@ class VerovioService {
     );
   }
 
+  /// Recomputes the layout using optional JSON options.
   void redoLayout({String jsonOptions = ''}) {
     _withUtf8(jsonOptions, (nativeValue) {
       _bindings.vrv_ffi_redo_layout(_requireHandle(), nativeValue);
@@ -524,18 +586,22 @@ class VerovioService {
     });
   }
 
+  /// Recomputes the page pitch-position layout.
   void redoPagePitchPosLayout() {
     _bindings.vrv_ffi_redo_page_pitch_pos_layout(_requireHandle());
   }
 
+  /// Resets all options to their defaults.
   void resetOptions() {
     _bindings.vrv_ffi_reset_options(_requireHandle());
   }
 
+  /// Resets the XML ID seed to [seed].
   void resetXmlIdSeed(int seed) {
     _bindings.vrv_ffi_reset_xml_id_seed(_requireHandle(), seed);
   }
 
+  /// Releases the native toolkit handle.
   Future<void> dispose() async {
     if (_disposed) {
       return;
