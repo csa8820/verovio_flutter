@@ -27,7 +27,7 @@ Language: [English](README.md) | [中文](README_CN.md)
 
 ```yaml
 dependencies:
-  verovio_flutter: ^0.1.3
+  verovio_flutter: ^0.1.4
 ```
 
 ## 快速上手
