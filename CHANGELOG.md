@@ -1,5 +1,9 @@
 ## Unreleased
 
+## 0.1.5
+
+- Bumped the package version to `0.1.5` and refreshed the install snippets in the docs.
+
 ## 0.1.4
 
 - Updated the install examples to `verovio_flutter: ^0.1.4`.
