@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
@@ -65,16 +64,9 @@ class VerovioResourceManager {
       }
       await targetDirectory.create(recursive: true);
 
-      final manifestJson = await rootBundle.loadString('AssetManifest.json');
-      final manifest = jsonDecode(manifestJson);
-      if (manifest is! Map<String, dynamic>) {
-        throw StateError(
-          'AssetManifest.json did not contain a map; found ${manifest.runtimeType}',
-        );
-      }
-
-      final assetPaths = manifest.keys
-          .whereType<String>()
+      final manifest = await AssetManifest.loadFromAssetBundle(rootBundle);
+      final assetPaths = manifest
+          .listAssets()
           .where((path) => path.startsWith(_assetsPrefix))
           .toList()
         ..sort();
