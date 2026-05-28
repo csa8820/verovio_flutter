@@ -34,7 +34,6 @@ dependencies:
 
 ```dart
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:verovio_flutter/verovio_flutter.dart';
 
 Future<void> main() async {
@@ -54,12 +53,9 @@ Future<void> main() async {
   // 4. 取出任意一页 SVG 并显示。
   final svg = await service.renderToSvg(1);
 
-  runApp(MaterialApp(
-    home: Scaffold(
-      appBar: AppBar(title: const Text('verovio_flutter')),
-      body: SvgPicture.string(svg),
-    ),
-  ));
+  // 用任意 SVG 渲染方案显示 `svg` 即可
+  // (例如 flutter_svg、jovial_svg、WebView,或自己实现的渲染器)。
+  print(svg);
 }
 ```
 

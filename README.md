@@ -34,7 +34,6 @@ dependencies:
 
 ```dart
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:verovio_flutter/verovio_flutter.dart';
 
 Future<void> main() async {
@@ -54,12 +53,9 @@ Future<void> main() async {
   // 4. Get an SVG string for any page and draw it.
   final svg = await service.renderToSvg(1);
 
-  runApp(MaterialApp(
-    home: Scaffold(
-      appBar: AppBar(title: const Text('verovio_flutter')),
-      body: SvgPicture.string(svg),
-    ),
-  ));
+  // Render `svg` with any SVG widget of your choice
+  // (e.g. flutter_svg, jovial_svg, a WebView, or your own renderer).
+  print(svg);
 }
 ```
 
