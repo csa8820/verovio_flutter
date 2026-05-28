@@ -1,6 +1,6 @@
 name: verovio_flutter
 description: "Flutter FFI plugin for Verovio music notation rendering."
-version: 0.1.3
+version: 0.1.4
 repository: https://github.com/csa8820/verovio_flutter
 homepage: https://pub.dev/publishers/csa8820.top
 
