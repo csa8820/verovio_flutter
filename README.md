@@ -89,11 +89,13 @@ final svg = await cache.getOrRender(
 | Component | Size |
 |-----------|------|
 | `android/src/main/jniLibs` | 14 MB |
-| `ios/Frameworks/VerovioFFI.xcframework` | 8.6 MB |
-| `assets/verovio_data` (fonts + schemas) | 11 MB |
-| **Bundled total** | **33.6 MB** |
+| `ios/Frameworks/VerovioFFI.xcframework` | 14.8 MB |
+| `assets/verovio_data` (fonts + schemas) | 11.4 MB |
+| **Bundled total** | **40.2 MB** |
 
 Per-ABI install footprint on Android with `--split-per-abi`: **~6.8 MB** (`arm64-v8a`) / **~7.2 MB** (`x86_64`) before APK compression.
+
+> Note: the iOS binary size increased after changing the packaging flow to ship a fuller `.xcframework` build.
 
 ## API reference
 
@@ -114,6 +116,7 @@ See [`doc/api.md`](doc/api.md) for the full `VerovioAsyncService` surface (optio
 | 0.1.1           | `version-6.2.1` (`8d42439dc9231f6c87779287b542febcb3d609b3`) |
 | 0.1.2           | `version-6.2.1` (`8d42439dc9231f6c87779287b542febcb3d609b3`) |
 | 0.1.3           | `version-6.2.1` (`8d42439dc9231f6c87779287b542febcb3d609b3`) |
+| 0.1.4           | `version-6.2.1` (`8d42439dc9231f6c87779287b542febcb3d609b3`) |
 
 ## License
 

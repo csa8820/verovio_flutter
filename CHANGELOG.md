@@ -1,5 +1,7 @@
 ## Unreleased
 
+- Updated the size documentation to reflect the new iOS `.xcframework` packaging flow.
+
 ## 0.1.3
 
 - Synchronized the package metadata and README version references for the next pub.dev release.

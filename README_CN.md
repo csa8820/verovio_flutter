@@ -89,11 +89,13 @@ final svg = await cache.getOrRender(
 | 组成 | 大小 |
 |------|------|
 | `android/src/main/jniLibs` | 14 MB |
-| `ios/Frameworks/VerovioFFI.xcframework` | 8.6 MB |
-| `assets/verovio_data`（字体 + Schema）| 11 MB |
-| **打包总计** | **33.6 MB** |
+| `ios/Frameworks/VerovioFFI.xcframework` | 14.8 MB |
+| `assets/verovio_data`（字体 + Schema）| 11.4 MB |
+| **打包总计** | **40.2 MB** |
 
 Android 使用 `--split-per-abi` 后的单架构安装增量：**约 6.8 MB**（`arm64-v8a`）/ **7.2 MB**（`x86_64`），未计 APK 压缩差异。
+
+> 说明：iOS 这次改成了更完整的 `.xcframework` 打包流程，所以体积会上升。
 
 ## API 文档
 
@@ -114,6 +116,7 @@ Android 使用 `--split-per-abi` 后的单架构安装增量：**约 6.8 MB**（
 | 0.1.1 | `version-6.2.1` (`8d42439dc9231f6c87779287b542febcb3d609b3`) |
 | 0.1.2 | `version-6.2.1` (`8d42439dc9231f6c87779287b542febcb3d609b3`) |
 | 0.1.3 | `version-6.2.1` (`8d42439dc9231f6c87779287b542febcb3d609b3`) |
+| 0.1.4 | `version-6.2.1` (`8d42439dc9231f6c87779287b542febcb3d609b3`) |
 
 ## 许可证
 
