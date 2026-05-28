@@ -1,6 +1,9 @@
 ## Unreleased
 
-- Updated the size documentation to reflect the new iOS `.xcframework` packaging flow.
+## 0.1.4
+
+- Updated the install examples to `verovio_flutter: ^0.1.4`.
+- Updated the documentation to reflect the larger iOS `.xcframework` packaging flow.
 
 ## 0.1.3
 
