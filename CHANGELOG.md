@@ -1,5 +1,9 @@
 ## Unreleased
 
+## 0.1.3
+
+- Synchronized the package metadata and README version references for the next pub.dev release.
+
 ## 0.1.2
 
 - Unified the public API around `VerovioAsyncService` and updated the English/Chinese docs accordingly.
