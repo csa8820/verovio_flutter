@@ -1,4 +1,11 @@
-## Unreleased
+## 0.2.0
+
+- Added first-class HitMap APIs to `VerovioAsyncService`: `renderPageWithHitMap()` and `parseHitMap()`, so callers can fetch SVG and interaction metadata in one isolate round-trip.
+- Added `snapToNearest()` plus R-tree nearest-neighbor search, enabling "click anywhere, snap to the closest note/element" interactions.
+- Expanded `VerovioPageCache` to cache both SVG and parsed HitMap data, reducing repeat render/parse overhead.
+- Made asset extraction more robust by falling back to the local workspace `assets/verovio_data` directory when running without a Flutter plugin host.
+- Exported the HitMap data models and hit-test helpers from the top-level package API for easier consumption.
+- Updated documentation and release notes for the 0.2.0 release.
 
 ## 0.1.6
 

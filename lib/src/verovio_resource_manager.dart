@@ -100,6 +100,17 @@ class VerovioResourceManager {
 
       debugPrint('Verovio assets copied to ${targetDirectory.path}');
       return targetDirectory.path;
+    } on MissingPluginException catch (_) {
+      final localDirectory = Directory(
+        _joinPath(Directory.current.path, 'assets/verovio_data'),
+      );
+      if (await localDirectory.exists()) {
+        debugPrint(
+          'Verovio assets using local workspace directory ${localDirectory.path}',
+        );
+        return localDirectory.path;
+      }
+      rethrow;
     } catch (error, stackTrace) {
       throw StateError(
         'ensureVerovioAssetsReady failed: $error\n$stackTrace',

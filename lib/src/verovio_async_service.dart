@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'dart:isolate';
 import 'dart:typed_data';
 
+import 'package:verovio_flutter/src/hit_map/models.dart';
+import 'package:verovio_flutter/src/verovio_page_cache.dart';
 import 'package:verovio_flutter/src/verovio_isolate_worker.dart';
 import 'package:verovio_flutter/src/verovio_resource_manager.dart';
 import 'package:verovio_flutter/src/verovio_service.dart';
@@ -124,9 +126,10 @@ class _VerovioWorkerClient {
 
 /// Asynchronous wrapper around Verovio backed by a worker isolate.
 class VerovioAsyncService {
-  VerovioAsyncService._(this._client);
+  VerovioAsyncService._(this._client) : _pageCache = VerovioPageCache();
 
   final _VerovioWorkerClient _client;
+  final VerovioPageCache _pageCache;
 
   /// Spawns a worker isolate and creates an async Verovio instance.
   static Future<VerovioAsyncService> spawn({
@@ -192,6 +195,71 @@ class VerovioAsyncService {
       'pageNo': pageNo,
       'xmlDeclaration': xmlDeclaration,
     }) as String;
+  }
+
+  /// 渲染一页并解析出 HitMap，一次 worker round-trip 完成。
+  Future<({String svg, PageHitMap hitMap})> renderPageWithHitMap(
+    int pageIndex, {
+    ParseConfig config = const ParseConfig.defaultForInteractive(),
+  }) async {
+    final int configHash = config.configHash;
+    final PageCacheEntry? cached = _pageCache.getPageEntry(pageIndex, configHash);
+    if (cached != null && cached.hitMap != null) {
+      return (
+        svg: cached.svg,
+        hitMap: cached.hitMap!,
+      );
+    }
+    if (cached != null && cached.hitMap == null) {
+      final PageHitMap hitMap = await parseHitMap(
+        cached.svg,
+        pageIndex: pageIndex,
+        config: config,
+      );
+      return (svg: cached.svg, hitMap: hitMap);
+    }
+
+    final Object? response = await _client.sendRaw(
+      'renderPageWithHitMap',
+      <String, Object?>{
+        'pageIndex': pageIndex,
+        'config': config.toJson(),
+      },
+    );
+    final Map<String, Object?> responseMap = (response as Map).cast<String, Object?>();
+    final String svg = responseMap['svg'] as String;
+    final PageHitMap hitMap = _decodeHitMap(responseMap['hitMap']);
+    _pageCache.putPageEntry(
+      pageIndex: pageIndex,
+      configHash: configHash,
+      svg: svg,
+      hitMap: hitMap,
+    );
+    return (svg: svg, hitMap: hitMap);
+  }
+
+  /// 仅解析已有 SVG 字符串（业务自己缓存了 SVG 时用）。
+  Future<PageHitMap> parseHitMap(
+    String svg, {
+    int pageIndex = 0,
+    ParseConfig config = const ParseConfig.defaultForInteractive(),
+  }) async {
+    final Object? response = await _client.sendRaw(
+      'parseHitMap',
+      <String, Object?>{
+        'svg': svg,
+        'pageIndex': pageIndex,
+        'config': config.toJson(),
+      },
+    );
+    final PageHitMap hitMap = _decodeHitMap(response);
+    _pageCache.putPageEntry(
+      pageIndex: pageIndex,
+      configHash: config.configHash,
+      svg: svg,
+      hitMap: hitMap,
+    );
+    return hitMap;
   }
 
   /// Returns the current Verovio log output.
@@ -449,5 +517,15 @@ class VerovioAsyncService {
   /// Releases the worker isolate and native toolkit resources.
   Future<void> dispose() async {
     await _client.dispose();
+  }
+
+  PageHitMap _decodeHitMap(Object? response) {
+    if (response is PageHitMap) {
+      return response;
+    }
+    if (response is Map) {
+      return PageHitMap.fromJson(response.cast<String, Object?>());
+    }
+    throw StateError('Unexpected hit map response: $response');
   }
 }

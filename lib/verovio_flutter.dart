@@ -5,3 +5,7 @@ export 'src/verovio_service.dart' show VerovioService, VerovioException;
 export 'src/verovio_async_service.dart' show VerovioAsyncService;
 export 'src/verovio_resource_manager.dart' show VerovioResourceManager;
 export 'src/verovio_page_cache.dart' show VerovioPageCache;
+export 'src/hit_map/models.dart'
+    show PageHitMap, ElementHit, ParseConfig, PathBBoxMode;
+export 'src/hit_map/hit_test.dart'
+    show hitTestPoint, hitTestPointAll, hitTestRect, snapToNearest, kBruteForceThreshold;

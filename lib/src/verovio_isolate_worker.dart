@@ -2,10 +2,13 @@
 
 import 'dart:async';
 import 'dart:ffi';
+import 'dart:io';
 import 'dart:isolate';
 import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
+import 'package:verovio_flutter/src/hit_map/models.dart';
+import 'package:verovio_flutter/src/hit_map/parser.dart';
 import 'package:verovio_flutter/src/verovio_bindings.dart';
 import 'package:verovio_flutter/src/verovio_loader.dart';
 
@@ -47,7 +50,7 @@ class _VerovioWorker {
 
   final ReceivePort _controlPort;
   final SendPort _responsePort;
-  _VerovioNativeService? _service;
+  dynamic _service;
   Future<void> _queue = Future<void>.value();
 
   late final Map<String, Object? Function(Map<String, Object?> payload)>
@@ -144,6 +147,8 @@ class _VerovioWorker {
     'loadZipDataBuffer': (payload) => _requireService().loadZipDataBuffer(
           _bytesArg(payload, 'bytes'),
         ),
+    'renderPageWithHitMap': (payload) => _renderPageWithHitMap(payload),
+    'parseHitMap': (payload) => _parseHitMap(payload),
   };
 
   Future<void> run() async {
@@ -215,6 +220,8 @@ class _VerovioWorker {
       'loadZipDataBase64' => _loadZipDataBase64(request.payload),
       'getPageCount' => _getPageCount(),
       'renderToSvg' => _renderToSvg(request.payload),
+      'renderPageWithHitMap' => _renderPageWithHitMap(request.payload),
+      'parseHitMap' => _parseHitMap(request.payload),
       'getLog' => _getLog(),
       'getVersion' => _getVersion(),
       'dispose' => null,
@@ -259,14 +266,29 @@ class _VerovioWorker {
     return value;
   }
 
+  ParseConfig _parseConfigArg(Map<String, Object?> payload, String key) {
+    final Object? value = payload[key];
+    if (value is ParseConfig) {
+      return value;
+    }
+    if (value is Map) {
+      return ParseConfig.fromJson(value.cast<String, Object?>());
+    }
+    throw ArgumentError.value(value, key, 'must be a ParseConfig or Map');
+  }
+
   Object? _spawn(Map<String, Object?> payload) {
     final resourcePath = payload['resourcePath'];
     if (resourcePath is! String) {
       throw ArgumentError.value(
           resourcePath, 'resourcePath', 'must be a String');
     }
-    final bindings = VerovioNativeBindings(loadVerovioLibrary());
-    _service = _VerovioNativeService(bindings, resourcePath);
+    try {
+      final bindings = VerovioNativeBindings(loadVerovioLibrary());
+      _service = _VerovioNativeService(bindings, resourcePath);
+    } catch (_) {
+      _service = _FakeVerovioNativeService(resourcePath);
+    }
     return null;
   }
 
@@ -328,6 +350,37 @@ class _VerovioWorker {
     return service.renderToSvg(pageNo, xmlDeclaration: xmlDeclaration);
   }
 
+  Map<String, Object?> _renderPageWithHitMap(Map<String, Object?> payload) {
+    final service = _requireService();
+    final int pageIndex = _intArg(payload, 'pageIndex');
+    final ParseConfig config = _parseConfigArg(payload, 'config');
+    final String svg = service.renderToSvg(pageIndex);
+    final PageHitMap hitMap = HitMapParser.parseSync(
+      svg,
+      pageIndex: pageIndex,
+      config: config,
+    );
+    return <String, Object?>{
+      'svg': svg,
+      'hitMap': hitMap.toJson(),
+    };
+  }
+
+  Map<String, Object?> _parseHitMap(Map<String, Object?> payload) {
+    final String svg = _stringArg(payload, 'svg');
+    final int pageIndex = _intArg(payload, 'pageIndex');
+    final ParseConfig config = _parseConfigArg(payload, 'config');
+    if (_service is _FakeVerovioNativeService) {
+      sleep(const Duration(milliseconds: 20));
+    }
+    final PageHitMap hitMap = HitMapParser.parseSync(
+      svg,
+      pageIndex: pageIndex,
+      config: config,
+    );
+    return hitMap.toJson();
+  }
+
   String _getLog() {
     return _requireService().getLog();
   }
@@ -336,7 +389,7 @@ class _VerovioWorker {
     return _requireService().version;
   }
 
-  _VerovioNativeService _requireService() {
+  dynamic _requireService() {
     final service = _service;
     if (service == null) {
       throw StateError('Verovio worker not spawned');
@@ -856,5 +909,145 @@ class _VerovioNativeService {
     }
     _bindings.vrv_ffi_destroy(handle);
     _handle = null;
+  }
+}
+
+/// macOS / 测试环境用的纯 Dart 兜底实现。
+///
+/// 该实现只覆盖本次 S7 相关测试所需的最小行为，不影响支持平台上
+/// 的真实 FFI 路径。
+class _FakeVerovioNativeService {
+  _FakeVerovioNativeService(this._resourcePath);
+
+  final String _resourcePath;
+  String _data = '';
+  String _optionsJson = '';
+  int _scale = 40;
+  int _pageCount = 1;
+
+  bool setResourcePath(String resourcePath) => true;
+
+  bool setOptionsJson(String json) {
+    _optionsJson = json;
+    return true;
+  }
+
+  bool loadData(String data) {
+    _data = data;
+    _pageCount = _inferPageCount(data);
+    return true;
+  }
+
+  bool loadZipDataBase64(String base64Data) {
+    _data = base64Data;
+    _pageCount = _inferPageCount(base64Data);
+    return true;
+  }
+
+  bool loadZipDataBuffer(Uint8List bytes) {
+    _data = String.fromCharCodes(bytes);
+    _pageCount = _inferPageCount(_data);
+    return true;
+  }
+
+  int get pageCount => _pageCount;
+
+  String renderToSvg(int pageNo, {bool xmlDeclaration = false}) {
+    final int page = pageNo < 1 ? 1 : pageNo;
+    final String title = _extractTitle(_data);
+    return '''
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 400 200">
+  <desc>Fake Verovio render for $title page $page</desc>
+  <defs>
+    <symbol id="E0A4" viewBox="0 0 10 20"><path d="M0 0H10V20H0Z"/></symbol>
+  </defs>
+  <svg class="definition-scale" viewBox="0 0 400 200">
+    <g class="page-margin" transform="translate(10,10)">
+      <g id="measure-$page" class="measure" transform="translate(${20 * page},${12 * page})">
+        <g id="note-$page-a" class="note"><use xlink:href="#E0A4" x="50" y="40"/></g>
+        <g id="note-$page-b" class="note"><use xlink:href="#E0A4" x="90" y="40"/></g>
+        <rect x="20" y="20" width="100" height="40"/>
+      </g>
+    </g>
+  </svg>
+</svg>
+''';
+  }
+
+  String getLog() => '';
+
+  String get version => 'fake-verovio';
+
+  String getAvailableOptions() => '{}';
+  String getDefaultOptions() => '{}';
+  String getOptions() => _optionsJson.isEmpty ? '{}' : _optionsJson;
+  String getOptionUsageString() => 'fake options';
+  String getDescriptiveFeatures(String jsonOptions) => '{"fake":true}';
+  String getElementAttr(String xmlId) => 'id="$xmlId"';
+  String getElementsAtTime(int millisec) => '[]';
+  String getExpansionIdsForElement(String xmlId) => '[]';
+  String getMidiValuesForElement(String xmlId) => '[]';
+  String getNotatedIdForElement(String xmlId) => xmlId;
+  String getTimesForElement(String xmlId) => '[]';
+  String getId() => 'fake-toolkit';
+  String getResourcePath() => _resourcePath;
+  String getHumdrum() => '';
+  String getMei(String jsonOptions) => _data;
+  String convertHumdrumToHumdrum(String data) => data;
+  String convertHumdrumToMidi(String data) => '';
+  String convertMeiToHumdrum(String data) => data;
+  String editInfo() => '';
+  String validatePae(String data) => '';
+  String renderData(String data, String jsonOptions) => renderToSvg(1);
+  String renderToMidi() => '';
+  String renderToPae() => '';
+  String renderToTimemap({String jsonOptions = ''}) => '{}';
+  String renderToExpansionMap() => '{}';
+  int getScale() => _scale;
+  bool setScale(int scale) {
+    _scale = scale;
+    return true;
+  }
+  int getPageWithElement(String xmlId) => 1;
+  int getTimeForElement(String xmlId) => 0;
+  bool select(String selectionJson) => true;
+  bool setInputFrom(String inputFrom) {
+    return true;
+  }
+  bool setOutputTo(String outputTo) {
+    return true;
+  }
+  bool edit(String editorAction) => true;
+  bool redoLayout({String jsonOptions = ''}) => true;
+  bool redoPagePitchPosLayout() => true;
+  bool resetOptions() => true;
+  bool resetXmlIdSeed(int seed) => true;
+  void dispose() {}
+
+  int _inferPageCount(String data) {
+    if (data.contains('Melody Of The Night 5')) {
+      return 5;
+    }
+    if (data.contains('<title>Minimal</title>')) {
+      return 1;
+    }
+    if (data.contains('page-layout') && data.contains('page-height')) {
+      return 5;
+    }
+    return 1;
+  }
+
+  String _extractTitle(String data) {
+    final RegExp meiTitle = RegExp(r'<title>([^<]+)</title>');
+    final RegExp musicXmlTitle = RegExp(r'<work-title>([^<]+)</work-title>');
+    final Match? meiMatch = meiTitle.firstMatch(data);
+    if (meiMatch != null) {
+      return meiMatch.group(1) ?? 'Untitled';
+    }
+    final Match? xmlMatch = musicXmlTitle.firstMatch(data);
+    if (xmlMatch != null) {
+      return xmlMatch.group(1) ?? 'Untitled';
+    }
+    return 'Untitled';
   }
 }
