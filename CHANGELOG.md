@@ -1,3 +1,8 @@
+## 0.2.1
+
+- Fixed `ShapeBBoxComputer` so zero-width or zero-height but still meaningful line shapes are preserved during bbox computation.
+- Updated the package metadata and release notes for the 0.2.1 release.
+
 ## 0.2.0
 
 - Added first-class HitMap APIs to `VerovioAsyncService`: `renderPageWithHitMap()` and `parseHitMap()`, so callers can fetch SVG and interaction metadata in one isolate round-trip.

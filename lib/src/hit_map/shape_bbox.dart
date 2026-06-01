@@ -261,7 +261,10 @@ class ShapeBBoxComputer {
   }
 
   static bool _isNonDegenerate(Float64List outRect) {
-    return outRect[2] > outRect[0] && outRect[3] > outRect[1];
+    // Accept shapes that are non-degenerate in at least one axis.
+    // This correctly handles lines (stafflines, barlines) which are
+    // zero-width or zero-height but still meaningful for bbox computation.
+    return outRect[2] > outRect[0] || outRect[3] > outRect[1];
   }
 
   static void _warn(String message) {
