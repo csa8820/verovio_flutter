@@ -79,10 +79,98 @@ final svg = await cache.getOrRender(
 
 ## Platform support
 
-| Platform | Minimum version | Architectures |
-|----------|-----------------|---------------|
-| Android  | API 21          | arm64-v8a / x86_64 |
-| iOS      | 13.0            | arm64 (device) / arm64 + x86_64 (simulator) |
+| Platform | Minimum version | Architectures | Notes |
+|----------|-----------------|---------------|-------|
+| Android  | API 21          | arm64-v8a / x86_64 | Native FFI |
+| iOS      | 13.0            | arm64 (device) / arm64 + x86_64 (simulator) | Native FFI |
+| Web      | All modern browsers | N/A | WASM via Web Worker |
+
+### Web support (WASM)
+
+`verovio_flutter` fully supports **Flutter Web** via WebAssembly. The public API is compatible across all platforms — your code works without changes on mobile and web, with a few Web-only no-op methods noted below.
+
+**Key features:**
+- Renders SVG in a Web Worker (non-blocking)
+- All 38 Verovio API actions (render, MIDI, time-map, hit_map, ZIP/MXL load, edit operations)
+- Hit-testing with `renderPageWithHitMap()` and `hitTestPoint()`
+- Page caching via `VerovioPageCache`
+- No server or HTTP — everything local
+
+**Build for Web:**
+
+1. Build the Verovio Web Worker and Flutter app:
+   ```bash
+   cd path/to/verovio_flutter
+   bash tool/build_web.sh
+   ```
+2. Run or serve:
+   ```bash
+   # Option 1: flutter run
+   flutter run -d chrome
+
+   # Option 2: Manual serve
+   python3 -m http.server --directory example/build/web 8000
+   # Then open http://localhost:8000
+   ```
+
+**Using it in your own app (Web):**
+
+The package spawns its own Web Worker and loads the WASM toolkit by itself —
+**no bootstrap `<script>` is required** in your `index.html`. You only need two
+files present at your app's web root (copy them from this package's `web/`):
+
+```
+web/
+├── verovio_worker.dart.js              # compiled Verovio worker
+└── verovio/
+    └── verovio-toolkit-wasm.js         # official Verovio WASM toolkit
+```
+
+`dart compile js` for the worker is run for you by `tool/build_web.sh`,
+which stages `verovio_worker.dart.js` into `example/web/`. For your own app,
+copy both files into your `web/` folder (so they are picked up by both
+`flutter run -d chrome` and `flutter build web`).
+
+**Optional configuration.** If you serve those assets from non-default
+locations, set a global config _before_ Flutter boots in `web/index.html`:
+
+```html
+<script>
+  window.verovioFlutterConfig = {
+    workerUrl: 'verovio_worker.dart.js',           // default
+    wasmUrl: 'verovio/verovio-toolkit-wasm.js',    // default, resolved relative to the worker
+  };
+</script>
+```
+
+> On Web the `resourcePath` passed to `VerovioAsyncService.spawn(...)` is
+> ignored — fonts and resources are embedded in the WASM module. Any non-empty
+> string satisfies the cross-platform API.
+
+**Version alignment:**
+
+| Component | Version | Notes |
+|-----------|---------|-------|
+| Native (Android/iOS) | Verovio 6.2.1 | Built from [upstream tag](https://github.com/rism-digital/verovio) |
+| Web (WASM) | Verovio 6.2.0 | Official [npm package](https://www.npmjs.com/package/verovio) — functionally equivalent to native 6.2.1 |
+
+> **Why 6.2.0 for Web?** The official Verovio npm package only ships 6.2.0 WASM; no 6.2.1 JS/WASM release exists. The emscripten outputs (6.2.0 vs 6.2.1) are identical in behavior.
+
+**Known limitations on Web:**
+
+The following methods are **no-ops** on Web (return placeholder values or do nothing):
+- `setScale()` / `getScale()` — WASM toolkit has no corresponding method
+- `setResourcePath()` / `getResourcePath()` — fonts are embedded in WASM; resource path is unused
+- `setInputFrom()` / `setOutputTo()` — file I/O not applicable to WASM
+- `spawn()` — initialization is handled transparently on Web
+
+All other methods (rendering, MIDI, hit-testing, editing, etc.) work identically to the native implementation.
+
+**Performance notes:**
+- SVG rendering: 50–200 ms per page (depends on score complexity)
+- Hit-map generation: included in render time; cached by `VerovioPageCache`
+- Memory: WASM heap managed by browser; `dispose()` frees Worker resources
+- Large scores: watch browser DevTools Memory tab for heap usage patterns
 
 ## Size
 

@@ -2,6 +2,8 @@ import 'dart:ui';
 
 import 'package:collection/collection.dart';
 
+import 'package:verovio_flutter/src/hit_map/geometry.dart';
+import 'package:verovio_flutter/src/hit_map/models_data.dart' as hm;
 import 'package:verovio_flutter/src/hit_map/spatial_index.dart';
 
 /// 单页 HitMap：保存一页 SVG 的全部命中数据。
@@ -84,6 +86,31 @@ class PageHitMap {
     );
   }
 
+  /// 从纯 Dart 中间表示恢复公共 `PageHitMap`。
+  factory PageHitMap.fromData(
+    hm.PageHitMapData data, {
+    bool buildSpatialIndex = false,
+  }) {
+    final Map<String, ElementHit> byId = data.byId.map(
+      (String key, hm.ElementHitData value) => MapEntry<String, ElementHit>(
+        key,
+        ElementHit.fromData(value),
+      ),
+    );
+    final List<ElementHit> byType = data.byType
+        .map((hm.ElementHitData value) => ElementHit.fromData(value))
+        .toList(growable: false);
+    return PageHitMap(
+      pageIndex: data.pageIndex,
+      viewBox: Size(data.viewBox.width, data.viewBox.height),
+      byId: byId,
+      byType: byType,
+      rTree:
+          buildSpatialIndex && byType.isNotEmpty ? SpatialIndex.build(byType) : null,
+      parseTime: data.parseTime,
+    );
+  }
+
   static const MapEquality<String, ElementHit> _mapEquality =
       MapEquality<String, ElementHit>();
   static const ListEquality<ElementHit> _listEquality =
@@ -97,6 +124,22 @@ class PageHitMap {
         _mapEquality.equals(byId, other.byId) &&
         _listEquality.equals(byType, other.byType) &&
         parseTime == other.parseTime;
+  }
+
+  /// 转成纯 Dart 中间表示。
+  hm.PageHitMapData toData() {
+    return hm.PageHitMapData(
+      pageIndex: pageIndex,
+      viewBox: SizeD(viewBox.width, viewBox.height),
+      byId: byId.map(
+        (String key, ElementHit value) => MapEntry<String, hm.ElementHitData>(
+          key,
+          value.toData(),
+        ),
+      ),
+      byType: byType.map((ElementHit value) => value.toData()).toList(),
+      parseTime: parseTime,
+    );
   }
 
   @override
@@ -171,7 +214,23 @@ class ElementHit {
                 key as String,
                 value as String,
               ),
-            ),
+      ),
+    );
+  }
+
+  /// 从纯 Dart 中间表示恢复公共 `ElementHit`。
+  factory ElementHit.fromData(hm.ElementHitData data) {
+    return ElementHit(
+      id: data.id,
+      type: data.type,
+      bbox: Rect.fromLTWH(
+        data.bbox.left,
+        data.bbox.top,
+        data.bbox.width,
+        data.bbox.height,
+      ),
+      parentId: data.parentId,
+      extra: data.extra,
     );
   }
 
@@ -196,6 +255,22 @@ class ElementHit {
         parentId,
         extra == null ? null : _mapEquality.hash(extra!),
       );
+
+  /// 转成纯 Dart 中间表示。
+  hm.ElementHitData toData() {
+    return hm.ElementHitData(
+      id: id,
+      type: type,
+      bbox: RectD.fromLTWH(
+        bbox.left,
+        bbox.top,
+        bbox.width,
+        bbox.height,
+      ),
+      parentId: parentId,
+      extra: extra,
+    );
+  }
 }
 
 /// 解析配置。
@@ -298,6 +373,28 @@ class ParseConfig {
         json['pathMode'] as String? ?? PathBBoxMode.accurate.name,
       ),
       skipDecorative: json['skipDecorative'] as bool? ?? false,
+    );
+  }
+
+  /// 转成纯 Dart 中间表示。
+  hm.ParseConfigData toData() {
+    return hm.ParseConfigData(
+      captureClasses: captureClasses,
+      buildSpatialIndex: buildSpatialIndex,
+      extraAttrs: extraAttrs,
+      pathMode: hm.HitMapPathBBoxMode.values.byName(pathMode.name),
+      skipDecorative: skipDecorative,
+    );
+  }
+
+  /// 从纯 Dart 中间表示恢复公共 `ParseConfig`。
+  factory ParseConfig.fromData(hm.ParseConfigData data) {
+    return ParseConfig(
+      captureClasses: data.captureClasses,
+      buildSpatialIndex: data.buildSpatialIndex,
+      extraAttrs: data.extraAttrs,
+      pathMode: PathBBoxMode.values.byName(data.pathMode.name),
+      skipDecorative: data.skipDecorative,
     );
   }
 

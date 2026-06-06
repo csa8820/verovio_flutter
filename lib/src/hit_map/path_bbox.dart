@@ -1,8 +1,7 @@
 import 'dart:typed_data';
 
-import 'package:flutter/widgets.dart';
-
-import 'package:verovio_flutter/src/hit_map/models.dart';
+import 'package:verovio_flutter/src/hit_map/geometry.dart';
+import 'package:verovio_flutter/src/hit_map/models_data.dart';
 import 'package:verovio_flutter/src/hit_map/path_bbox_core.dart';
 
 /// SVG path `d` 属性边界框求解器。
@@ -19,13 +18,13 @@ class PathBBoxSolver {
   /// 解析 path 的 `d` 属性，把 bbox 写入 [outRect]（4 个 double）。
   ///
   /// [outRect] 复用以零分配。
-  void solve(String d, PathBBoxMode mode, Float64List outRect) {
-    _core.solve(d, mode == PathBBoxMode.accurate, outRect);
+  void solve(String d, HitMapPathBBoxMode mode, Float64List outRect) {
+    _core.solve(d, mode == HitMapPathBBoxMode.accurate, outRect);
   }
 
-  /// 便利方法：返回 [Rect]（内部仍走 solve）。
-  Rect solveToRect(String d, PathBBoxMode mode) {
-    _core.solve(d, mode == PathBBoxMode.accurate, _out);
-    return Rect.fromLTRB(_out[0], _out[1], _out[2], _out[3]);
+  /// 便利方法：返回 [RectD]（内部仍走 solve）。
+  RectD solveToRectD(String d, HitMapPathBBoxMode mode) {
+    _core.solve(d, mode == HitMapPathBBoxMode.accurate, _out);
+    return RectD.fromLTRB(_out[0], _out[1], _out[2], _out[3]);
   }
 }

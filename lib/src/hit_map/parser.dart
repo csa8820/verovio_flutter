@@ -2,9 +2,8 @@ import 'dart:isolate';
 
 import 'package:verovio_flutter/src/hit_map/glyph_cache.dart';
 import 'package:verovio_flutter/src/hit_map/models.dart';
-import 'package:verovio_flutter/src/hit_map/path_bbox.dart';
-import 'package:verovio_flutter/src/hit_map/shape_bbox.dart';
-import 'package:verovio_flutter/src/hit_map/walker.dart';
+import 'package:verovio_flutter/src/hit_map/models_data.dart';
+import 'package:verovio_flutter/src/hit_map/parser_core.dart';
 
 /// HitMap 对外解析入口。
 class HitMapParser {
@@ -16,20 +15,16 @@ class HitMapParser {
     ParseConfig config = const ParseConfig.defaultForInteractive(),
     GlyphBBoxCache? cache,
   }) {
-    final GlyphBBoxCache glyphCache = cache ?? GlyphBBoxCache();
-    final PathBBoxSolver pathSolver = PathBBoxSolver();
-    final ShapeBBoxComputer shapeComp = ShapeBBoxComputer(
-      glyphCache: glyphCache,
-      pathSolver: pathSolver,
-      pathMode: config.pathMode,
+    final PageHitMapData data = HitMapParserCore.parseSync(
+      svg,
+      pageIndex: pageIndex,
+      config: config.toData(),
+      cache: cache,
     );
-    final HitMapWalker walker = HitMapWalker(
-      config: config,
-      glyphCache: glyphCache,
-      pathSolver: pathSolver,
-      shapeComp: shapeComp,
+    return PageHitMap.fromData(
+      data,
+      buildSpatialIndex: config.buildSpatialIndex,
     );
-    return walker.parseSync(svg, pageIndex);
   }
 
   /// 异步版本：主 isolate 调用时自动 Isolate.run；

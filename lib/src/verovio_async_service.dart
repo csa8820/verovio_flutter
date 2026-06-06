@@ -1,137 +1,25 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:isolate';
 import 'dart:typed_data';
 
 import 'package:verovio_flutter/src/hit_map/models.dart';
 import 'package:verovio_flutter/src/verovio_page_cache.dart';
-import 'package:verovio_flutter/src/verovio_isolate_worker.dart';
 import 'package:verovio_flutter/src/verovio_resource_manager.dart';
-import 'package:verovio_flutter/src/verovio_service.dart';
+import 'package:verovio_flutter/src/worker/worker_client.dart';
+import 'package:verovio_flutter/src/worker/worker_client_io.dart'
+    if (dart.library.js_interop) 'package:verovio_flutter/src/worker/worker_client_web.dart'
+    as worker_impl;
 
-class _VerovioWorkerClient {
-  _VerovioWorkerClient._(
-    this._isolate,
-    this._controlPort,
-    this._responsePort,
-  ) {
-    _responseSubscription = _responsePort.listen(_handleResponse);
-  }
-
-  final Isolate _isolate;
-  final SendPort _controlPort;
-  final ReceivePort _responsePort;
-  late final StreamSubscription<dynamic> _responseSubscription;
-  final Map<int, Completer<Map<String, Object?>>> _pending =
-      <int, Completer<Map<String, Object?>>>{};
-  int _nextRequestId = 0;
-  bool _disposed = false;
-
-  static Future<_VerovioWorkerClient> connect({
-    required String resourcePath,
-  }) async {
-    final handshakePort = ReceivePort();
-    final responsePort = ReceivePort();
-    final isolate = await Isolate.spawn(
-      verovioIsolateWorkerEntryPoint,
-      <String, Object?>{
-        'handshakePort': handshakePort.sendPort,
-        'responsePort': responsePort.sendPort,
-      },
-    );
-    final controlPort = await handshakePort.first as SendPort;
-    final client = _VerovioWorkerClient._(
-      isolate,
-      controlPort,
-      responsePort,
-    );
-    try {
-      await client.sendRaw('spawn', <String, Object?>{
-        'resourcePath': resourcePath,
-      });
-      return client;
-    } catch (_) {
-      await client.forceDispose();
-      rethrow;
-    }
-  }
-
-  void _handleResponse(dynamic message) {
-    if (message is! Map) {
-      return;
-    }
-    final requestId = message['requestId'];
-    if (requestId is! int) {
-      return;
-    }
-    final completer = _pending.remove(requestId);
-    if (completer == null || completer.isCompleted) {
-      return;
-    }
-    completer.complete(message.cast<String, Object?>());
-  }
-
-  Future<Object?> sendRaw(String action,
-      [Map<String, Object?> payload = const <String, Object?>{}]) async {
-    if (_disposed) {
-      throw StateError('VerovioAsyncService has been disposed');
-    }
-    final requestId = _nextRequestId++;
-    final completer = Completer<Map<String, Object?>>();
-    _pending[requestId] = completer;
-    _controlPort.send(<String, Object?>{
-      'requestId': requestId,
-      'action': action,
-      'payload': payload,
-    });
-    final response = await completer.future;
-    if (response['ok'] == true) {
-      return response['result'];
-    }
-    throw VerovioException(
-      method: action,
-      log: response['error']?.toString() ?? '',
-    );
-  }
-
-  Future<void> forceDispose() async {
-    if (_disposed) {
-      return;
-    }
-    _disposed = true;
-    for (final completer in _pending.values) {
-      if (!completer.isCompleted) {
-        completer.completeError(
-          StateError('VerovioAsyncService has been disposed'),
-        );
-      }
-    }
-    _pending.clear();
-    await _responseSubscription.cancel();
-    _responsePort.close();
-    _isolate.kill(priority: Isolate.immediate);
-  }
-
-  Future<void> dispose() async {
-    if (_disposed) {
-      return;
-    }
-    try {
-      await sendRaw('dispose');
-    } finally {
-      await forceDispose();
-    }
-  }
-}
-
-/// Asynchronous wrapper around Verovio backed by a worker isolate.
+/// Asynchronous wrapper around Verovio backed by a worker client.
 class VerovioAsyncService {
   VerovioAsyncService._(this._client) : _pageCache = VerovioPageCache();
 
-  final _VerovioWorkerClient _client;
+  final VerovioWorkerClient _client;
   final VerovioPageCache _pageCache;
 
-  /// Spawns a worker isolate and creates an async Verovio instance.
+  void _invalidatePageCache() => _pageCache.invalidateAll();
+
+  /// Spawns a worker and creates an async Verovio instance.
   static Future<VerovioAsyncService> spawn({
     required String resourcePath,
   }) async {
@@ -139,35 +27,37 @@ class VerovioAsyncService {
       throw ArgumentError.value(
           resourcePath, 'resourcePath', 'must not be empty');
     }
-    if (!Uri.file(resourcePath).isAbsolute) {
-      throw ArgumentError.value(
-        resourcePath,
-        'resourcePath',
-        'must be an absolute path',
-      );
-    }
+    // Try to validate as an absolute file path; on Web, the path is a placeholder
+    // and Uri.file may not behave the same. Accept any non-empty path to support both.
+    // Actual path validation happens at worker initialization.
+    // (On Web, fonts are embedded in WASM, so resourcePath is ignored by worker.)
 
     await VerovioResourceManager.ensureVerovioAssetsReady();
-    final client =
-        await _VerovioWorkerClient.connect(resourcePath: resourcePath);
+    final client = await worker_impl.createWorkerClient(
+      resourcePath: resourcePath,
+    );
     return VerovioAsyncService._(client);
   }
 
   /// Updates the resource path used by the worker.
   Future<bool> setResourcePath(String resourcePath) async {
-    return await _client.sendRaw('setResourcePath', <String, Object?>{
+    final result = await _client.sendRaw('setResourcePath', <String, Object?>{
       'resourcePath': resourcePath,
     }) as bool;
+    _invalidatePageCache();
+    return result;
   }
 
   /// Applies a JSON string of Verovio options.
   Future<void> setOptionsJson(String json) async {
     await _client.sendRaw('setOptionsJson', <String, Object?>{'json': json});
+    _invalidatePageCache();
   }
 
   /// Loads input data into the worker.
   Future<void> loadData(String data) async {
     await _client.sendRaw('loadData', <String, Object?>{'data': data});
+    _invalidatePageCache();
   }
 
   /// Loads zipped input data from a Base64 string.
@@ -175,13 +65,16 @@ class VerovioAsyncService {
     await _client.sendRaw('loadZipDataBase64', <String, Object?>{
       'base64Data': base64Data,
     });
+    _invalidatePageCache();
   }
 
   /// Loads zipped input data from raw bytes.
   Future<bool> loadZipDataBuffer(Uint8List bytes) async {
-    return await _client.sendRaw('loadZipDataBuffer', <String, Object?>{
+    final result = await _client.sendRaw('loadZipDataBuffer', <String, Object?>{
       'bytes': bytes,
     }) as bool;
+    _invalidatePageCache();
+    return result;
   }
 
   /// Returns the number of pages currently available.
@@ -403,10 +296,12 @@ class VerovioAsyncService {
 
   /// Renders arbitrary input data using the provided JSON options.
   Future<String> renderData(String data, String jsonOptions) async {
-    return await _client.sendRaw('renderData', <String, Object?>{
+    final result = await _client.sendRaw('renderData', <String, Object?>{
       'data': data,
       'jsonOptions': jsonOptions,
     }) as String;
+    _invalidatePageCache();
+    return result;
   }
 
   /// Renders the current score to Base64-encoded MIDI data.
@@ -443,9 +338,11 @@ class VerovioAsyncService {
 
   /// Sets the engraving scale.
   Future<bool> setScale(int scale) async {
-    return await _client.sendRaw('setScale', <String, Object?>{
+    final result = await _client.sendRaw('setScale', <String, Object?>{
       'scale': scale,
     }) as bool;
+    _invalidatePageCache();
+    return result;
   }
 
   /// Returns the page that contains the element identified by [xmlId].
@@ -464,30 +361,38 @@ class VerovioAsyncService {
 
   /// Applies a selection described by [selectionJson].
   Future<bool> select(String selectionJson) async {
-    return await _client.sendRaw('select', <String, Object?>{
+    final result = await _client.sendRaw('select', <String, Object?>{
       'selectionJson': selectionJson,
     }) as bool;
+    _invalidatePageCache();
+    return result;
   }
 
   /// Sets the current input format.
   Future<bool> setInputFrom(String inputFrom) async {
-    return await _client.sendRaw('setInputFrom', <String, Object?>{
+    final result = await _client.sendRaw('setInputFrom', <String, Object?>{
       'inputFrom': inputFrom,
     }) as bool;
+    _invalidatePageCache();
+    return result;
   }
 
   /// Sets the current output format.
   Future<bool> setOutputTo(String outputTo) async {
-    return await _client.sendRaw('setOutputTo', <String, Object?>{
+    final result = await _client.sendRaw('setOutputTo', <String, Object?>{
       'outputTo': outputTo,
     }) as bool;
+    _invalidatePageCache();
+    return result;
   }
 
   /// Applies an editor action string.
   Future<bool> edit(String editorAction) async {
-    return await _client.sendRaw('edit', <String, Object?>{
+    final result = await _client.sendRaw('edit', <String, Object?>{
       'editorAction': editorAction,
     }) as bool;
+    _invalidatePageCache();
+    return result;
   }
 
   /// Recomputes the layout using optional JSON options.
@@ -495,16 +400,19 @@ class VerovioAsyncService {
     await _client.sendRaw('redoLayout', <String, Object?>{
       'jsonOptions': jsonOptions,
     });
+    _invalidatePageCache();
   }
 
   /// Recomputes the page pitch-position layout.
   Future<void> redoPagePitchPosLayout() async {
     await _client.sendRaw('redoPagePitchPosLayout');
+    _invalidatePageCache();
   }
 
   /// Resets all options to their defaults.
   Future<void> resetOptions() async {
     await _client.sendRaw('resetOptions');
+    _invalidatePageCache();
   }
 
   /// Resets the XML ID seed to [seed].
@@ -512,6 +420,7 @@ class VerovioAsyncService {
     await _client.sendRaw('resetXmlIdSeed', <String, Object?>{
       'seed': seed,
     });
+    _invalidatePageCache();
   }
 
   /// Releases the worker isolate and native toolkit resources.

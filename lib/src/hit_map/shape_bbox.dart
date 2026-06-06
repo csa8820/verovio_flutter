@@ -1,9 +1,9 @@
 import 'dart:developer' as developer;
 import 'dart:typed_data';
-import 'dart:ui';
 
+import 'package:verovio_flutter/src/hit_map/geometry.dart';
 import 'package:verovio_flutter/src/hit_map/glyph_cache.dart';
-import 'package:verovio_flutter/src/hit_map/models.dart';
+import 'package:verovio_flutter/src/hit_map/models_data.dart';
 import 'package:verovio_flutter/src/hit_map/path_bbox.dart';
 
 /// 轻量属性访问接口，避免绑定具体 XML 库实现。
@@ -30,12 +30,12 @@ class ShapeBBoxComputer {
   ShapeBBoxComputer({
     required this.glyphCache,
     required this.pathSolver,
-    this.pathMode = PathBBoxMode.accurate,
+    this.pathMode = HitMapPathBBoxMode.accurate,
   });
 
   final GlyphBBoxCache glyphCache;
   final PathBBoxSolver pathSolver;
-  final PathBBoxMode pathMode;
+  final HitMapPathBBoxMode pathMode;
 
   /// 写入 outRect [minX, minY, maxX, maxY]，失败时写入退化点。
   bool useBBox(ShapeAttrs a, Float64List outRect) {
@@ -45,7 +45,7 @@ class ShapeBBoxComputer {
     final double? width = _readOptionalDouble(a, 'width');
     final double? height = _readOptionalDouble(a, 'height');
 
-    final Rect? symbolBBox = href == null ? null : glyphCache.lookup(href);
+    final RectD? symbolBBox = href == null ? null : glyphCache.lookup(href);
     if (symbolBBox == null) {
       _writePoint(outRect, x, y);
       _warn('Glyph not found: $href');

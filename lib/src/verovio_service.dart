@@ -5,24 +5,9 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 import 'package:verovio_flutter/src/verovio_bindings.dart';
+import 'package:verovio_flutter/src/verovio_exception.dart';
 import 'package:verovio_flutter/src/verovio_loader.dart';
 import 'package:verovio_flutter/src/verovio_resource_manager.dart';
-
-/// Exception thrown when a Verovio call fails.
-class VerovioException implements Exception {
-  /// Creates an exception for the failed Verovio [method].
-  VerovioException({required this.method, this.log = ''});
-
-  /// The Verovio API method that failed.
-  final String method;
-
-  /// The native Verovio log captured for the failure.
-  final String log;
-
-  /// Returns a readable description of the failure.
-  @override
-  String toString() => 'VerovioException(method: $method, log: $log)';
-}
 
 /// Synchronous wrapper around the native Verovio toolkit.
 class VerovioService {

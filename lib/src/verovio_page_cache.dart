@@ -93,12 +93,14 @@ class VerovioPageCache {
   int get length => _entries.length;
 
   int _fnv1a64(String s) {
-    var h = 0xcbf29ce484222325;
+    // Use a simple hash that works on JavaScript (32-bit)
+    // FNV-1a hash adapted for JavaScript compatibility
+    var h = 0x811c9dc5;
     for (final c in s.codeUnits) {
-      h = (h ^ c) * 0x100000001b3;
-      h &= 0xffffffffffffffff;
+      h = (h ^ c);
+      h = (h * 16777619) & 0xffffffff; // Keep to 32-bit to avoid overflow
     }
-    return h;
+    return h.abs(); // Ensure positive
   }
 
   void _put(String key, PageCacheEntry entry) {

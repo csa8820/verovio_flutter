@@ -1,15 +1,17 @@
 name: verovio_flutter
-description: "Flutter FFI plugin for Verovio music notation rendering."
-version: 0.2.1
+description: "Flutter FFI plugin for Verovio music notation rendering. Supports Android, iOS, and Web (WASM)."
+version: 0.3.0
 repository: https://github.com/csa8820/verovio_flutter
 homepage: https://pub.dev/publishers/csa8820.top
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
-  flutter: '>=3.10.0'
+  sdk: '>=3.3.0 <4.0.0'
+  flutter: '>=3.13.0'
 
 dependencies:
   flutter:
+    sdk: flutter
+  flutter_web_plugins:
     sdk: flutter
   plugin_platform_interface: ^2.0.2
   ffi: ^2.1.0
@@ -57,6 +59,9 @@ flutter:
         pluginClass: VerovioFlutterPlugin
       ios:
         ffiPlugin: true
+      web:
+        pluginClass: VerovioFlutterWeb
+        fileName: verovio_flutter_web.dart
 
   # To add assets to your plugin package, add an assets section, like this:
   # assets:

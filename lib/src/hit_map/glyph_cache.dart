@@ -1,48 +1,46 @@
-import 'dart:developer' as developer;
 import 'dart:collection';
+import 'dart:developer' as developer;
 
-import 'package:flutter/widgets.dart';
-
-import 'package:verovio_flutter/src/hit_map/models.dart';
+import 'package:verovio_flutter/src/hit_map/geometry.dart';
+import 'package:verovio_flutter/src/hit_map/models_data.dart';
 import 'package:verovio_flutter/src/hit_map/path_bbox.dart';
 
 /// SMuFL 字形 bbox 缓存。
 ///
 /// 注意：此缓存**非线程安全**，仅供同一 isolate 内的单页/多页解析复用。
 class GlyphBBoxCache {
-  GlyphBBoxCache() : _local = <String, Rect>{};
+  GlyphBBoxCache() : _local = <String, RectD>{};
 
   /// 当前文档（单页解析）的字形缓存。
   ///
   /// key 是 symbol 的 id（已去掉前导 `#`）。
-  final Map<String, Rect> _local;
+  final Map<String, RectD> _local;
 
   /// 跨页/跨文档的持久缓存。
   ///
   /// key 是 `"$fontHash:$glyphId"`。
-  static final LinkedHashMap<String, Rect> _global =
-      LinkedHashMap<String, Rect>();
+  static final LinkedHashMap<String, RectD> _global =
+      LinkedHashMap<String, RectD>();
 
   static const int _defaultGlobalMaxEntries = 2000;
 
   /// 仅测试用：可临时调整全局缓存上限，便于验证 LRU 淘汰。
-  @visibleForTesting
   static int globalMaxEntriesForTesting = _defaultGlobalMaxEntries;
 
   /// 本页查表：href 可以是 `"#E0A4"` 或 `"E0A4"`。
-  Rect? lookup(String href) {
+  RectD? lookup(String href) {
     return _local[_normalizeId(href)];
   }
 
   /// 写入本页缓存。
-  void put(String id, Rect bbox) {
+  void put(String id, RectD bbox) {
     _local[_normalizeId(id)] = bbox;
   }
 
   /// 跨文档全局查表（按字体哈希命名空间）。
-  static Rect? lookupGlobal(String fontHash, String id) {
+  static RectD? lookupGlobal(String fontHash, String id) {
     final String key = _globalKey(fontHash, id);
-    final Rect? value = _global.remove(key);
+    final RectD? value = _global.remove(key);
     if (value != null) {
       // 命中时按标准 LRU 语义移动到队尾。
       _global[key] = value;
@@ -51,7 +49,7 @@ class GlyphBBoxCache {
   }
 
   /// 跨文档全局写入（带 LRU 淘汰）。
-  static void putGlobal(String fontHash, String id, Rect bbox) {
+  static void putGlobal(String fontHash, String id, RectD bbox) {
     final String key = _globalKey(fontHash, id);
     // 先移除旧值，再写回末尾，实现“最近使用”语义。
     _global.remove(key);
@@ -70,13 +68,11 @@ class GlyphBBoxCache {
   static int get globalSize => _global.length;
 
   /// 仅测试用：清空全局缓存。
-  @visibleForTesting
   static void clearGlobal() {
     _global.clear();
   }
 
   /// 仅测试用：恢复全局缓存上限。
-  @visibleForTesting
   static void resetGlobalMaxEntriesForTesting() {
     globalMaxEntriesForTesting = _defaultGlobalMaxEntries;
   }
@@ -94,44 +90,44 @@ class GlyphBBoxCache {
 ///
 /// - 若 `symbolViewBox` 存在，优先使用它；这是作者直接给出的精确边界。
 /// - 否则回退到 `pathD` 的几何 bbox 求解。
-/// - 若两者都缺失，则写入 `Rect.zero` 作为兜底。
-Rect populateGlyphFromSymbol({
+/// - 若两者都缺失，则写入 `RectD.zero` 作为兜底。
+RectD populateGlyphFromSymbol({
   required String id,
   required String? symbolViewBox,
   required String? pathD,
   required PathBBoxSolver solver,
-  required PathBBoxMode mode,
+  required HitMapPathBBoxMode mode,
   required GlyphBBoxCache cache,
 }) {
-  final Rect? cached = cache.lookup(id);
+  final RectD? cached = cache.lookup(id);
   if (cached != null) {
     return cached;
   }
 
   if (symbolViewBox != null && symbolViewBox.trim().isNotEmpty) {
-    final Rect? rect = _parseViewBox(symbolViewBox);
+    final RectD? rect = _parseViewBox(symbolViewBox);
     if (rect != null) {
       cache.put(id, rect);
       return rect;
     }
 
     _logWarning(
-      'glyph bbox viewBox 解析失败：id=$id，已回退到 path bbox 或 Rect.zero。',
+      'glyph bbox viewBox 解析失败：id=$id，已回退到 path bbox 或 RectD.zero。',
     );
   }
 
   if (pathD != null && pathD.trim().isNotEmpty) {
-    final Rect rect = solver.solveToRect(pathD, mode);
+    final RectD rect = solver.solveToRectD(pathD, mode);
     cache.put(id, rect);
     return rect;
   }
 
   _logWarning('glyph bbox 缺失：id=$id，symbol viewBox 与 path 均为空。');
-  cache.put(id, Rect.zero);
-  return Rect.zero;
+  cache.put(id, RectD.zero);
+  return RectD.zero;
 }
 
-Rect? _parseViewBox(String viewBox) {
+RectD? _parseViewBox(String viewBox) {
   final List<String> parts = viewBox
       .trim()
       .split(RegExp(r'\s+'))
@@ -147,7 +143,7 @@ Rect? _parseViewBox(String viewBox) {
   if (x == null || y == null || w == null || h == null) {
     return null;
   }
-  return Rect.fromLTWH(x, y, w, h);
+  return RectD.fromLTWH(x, y, w, h);
 }
 
 void _logWarning(String message) {

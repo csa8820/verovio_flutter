@@ -1,3 +1,13 @@
+## 0.3.0
+
+- **NEW: Full Web (WASM) support** — `verovio_flutter` now works on Flutter Web via WebAssembly, with identical public API across Android, iOS, and Web.
+- **Web Worker integration** — Verovio runs in a Web Worker (non-blocking) via `web/verovio_worker.dart`, compiled from Dart to JavaScript.
+- **WASM toolkit** — Bundles official Verovio 6.2.0 WASM runtime (functionally equivalent to native 6.2.1).
+- **All 38 API methods on Web** — Rendering, MIDI, time-map, hit_map, ZIP/MXL load, edit operations, page caching, all work identically to mobile.
+- **Build scripts** — New `tool/build_web.sh` automates Web Worker compilation and Flutter Web build; see README.md for Web support details.
+- **Documentation** — Added Web support section to README.md and README_CN.md with build instructions, version alignment, and known limitations.
+- **Cross-platform hit_map parity** — Web reuses the same pure-Dart hit_map parser core as native (no separate minimal parser); `renderPageWithHitMap()` / `parseHitMap()` produce identical results on mobile and Web.
+
 ## 0.2.1
 
 - Fixed `ShapeBBoxComputer` so zero-width or zero-height but still meaningful line shapes are preserved during bbox computation.

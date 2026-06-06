@@ -1,2 +1,7 @@
-third_party/verovio/
+# Upstream Verovio source & submodule (package ships prebuilt binaries instead)
+third_party/
 build/
+
+# Web Worker debug artifacts (runtime only needs verovio_worker.dart.js)
+*.js.map
+*.js.deps

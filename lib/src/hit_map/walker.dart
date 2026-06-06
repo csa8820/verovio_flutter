@@ -1,13 +1,12 @@
 import 'dart:collection';
 import 'dart:typed_data';
-import 'dart:ui';
 
 import 'package:xml/xml_events.dart';
 
 import 'package:verovio_flutter/src/hit_map/affine2d.dart';
+import 'package:verovio_flutter/src/hit_map/geometry.dart';
 import 'package:verovio_flutter/src/hit_map/glyph_cache.dart';
-import 'package:verovio_flutter/src/hit_map/models.dart';
-import 'package:verovio_flutter/src/hit_map/spatial_index.dart';
+import 'package:verovio_flutter/src/hit_map/models_data.dart';
 import 'package:verovio_flutter/src/hit_map/path_bbox.dart';
 import 'package:verovio_flutter/src/hit_map/shape_bbox.dart';
 import 'package:verovio_flutter/src/hit_map/transform_parser.dart';
@@ -35,7 +34,7 @@ class HitMapWalker {
     }
   }
 
-  final ParseConfig config;
+  final ParseConfigData config;
   final GlyphBBoxCache glyphCache;
   final PathBBoxSolver pathSolver;
   final ShapeBBoxComputer shapeComp;
@@ -50,10 +49,10 @@ class HitMapWalker {
   final List<_Frame> _framePool = <_Frame>[];
 
   /// id → hit，保持插入顺序。
-  final Map<String, ElementHit> _byId = <String, ElementHit>{};
+  final Map<String, ElementHitData> _byId = <String, ElementHitData>{};
 
   /// 扁平类型索引。
-  final List<ElementHit> _byType = <ElementHit>[];
+  final List<ElementHitData> _byType = <ElementHitData>[];
 
   /// 是否位于 `<defs>` 内。
   bool _inDefs = false;
@@ -69,7 +68,7 @@ class HitMapWalker {
   final Affine2D _leafTransform = Affine2D.identity();
 
   /// 顶层 SVG 的 viewBox 尺寸。
-  Size? _viewBox;
+  SizeD? _viewBox;
 
   /// 解析计时。
   late Stopwatch _sw;
@@ -86,7 +85,7 @@ class HitMapWalker {
   final _MutableShapeAttrs _leafAttrs;
 
   /// 主入口：同步解析 SVG 文本，返回整页 HitMap。
-  PageHitMap parseSync(String svgText, int pageIndex) {
+  PageHitMapData parseSync(String svgText, int pageIndex) {
     _resetState();
     _sw = Stopwatch()..start();
 
@@ -102,18 +101,12 @@ class HitMapWalker {
       }
     }
 
-    SpatialIndex? rTree;
-    if (config.buildSpatialIndex && _byType.isNotEmpty) {
-      rTree = SpatialIndex.build(_byType);
-    }
-
     _sw.stop();
-    return PageHitMap(
+    return PageHitMapData(
       pageIndex: pageIndex,
-      viewBox: _viewBox ?? Size.zero,
-      byId: UnmodifiableMapView<String, ElementHit>(_byId),
-      byType: UnmodifiableListView<ElementHit>(_byType),
-      rTree: rTree,
+      viewBox: _viewBox ?? SizeD.zero,
+      byId: UnmodifiableMapView<String, ElementHitData>(_byId),
+      byType: UnmodifiableListView<ElementHitData>(_byType),
       parseTime: _sw.elapsed,
     );
   }
@@ -227,9 +220,9 @@ class HitMapWalker {
 
     if (isRoot) {
       _viewBox =
-          _parseSizeFromViewBox(_attrValue(event.attributes, 'viewBox')) ??
+              _parseSizeFromViewBox(_attrValue(event.attributes, 'viewBox')) ??
               _parseSizeFromWidthHeight(event.attributes) ??
-              Size.zero;
+              SizeD.zero;
     }
 
     _pushFrameFromElement(event, event.localName, isSvg: true);
@@ -239,8 +232,8 @@ class HitMapWalker {
     }
 
     // 额外叠加 definition-scale 的 viewBox 缩放。
-    final Size outer = _viewBox ?? Size.zero;
-    final Size? inner =
+    final SizeD outer = _viewBox ?? SizeD.zero;
+    final SizeD? inner =
         _parseSizeFromViewBox(_attrValue(event.attributes, 'viewBox'));
     if (inner != null && inner.width > 0.0 && inner.height > 0.0) {
       final double sx = outer.width > 0.0 ? outer.width / inner.width : 1.0;
@@ -479,10 +472,10 @@ class HitMapWalker {
         frame.bboxValid &&
         frame.id != null &&
         frame.type != null) {
-      final ElementHit hit = ElementHit(
+      final ElementHitData hit = ElementHitData(
         id: frame.id!,
         type: frame.type!,
-        bbox: Rect.fromLTRB(frame.minX, frame.minY, frame.maxX, frame.maxY),
+        bbox: RectD.fromLTRB(frame.minX, frame.minY, frame.maxX, frame.maxY),
         parentId: parentId,
         extra: _buildExtraMap(frame),
       );
@@ -648,7 +641,7 @@ class HitMapWalker {
     return double.tryParse(trimmed.substring(0, end)) ?? 0.0;
   }
 
-  static Size? _parseSizeFromViewBox(String? viewBox) {
+  static SizeD? _parseSizeFromViewBox(String? viewBox) {
     if (viewBox == null || viewBox.trim().isEmpty) {
       return null;
     }
@@ -665,16 +658,16 @@ class HitMapWalker {
     if (w == null || h == null) {
       return null;
     }
-    return Size(w, h);
+    return SizeD(w, h);
   }
 
-  static Size? _parseSizeFromWidthHeight(List<XmlEventAttribute> attrs) {
+  static SizeD? _parseSizeFromWidthHeight(List<XmlEventAttribute> attrs) {
     final double width = _parseDouble(_attrValue(attrs, 'width'));
     final double height = _parseDouble(_attrValue(attrs, 'height'));
     if (width <= 0.0 || height <= 0.0) {
       return null;
     }
-    return Size(width, height);
+    return SizeD(width, height);
   }
 }
 
