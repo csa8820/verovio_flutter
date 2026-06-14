@@ -6,6 +6,7 @@ import 'dart:typed_data';
 
 import 'package:verovio_flutter/src/verovio_exception.dart';
 import 'package:verovio_flutter/src/worker/worker_client.dart';
+import 'package:verovio_flutter/src/worker/worker_client_inline_web.dart';
 
 // ============================================================================
 // Web Worker Bindings
@@ -442,12 +443,41 @@ final class VerovioWorkerClientWeb extends VerovioWorkerClient {
 }
 
 // ============================================================================
-// Factory Function
+// Platform Detection & Factory Function
 // ============================================================================
 
+/// WeChat mini-app global binding: presence indicates logic layer (no Worker).
+@JS('WXWebAssembly')
+external JSAny? get _wxWebAssembly;
+
+/// Check if inline backend should be used.
+///
+/// Returns true if:
+/// 1. Host page set `window.verovioFlutterConfig.forceInline = true`, or
+/// 2. WeChat mini-app (WXWebAssembly global exists, Worker unavailable).
+bool _shouldUseInline() {
+  final cfg = _verovioFlutterConfig;
+  if (cfg != null) {
+    final v = cfg.getProperty<JSAny?>('forceInline'.toJS);
+    if (v != null && v.typeofEquals('boolean') && (v as JSBoolean).toDart) {
+      return true;
+    }
+  }
+  // WeChat mini-app logic layer: WXWebAssembly present, but no Worker.
+  return _wxWebAssembly != null;
+}
+
 /// Factory function to create a Web worker client.
+///
+/// Automatically selects between inline (WeChat) and standard Worker (browser)
+/// based on platform detection. Returns [VerovioWorkerClientInline] if running
+/// in WeChat mini-app logic layer or if [forceInline] is set; otherwise returns
+/// [VerovioWorkerClientWeb] (standard Web Worker).
 Future<VerovioWorkerClient> createWorkerClient({
   required String resourcePath,
 }) {
+  if (_shouldUseInline()) {
+    return VerovioWorkerClientInline.connect(resourcePath: resourcePath);
+  }
   return VerovioWorkerClientWeb.connect(resourcePath: resourcePath);
 }

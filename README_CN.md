@@ -27,7 +27,7 @@ Language: [English](README.md) | [中文](README_CN.md)
 
 ```yaml
 dependencies:
-  verovio_flutter: ^0.3.0
+  verovio_flutter: ^0.3.1
 ```
 
 ## 快速上手
@@ -84,6 +84,7 @@ final svg = await cache.getOrRender(
 | Android | API 21 | arm64-v8a / x86_64 | 原生 FFI |
 | iOS | 13.0 | arm64（真机）/ arm64 + x86_64（模拟器）| 原生 FFI |
 | Web | 所有现代浏览器 | N/A | 通过 Web Worker 运行 WASM |
+| 微信小程序 | — | N/A | 通过 inline 后端运行 WASM（无 Worker）|
 
 ### Web 支持（WASM）
 
@@ -168,6 +169,32 @@ worker 的 `dart compile js` 已由 `tool/build_web.sh` 自动完成，并会把
 - 内存：WASM 堆由浏览器管理；`dispose()` 释放 Worker 资源
 - 大乐谱：在浏览器 DevTools Memory 标签观察堆使用模式
 
+### 微信小程序支持
+
+Web 后端同样可以运行在**微信小程序**的逻辑层中。小程序逻辑层没有 Web Worker，
+本包会自动检测并切换到 **inline 后端**（`worker_client_inline_web.dart`），在同一线程上
+运行 toolkit —— 无需改动任何 API。
+
+**检测逻辑：**
+- 若宿主设置了 `window.verovioFlutterConfig.forceInline = true`，使用 inline 后端。
+- 否则，若存在 `WXWebAssembly` 全局变量（微信小程序逻辑层），使用 inline 后端。
+- 普通浏览器环境则使用标准 Web Worker 后端。
+
+**已内置的小程序资源：**
+
+官方 `verovio-toolkit-wasm.js` 把 WASM 二进制以巨大的 base64 字符串内嵌其中，
+会超出小程序分包体积限制。本包已直接提供瘦身后的胶水文件和 brotli 压缩的二进制，
+无需自行构建：
+
+```
+web/verovio/
+├── verovio-weapp.js      # 瘦身后的胶水（WASM 改为外部加载）
+└── verovio.wasm.br       # brotli 压缩的 WASM 二进制
+```
+
+把这两个文件复制到你的小程序工程，并在加载胶水前把 `wx.__verovioWasmPath`
+指向 `.wasm.br` 资源即可。
+
 ## 体积
 
 | 组成 | 大小 |
@@ -205,6 +232,7 @@ Android 使用 `--split-per-abi` 后的单架构安装增量：**约 6.8 MB**（
 | 0.2.0 | `version-6.2.1` (`8d42439dc9231f6c87779287b542febcb3d609b3`) |
 | 0.2.1 | `version-6.2.1` (`8d42439dc9231f6c87779287b542febcb3d609b3`) |
 | 0.3.0 | `version-6.2.1` (`8d42439dc9231f6c87779287b542febcb3d609b3`) |
+| 0.3.1 | `version-6.2.1` (`8d42439dc9231f6c87779287b542febcb3d609b3`) |
 
 ## 许可证
 

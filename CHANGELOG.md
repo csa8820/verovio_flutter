@@ -1,3 +1,10 @@
+## 0.3.1
+
+- **WeChat mini-app support** — Added inline WASM backend for the WeChat mini-program environment (detects the `WXWebAssembly` global or a `forceInline` config); the factory automatically falls back from Web Worker to inline mode when no Worker is available.
+- **Dart version compatibility** — Fixed `js_interop` API compatibility between Dart 3.4 and 3.12 (`isTruthy` deprecation) via a new `_jsTruthy()` helper.
+- **Prebuilt mini-app assets** — Ship the slimmed-down WeChat mini-app WASM glue (`verovio-weapp.js`) and brotli-compressed `verovio.wasm.br` so no extra build step is needed.
+- **Dependency adjustment** — Relaxed the `collection` constraint to `^1.18.0` for broader SDK compatibility.
+
 ## 0.3.0
 
 - **NEW: Full Web (WASM) support** — `verovio_flutter` now works on Flutter Web via WebAssembly, with identical public API across Android, iOS, and Web.

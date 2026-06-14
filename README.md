@@ -27,7 +27,7 @@ Language: [English](README.md) | [中文](README_CN.md)
 
 ```yaml
 dependencies:
-  verovio_flutter: ^0.3.0
+  verovio_flutter: ^0.3.1
 ```
 
 ## Quick start
@@ -84,6 +84,7 @@ final svg = await cache.getOrRender(
 | Android  | API 21          | arm64-v8a / x86_64 | Native FFI |
 | iOS      | 13.0            | arm64 (device) / arm64 + x86_64 (simulator) | Native FFI |
 | Web      | All modern browsers | N/A | WASM via Web Worker |
+| WeChat mini-app | — | N/A | WASM via inline backend (no Worker) |
 
 ### Web support (WASM)
 
@@ -172,6 +173,36 @@ All other methods (rendering, MIDI, hit-testing, editing, etc.) work identically
 - Memory: WASM heap managed by browser; `dispose()` frees Worker resources
 - Large scores: watch browser DevTools Memory tab for heap usage patterns
 
+### WeChat mini-app support
+
+The Web backend also runs inside the **WeChat mini-program** logic layer, which
+has no Web Worker. The package detects this automatically and switches to an
+**inline backend** (`worker_client_inline_web.dart`) that runs the toolkit on the
+same thread — no API changes required.
+
+**How detection works:**
+- If the host sets `window.verovioFlutterConfig.forceInline = true`, the inline
+  backend is used.
+- Otherwise, if the `WXWebAssembly` global is present (WeChat mini-program logic
+  layer), the inline backend is used.
+- In a normal browser, the standard Web Worker backend is used.
+
+**Prebuilt mini-app assets:**
+
+The standard `verovio-toolkit-wasm.js` embeds the WASM binary as a huge base64
+string, which exceeds the mini-program package size limit. This package ships a
+slimmed-down glue file plus a brotli-compressed binary so you don't have to
+build them yourself:
+
+```
+web/verovio/
+├── verovio-weapp.js      # slimmed glue (WASM loaded externally)
+└── verovio.wasm.br       # brotli-compressed WASM binary
+```
+
+Copy both files into your mini-program project, and point `wx.__verovioWasmPath`
+at the `.wasm.br` asset before loading the glue.
+
 ## Size
 
 | Component | Size |
@@ -209,6 +240,7 @@ See [`doc/api.md`](doc/api.md) for the full `VerovioAsyncService` surface (optio
 | 0.2.0           | `version-6.2.1` (`8d42439dc9231f6c87779287b542febcb3d609b3`) |
 | 0.2.1           | `version-6.2.1` (`8d42439dc9231f6c87779287b542febcb3d609b3`) |
 | 0.3.0           | `version-6.2.1` (`8d42439dc9231f6c87779287b542febcb3d609b3`) |
+| 0.3.1           | `version-6.2.1` (`8d42439dc9231f6c87779287b542febcb3d609b3`) |
 
 ## License
 

@@ -135,6 +135,15 @@ String _jsToJsonString(JSAny? value) {
   return jsonEncode(value.dartify());
 }
 
+/// 把 toolkit cwrap 返回的 JS 真值（number 1/0 或 boolean）转成 Dart bool。
+/// 兼容 Dart 3.4（isTruthy 返回 bool）与 3.12（返回 JSBoolean）的 js_interop 差异。
+bool _jsTruthy(JSAny? value) {
+  final dynamic d = value.dartify();
+  if (d is bool) return d;
+  if (d is num) return d != 0;
+  return d != null;
+}
+
 extension type VerovioToolkit(JSObject _) implements JSObject {
   /// Factory constructor: instantiate toolkit from the WASM module.
   /// Must be called AFTER the module is runtime-initialized.
@@ -157,7 +166,7 @@ extension type VerovioToolkit(JSObject _) implements JSObject {
   /// coerce to bool via truthiness.
   @JS('loadData')
   external JSAny _loadData(String data);
-  bool loadData(String data) => _loadData(data).isTruthy.toDart;
+  bool loadData(String data) => _jsTruthy(_loadData(data));
 
   /// Set rendering options from a JSON string.
   /// Options control page layout, staff spacing, fonts, etc.
@@ -204,7 +213,7 @@ extension type VerovioToolkit(JSObject _) implements JSObject {
   @JS('loadZipDataBase64')
   external JSAny _loadZipDataBase64(String data);
   bool loadZipDataBase64(String data) =>
-      _loadZipDataBase64(data).isTruthy.toDart;
+      _jsTruthy(_loadZipDataBase64(data));
 
   /// Load ZIP/MXL archive from raw bytes.
   ///
@@ -214,7 +223,7 @@ extension type VerovioToolkit(JSObject _) implements JSObject {
   @JS('loadZipDataBuffer')
   external JSAny _loadZipDataBuffer(JSObject arrayBuffer);
   bool loadZipDataBuffer(JSObject arrayBuffer) =>
-      _loadZipDataBuffer(arrayBuffer).isTruthy.toDart;
+      _jsTruthy(_loadZipDataBuffer(arrayBuffer));
 
   /// Redo layout with new options (e.g., after setOptions, without reload).
   /// Signature: void redoLayout(Toolkit *ic, const char *options)
@@ -343,7 +352,7 @@ extension type VerovioToolkit(JSObject _) implements JSObject {
   @JS('select')
   external JSAny _select(JSAny selection);
   bool select(String selection) =>
-      _select(_jsonStringToJs(selection)).isTruthy.toDart;
+      _jsTruthy(_select(_jsonStringToJs(selection)));
 
   /// Edit the score based on an editor action (JSON).
   /// Modifies the internal score tree.
@@ -353,7 +362,7 @@ extension type VerovioToolkit(JSObject _) implements JSObject {
   @JS('edit')
   external JSAny _edit(JSAny editorAction);
   bool edit(String editorAction) =>
-      _edit(_jsonStringToJs(editorAction)).isTruthy.toDart;
+      _jsTruthy(_edit(_jsonStringToJs(editorAction)));
 
   /// Get information about the last edit operation.
   /// Returns JSON with edit result and side effects.
