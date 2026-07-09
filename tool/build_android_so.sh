@@ -7,8 +7,11 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 OUT="$ROOT/android/src/main/jniLibs"
 VEROVIO_TOOLS="$ROOT/third_party/verovio/tools"
 
-# Default to the ABIs Flutter actually ships. Override e.g. ABIS="arm64-v8a x86_64".
-ABIS="${ABIS:-arm64-v8a x86_64}"
+# Default to the ABIs Flutter release builds ship: armeabi-v7a is still
+# required for 32-bit devices (e.g. Redmi 9C / MT6762 runs 32-bit Android 10;
+# missing it silently falls back to _FakeVerovioNativeService and renders
+# placeholder black boxes). Override e.g. ABIS="arm64-v8a".
+ABIS="${ABIS:-armeabi-v7a arm64-v8a x86_64}"
 
 NDK_HOST_TAG=""
 for tag in darwin-arm64 darwin-x86_64 linux-x86_64; do

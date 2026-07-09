@@ -102,6 +102,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          test -d android/src/main/jniLibs/armeabi-v7a
+          test -f android/src/main/jniLibs/armeabi-v7a/libverovio_flutter.so
           test -d android/src/main/jniLibs/arm64-v8a
           test -f android/src/main/jniLibs/arm64-v8a/libverovio_flutter.so
           test -d android/src/main/jniLibs/x86_64

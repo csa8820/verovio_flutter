@@ -81,7 +81,7 @@ final svg = await cache.getOrRender(
 
 | 平台 | 最低版本 | 架构 | 说明 |
 |------|----------|------|------|
-| Android | API 21 | arm64-v8a / x86_64 | 原生 FFI |
+| Android | API 21 | armeabi-v7a / arm64-v8a / x86_64 | 原生 FFI |
 | iOS | 13.0 | arm64（真机）/ arm64 + x86_64（模拟器）| 原生 FFI |
 | Web | 所有现代浏览器 | N/A | 通过 Web Worker 运行 WASM |
 | 微信小程序 | — | N/A | 通过 inline 后端运行 WASM（无 Worker）|
@@ -199,12 +199,12 @@ web/verovio/
 
 | 组成 | 大小 |
 |------|------|
-| `android/src/main/jniLibs` | 14 MB |
+| `android/src/main/jniLibs` | 17 MB |
 | `ios/Frameworks/VerovioFFI.xcframework` | 14.8 MB |
 | `assets/verovio_data`（字体 + Schema）| 11.4 MB |
-| **打包总计** | **40.2 MB** |
+| **打包总计** | **43.2 MB** |
 
-Android 使用 `--split-per-abi` 后的单架构安装增量：**约 6.8 MB**（`arm64-v8a`）/ **7.2 MB**（`x86_64`），未计 APK 压缩差异。
+Android 使用 `--split-per-abi` 后的单架构安装增量：**约 3.6 MB**（`armeabi-v7a`）/ **6.2 MB**（`arm64-v8a`）/ **7.0 MB**（`x86_64`），未计 APK 压缩差异。
 
 > 说明：iOS 这次改成了更完整的 `.xcframework` 打包流程，所以体积会上升。
 

@@ -1,3 +1,9 @@
+## 0.3.2
+
+- **Android ABI coverage** — Added a prebuilt native library for 32-bit Android ARM (`armeabi-v7a`) while keeping `arm64-v8a` and `x86_64` support.
+- **Build tooling** — Updated `tool/build_android_so.sh` and release artifact validation so Android builds produce all three supported Android ABIs by default.
+- **Documentation** — Refreshed platform and per-ABI size notes in English and Chinese docs.
+
 ## 0.3.1
 
 - **WeChat mini-app support** — Added inline WASM backend for the WeChat mini-program environment (detects the `WXWebAssembly` global or a `forceInline` config); the factory automatically falls back from Web Worker to inline mode when no Worker is available.

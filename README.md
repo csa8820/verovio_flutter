@@ -81,7 +81,7 @@ final svg = await cache.getOrRender(
 
 | Platform | Minimum version | Architectures | Notes |
 |----------|-----------------|---------------|-------|
-| Android  | API 21          | arm64-v8a / x86_64 | Native FFI |
+| Android  | API 21          | armeabi-v7a / arm64-v8a / x86_64 | Native FFI |
 | iOS      | 13.0            | arm64 (device) / arm64 + x86_64 (simulator) | Native FFI |
 | Web      | All modern browsers | N/A | WASM via Web Worker |
 | WeChat mini-app | — | N/A | WASM via inline backend (no Worker) |
@@ -207,12 +207,12 @@ at the `.wasm.br` asset before loading the glue.
 
 | Component | Size |
 |-----------|------|
-| `android/src/main/jniLibs` | 14 MB |
+| `android/src/main/jniLibs` | 17 MB |
 | `ios/Frameworks/VerovioFFI.xcframework` | 14.8 MB |
 | `assets/verovio_data` (fonts + schemas) | 11.4 MB |
-| **Bundled total** | **40.2 MB** |
+| **Bundled total** | **43.2 MB** |
 
-Per-ABI install footprint on Android with `--split-per-abi`: **~6.8 MB** (`arm64-v8a`) / **~7.2 MB** (`x86_64`) before APK compression.
+Per-ABI install footprint on Android with `--split-per-abi`: **~3.6 MB** (`armeabi-v7a`) / **~6.2 MB** (`arm64-v8a`) / **~7.0 MB** (`x86_64`) before APK compression.
 
 > Note: the iOS binary size increased after changing the packaging flow to ship a fuller `.xcframework` build.
 
