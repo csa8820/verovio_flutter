@@ -1,3 +1,8 @@
+## 0.3.3
+
+- **iOS version metadata** — Added Apple-compliant `CFBundleShortVersionString` and `CFBundleVersion` values to both device and simulator slices of the bundled `VerovioFFI.xcframework`.
+- **iOS build configuration** — Synchronized Xcode marketing and build versions so regenerated XCFramework artifacts preserve valid version metadata.
+
 ## 0.3.2
 
 - **Android ABI coverage** — Added a prebuilt native library for 32-bit Android ARM (`armeabi-v7a`) while keeping `arm64-v8a` and `x86_64` support.

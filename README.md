@@ -27,7 +27,7 @@ Language: [English](README.md) | [中文](README_CN.md)
 
 ```yaml
 dependencies:
-  verovio_flutter: ^0.3.1
+  verovio_flutter: ^0.3.3
 ```
 
 ## Quick start
@@ -241,6 +241,8 @@ See [`doc/api.md`](doc/api.md) for the full `VerovioAsyncService` surface (optio
 | 0.2.1           | `version-6.2.1` (`8d42439dc9231f6c87779287b542febcb3d609b3`) |
 | 0.3.0           | `version-6.2.1` (`8d42439dc9231f6c87779287b542febcb3d609b3`) |
 | 0.3.1           | `version-6.2.1` (`8d42439dc9231f6c87779287b542febcb3d609b3`) |
+| 0.3.2           | `version-6.2.1` (`8d42439dc9231f6c87779287b542febcb3d609b3`) |
+| 0.3.3           | `version-6.2.1` (`8d42439dc9231f6c87779287b542febcb3d609b3`) |
 
 ## License
 

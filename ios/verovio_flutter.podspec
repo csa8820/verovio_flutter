@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'verovio_flutter'
-  s.version          = '0.0.1'
+  s.version          = '0.3.3'
   s.summary          = 'Verovio FFI plugin for Flutter.'
   s.homepage         = 'https://www.verovio.org'
   s.license          = { :type => 'LGPL-3.0', :file => '../LICENSE' }
